@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBCM — Certificação Metodológica Educacional | Brary Institute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:#0B1F3A; --gold:#B8963E; --gold-light:#D4AF6A;
+    --cream:#F6F3EC; --white:#FDFCFA; --gray-200:#D6D2C8;
+    --gray-500:#8A8578; --gray-700:#4A4740;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Jost','Segoe UI',sans-serif;
+  }
+  body { font-family:var(--sans); background:var(--white); color:var(--gray-700); -webkit-font-smoothing:antialiased; }
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; background:var(--navy); border-bottom:1px solid rgba(184,150,62,0.3); display:flex; align-items:center; justify-content:space-between; padding:0 4rem; height:68px; }
+  .nav-logo { display:flex; flex-direction:column; gap:1px; text-decoration:none; }
+  .nav-logo-name { font-size:13px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#fff; }
+  .nav-logo-sub { font-size:9px; font-weight:300; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold-light); }
+  .nav-links { display:flex; align-items:center; gap:2rem; list-style:none; }
+  .nav-links a { font-size:11px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.65); text-decoration:none; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--gold-light); }
+  .nav-badge { font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); border:1px solid rgba(184,150,62,0.4); padding:6px 14px; }
+  #hero { background:var(--navy); padding:120px 4rem 80px; position:relative; overflow:hidden; }
+  .hero-rule { position:absolute; top:0; left:0; right:0; height:3px; background:var(--gold); }
+  .hero-tag { font-size:10px; font-weight:600; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:1.5rem; display:flex; align-items:center; gap:12px; }
+  .hero-tag::before { content:''; display:block; width:24px; height:1px; background:var(--gold); }
+  .hero-badge { display:inline-block; background:var(--gold); color:var(--navy); font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; padding:5px 14px; margin-bottom:1.5rem; }
+  .hero-title { font-family:var(--serif); font-size:clamp(2.2rem,4vw,3.5rem); font-weight:300; color:#fff; line-height:1.15; margin-bottom:1rem; }
+  .hero-title em { font-style:italic; color:var(--gold-light); }
+  .hero-sub { font-size:16px; font-weight:300; color:rgba(255,255,255,0.6); max-width:580px; line-height:1.8; margin-bottom:3rem; }
+  .hero-metrics { display:flex; gap:4rem; padding-top:2.5rem; border-top:1px solid rgba(255,255,255,0.1); flex-wrap:wrap; }
+  .metric-val { font-family:var(--serif); font-size:2rem; font-weight:300; color:var(--gold-light); line-height:1; margin-bottom:4px; }
+  .metric-lbl { font-size:11px; font-weight:300; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.4); }
+  section { padding:80px 4rem; }
+  .sec-tag { font-size:10px; font-weight:600; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem; display:flex; align-items:center; gap:10px; }
+  .sec-tag::before { content:''; display:block; width:20px; height:1px; background:var(--gold); }
+  .sec-title { font-family:var(--serif); font-size:clamp(1.8rem,3vw,2.6rem); font-weight:300; color:var(--navy); line-height:1.2; margin-bottom:1.25rem; }
+  .sec-title em { font-style:italic; }
+  .sec-lead { font-size:16px; font-weight:300; color:var(--gray-700); line-height:1.8; max-width:640px; }
+  .divider { width:40px; height:2px; background:var(--gold); margin:1.5rem 0; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; margin-top:3rem; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
+  .card { padding:2rem 1.75rem; border:1px solid var(--gray-200); border-top:3px solid var(--navy); background:var(--white); }
+  .card-tag { font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:0.5rem; }
+  .card-title { font-family:var(--serif); font-size:1.2rem; font-weight:400; color:var(--navy); margin-bottom:0.75rem; }
+  .card-text { font-size:13px; font-weight:300; color:var(--gray-700); line-height:1.7; }
+  .item { display:flex; align-items:flex-start; gap:10px; margin-bottom:0.75rem; }
+  .dot { width:5px; height:5px; border-radius:50%; background:var(--gold); margin-top:7px; flex-shrink:0; }
+  .item-text { font-size:14px; font-weight:300; color:var(--gray-700); line-height:1.6; }
+  .case-block { background:var(--navy); padding:2.5rem; }
+  .case-tag { font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem; }
+  .case-title { font-family:var(--serif); font-size:1.5rem; font-weight:300; color:#fff; margin-bottom:0.5rem; line-height:1.3; }
+  .case-author { font-size:12px; font-weight:300; color:rgba(255,255,255,0.45); letter-spacing:0.1em; margin-bottom:1.5rem; }
+  .case-divider { width:28px; height:1px; background:var(--gold); margin-bottom:1.5rem; }
+  .case-proto { font-family:monospace; font-size:12px; color:var(--gold-light); }
+  .case-nivel { display:inline-block; border:1px solid rgba(184,150,62,0.4); padding:5px 12px; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold-light); margin-top:1rem; }
+  .body-text p { font-size:15px; font-weight:300; color:var(--gray-700); line-height:1.9; margin-bottom:1.25rem; }
+  .body-text strong { font-weight:600; color:var(--navy); }
+  .quote { font-family:var(--serif); font-size:1.3rem; font-weight:300; font-style:italic; color:var(--navy); border-left:3px solid var(--gold); padding:1rem 1.5rem; margin:1.5rem 0; line-height:1.5; }
+  .dim-table { width:100%; border-collapse:collapse; margin-top:2rem; }
+  .dim-table th { font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#fff; background:var(--navy); padding:10px 16px; text-align:left; }
+  .dim-table td { font-size:13px; font-weight:300; color:var(--gray-700); padding:12px 16px; border-bottom:1px solid var(--gray-200); vertical-align:top; }
+  .dim-table td:first-child { font-weight:600; color:var(--navy); width:180px; }
+  #cta { background:var(--navy); text-align:center; padding:100px 4rem; }
+  .cta-title { font-family:var(--serif); font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:300; color:#fff; line-height:1.2; margin-bottom:1rem; }
+  .cta-title em { font-style:italic; color:var(--gold-light); }
+  .cta-text { font-size:15px; font-weight:300; color:rgba(255,255,255,0.55); max-width:500px; margin:0 auto 2.5rem; line-height:1.8; }
+  .btn-gold { display:inline-block; background:var(--gold); color:var(--navy); font-size:12px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none; padding:16px 32px; transition:background 0.2s; }
+  .btn-gold:hover { background:var(--gold-light); }
+  .btn-outline { display:inline-block; border:1px solid rgba(255,255,255,0.3); color:rgba(255,255,255,0.7); font-size:12px; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; text-decoration:none; padding:15px 28px; margin-left:1rem; transition:all 0.2s; }
+  .btn-outline:hover { border-color:var(--gold); color:var(--gold-light); }
+  footer { background:#07152A; padding:2.5rem 4rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; border-top:1px solid rgba(255,255,255,0.06); }
+  .ft { font-size:11px; font-weight:300; color:rgba(255,255,255,0.3); }
+  .ft strong { color:rgba(255,255,255,0.5); }
+  @media(max-width:900px){ nav{padding:0 1.5rem;} .nav-links{display:none;} section{padding:60px 1.5rem;} #hero{padding:100px 1.5rem 60px;} .grid2,.grid3{grid-template-columns:1fr;} footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;} }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <span class="nav-logo-name">Brary Institute</span>
+    <span class="nav-logo-sub">Sistema de Certificação Metodológica</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#governanca">Governança</a></li>
+    <li><a href="index.html#como-funciona">Processo</a></li>
+    <li><a href="index.html#niveis">Certificações</a></li>
+    <li><a href="index.html">← Voltar ao site</a></li>
+  </ul>
+  <span class="nav-badge">Sistema Ativo</span>
+</nav>
+
+<section id="hero">
+  <div class="hero-rule"></div>
+  <div class="hero-badge">SBCM — Sistema Ativo</div>
+  <p class="hero-tag">Certificação Metodológica Educacional</p>
+  <h1 class="hero-title">Sistema Brary de<br>Certificação Metodológica<br><em>Educacional</em></h1>
+  <p class="hero-sub">O SBCM valida metodologias de ensino, aprendizagem e desenvolvimento humano por meio de análise técnica multidisciplinar conduzida por banca de especialistas independentes.</p>
+  <div class="hero-metrics">
+    <div><div class="metric-val">4</div><div class="metric-lbl">Etapas de validação</div></div>
+    <div><div class="metric-val">6</div><div class="metric-lbl">Dimensões avaliadas</div></div>
+    <div><div class="metric-val">3</div><div class="metric-lbl">Especialistas por banca</div></div>
+    <div><div class="metric-val">EE-2026-001</div><div class="metric-lbl">Primeiro caso certificado</div></div>
+  </div>
+</section>
+
+<section style="background:var(--cream);">
+  <div class="sec-tag">Escopo de Atuação</div>
+  <h2 class="sec-title">O que o SBCM<br><em>certifica</em></h2>
+  <div class="divider"></div>
+  <div class="grid2">
+    <div class="body-text">
+      <p>O SBCM aplica-se a metodologias educacionais desenvolvidas por professores, especialistas, pesquisadores e instituições de ensino. O critério central é a existência de <strong>método estruturado, documentado e aplicável</strong> — independentemente da área temática ou da titulação formal do autor.</p>
+      <p>A certificação avalia a solidez pedagógica, a fundamentação teórica, a adequação ao público e a aplicabilidade prática — não a notoriedade de quem desenvolveu o método.</p>
+      <div class="quote">"O Padrão SBCM não avalia intenção. Avalia evidência."</div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:1rem;">
+        <div class="card-tag">Aplicável a</div>
+        <div class="item"><div class="dot"></div><div class="item-text">Metodologias de educação física, movimento e psicomotricidade</div></div>
+        <div class="item"><div class="dot"></div><div class="item-text">Métodos pedagógicos para primeira e segunda infância</div></div>
+        <div class="item"><div class="dot"></div><div class="item-text">Abordagens de neurodesenvolvimento e aprendizagem</div></div>
+        <div class="item"><div class="dot"></div><div class="item-text">Metodologias de educação especial e inclusiva</div></div>
+        <div class="item"><div class="dot"></div><div class="item-text">Práticas de educação artística e expressão criativa</div></div>
+        <div class="item"><div class="dot"></div><div class="item-text">Qualquer metodologia educacional estruturada e documentada</div></div>
+      </div>
+      <div class="card">
+        <div class="card-tag">Não aplicável a</div>
+        <div class="item"><div class="dot"></div><div class="item-text">Conteúdos informativos sem componente metodológico</div></div>
+        <div class="item"><div class="dot"></div><div class="item-text">Práticas informais não sistematizadas em documentação</div></div>
+        <div class="item"><div class="dot"></div><div class="item-text">Reprodução de metodologias de terceiros sem desenvolvimento original</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--white);">
+  <div class="sec-tag">Estrutura de Avaliação</div>
+  <h2 class="sec-title">As seis dimensões<br><em>do Padrão SBCM</em></h2>
+  <div class="divider"></div>
+  <table class="dim-table">
+    <thead><tr><th>Dimensão</th><th>O que é avaliado</th></tr></thead>
+    <tbody>
+      <tr><td>Fundamentação teórica</td><td>Base científica e pedagógica do método, coerência das referências utilizadas e articulação com o corpus de conhecimento da área.</td></tr>
+      <tr><td>Adequação ao público</td><td>Pertinência da linguagem, dos instrumentos e da progressão de complexidade em relação ao perfil do público-alvo definido.</td></tr>
+      <tr><td>Estrutura didática</td><td>Sequência lógica de conteúdos, progressão de aprendizagem, objetivos verificáveis e coerência entre instrumentos e objetivos.</td></tr>
+      <tr><td>Aplicabilidade prática</td><td>Viabilidade de implementação nos contextos educacionais de destino, com os recursos tipicamente disponíveis ao aplicador.</td></tr>
+      <tr><td>Originalidade</td><td>Contribuição própria e identificável da metodologia em relação a abordagens preexistentes no campo.</td></tr>
+      <tr><td>Impacto esperado</td><td>Relevância do problema endereçado e coerência entre os meios propostos e o desenvolvimento esperado do público-alvo.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section style="background:var(--cream);">
+  <div class="sec-tag">Primeiro Caso Certificado</div>
+  <h2 class="sec-title">Uma metodologia que responde<br><em>a uma urgência real</em></h2>
+  <div class="divider"></div>
+  <div class="grid2">
+    <div class="case-block">
+      <div class="case-tag">Selo ExerEducação — SBCM</div>
+      <div class="case-title">Colorindo a Natação — Método Tia Lóide</div>
+      <div class="case-author">Autora: Lóide da Silva</div>
+      <div class="case-divider"></div>
+      <div class="case-nivel">Nível III — Certificação Completa</div>
+      <div class="case-divider" style="margin-top:1.5rem;"></div>
+      <div class="case-proto">EE-2026-001</div>
+      <div style="font-size:11px;font-weight:300;color:rgba(255,255,255,0.3);margin-top:4px;">Registro CBL: 18/04/2026</div>
+    </div>
+    <div class="body-text">
+      <p>O afogamento é a segunda maior causa de morte acidental de crianças no Brasil. Dados epidemiológicos indicam que <strong>90% dessas mortes ocorrem por desconhecimento dos riscos</strong> e ausência de educação preventiva estruturada.</p>
+      <p>A professora e especialista em natação infantil Lóide da Silva desenvolveu, ao longo de anos de prática docente, uma metodologia autoral de educação para a segurança aquática dirigida ao público infantil — combinando linguagem pedagógica acessível, progressão didática estruturada e instrumentos de ensino desenvolvidos especificamente para crianças.</p>
+      <p>Após análise documental, análise técnica preliminar e deliberação de banca, o Método Tia Lóide recebeu o Selo ExerEducação com Certificação Completa — tornando-se o <strong>caso fundador do Sistema SBCM</strong> e o primeiro registro do Padrão de Certificação Metodológica Educacional Brasileiro.</p>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <h2 class="cta-title">Sua metodologia educacional<br><em>tem fundamento para ser validada?</em></h2>
+  <p class="cta-text">O processo de submissão ao SBCM é destinado a metodologias com fundamentação técnica, estrutura pedagógica identificável e evidência de aplicação.</p>
+  <a href="submeter.html" class="btn-gold">Submeter Metodologia →</a>
+  <a href="index.html" class="btn-outline">Conhecer o Padrão</a>
+</section>
+
+<footer>
+  <div class="ft"><strong>Brary Institute</strong> — SBCM · Certificação Metodológica Educacional</div>
+  <div class="ft" style="font-family:monospace;">EE-2026-001 · Brary Editora Ltda. · Brasil</div>
+</footer>
+
+</body>
+</html>

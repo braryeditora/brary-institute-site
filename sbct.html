@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBCT — Certificação Técnica e Operacional | Brary Institute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:#0B1F3A; --gold:#B8963E; --gold-light:#D4AF6A;
+    --cream:#F6F3EC; --white:#FDFCFA; --gray-200:#D6D2C8;
+    --gray-500:#8A8578; --gray-700:#4A4740;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Jost','Segoe UI',sans-serif;
+  }
+  body { font-family:var(--sans); background:var(--white); color:var(--gray-700); -webkit-font-smoothing:antialiased; }
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; background:var(--navy); border-bottom:1px solid rgba(184,150,62,0.3); display:flex; align-items:center; justify-content:space-between; padding:0 4rem; height:68px; }
+  .nav-logo { display:flex; flex-direction:column; gap:1px; text-decoration:none; }
+  .nav-logo-name { font-size:13px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#fff; }
+  .nav-logo-sub { font-size:9px; font-weight:300; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold-light); }
+  .nav-badge { font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.4); border:1px solid rgba(255,255,255,0.15); padding:6px 14px; }
+  #hero { background:var(--navy); padding:120px 4rem 80px; position:relative; overflow:hidden; }
+  .hero-rule { position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--gray-500) 0%, var(--gold) 50%, transparent 100%); }
+  .hero-tag { font-size:10px; font-weight:600; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:1.5rem; display:flex; align-items:center; gap:12px; }
+  .hero-tag::before { content:''; display:block; width:24px; height:1px; background:var(--gold); }
+  .hero-badge-estrut { display:inline-block; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; padding:5px 14px; margin-bottom:1.5rem; }
+  .hero-title { font-family:var(--serif); font-size:clamp(2.2rem,4vw,3.5rem); font-weight:300; color:#fff; line-height:1.15; margin-bottom:1rem; }
+  .hero-title em { font-style:italic; color:var(--gold-light); }
+  .hero-sub { font-size:16px; font-weight:300; color:rgba(255,255,255,0.6); max-width:580px; line-height:1.8; margin-bottom:3rem; }
+  .hero-aviso { display:flex; align-items:flex-start; gap:1rem; padding:1.5rem 2rem; border:1px solid rgba(255,255,255,0.1); border-left:3px solid var(--gold); max-width:600px; }
+  .hero-aviso p { font-size:14px; font-weight:300; color:rgba(255,255,255,0.6); line-height:1.7; }
+  .hero-aviso strong { color:var(--gold-light); font-weight:500; }
+  section { padding:80px 4rem; }
+  .sec-tag { font-size:10px; font-weight:600; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem; display:flex; align-items:center; gap:10px; }
+  .sec-tag::before { content:''; display:block; width:20px; height:1px; background:var(--gold); }
+  .sec-title { font-family:var(--serif); font-size:clamp(1.8rem,3vw,2.6rem); font-weight:300; color:var(--navy); line-height:1.2; margin-bottom:1.25rem; }
+  .sec-title em { font-style:italic; }
+  .sec-lead { font-size:16px; font-weight:300; color:var(--gray-700); line-height:1.8; max-width:640px; }
+  .divider { width:40px; height:2px; background:var(--gold); margin:1.5rem 0; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; margin-top:3rem; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
+  .card { padding:2rem 1.75rem; border:1px solid var(--gray-200); border-top:3px solid var(--gray-500); background:var(--white); }
+  .card-tag { font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--gray-500); margin-bottom:0.5rem; }
+  .card-title { font-family:var(--serif); font-size:1.2rem; font-weight:400; color:var(--navy); margin-bottom:0.75rem; }
+  .card-text { font-size:13px; font-weight:300; color:var(--gray-700); line-height:1.7; }
+  .item { display:flex; align-items:flex-start; gap:10px; margin-bottom:0.75rem; }
+  .dot { width:5px; height:5px; border-radius:50%; background:var(--gold); margin-top:7px; flex-shrink:0; }
+  .item-text { font-size:14px; font-weight:300; color:var(--gray-700); line-height:1.6; }
+  .body-text p { font-size:15px; font-weight:300; color:var(--gray-700); line-height:1.9; margin-bottom:1.25rem; }
+  .body-text strong { font-weight:600; color:var(--navy); }
+  .quote { font-family:var(--serif); font-size:1.3rem; font-weight:300; font-style:italic; color:var(--navy); border-left:3px solid var(--gold); padding:1rem 1.5rem; margin:1.5rem 0; line-height:1.5; }
+  .case-block { background:rgba(11,31,58,0.06); border:1px solid var(--gray-200); border-left:4px solid var(--gold); padding:2.5rem; }
+  .case-tag { font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:0.75rem; }
+  .case-status { display:inline-block; border:1px solid var(--gray-200); color:var(--gray-500); font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; padding:5px 12px; margin-bottom:1rem; }
+  .case-title-text { font-family:var(--serif); font-size:1.4rem; font-weight:400; color:var(--navy); margin-bottom:0.5rem; line-height:1.3; }
+  .case-author-text { font-size:12px; font-weight:300; color:var(--gray-500); letter-spacing:0.1em; margin-bottom:1rem; }
+  .case-desc { font-size:13px; font-weight:300; color:var(--gray-700); line-height:1.7; }
+  .perfis-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:2rem; }
+  .perfil { padding:1.25rem 1.5rem; border:1px solid var(--gray-200); border-left:3px solid var(--navy); }
+  .perfil-title { font-size:13px; font-weight:600; color:var(--navy); margin-bottom:4px; }
+  .perfil-text { font-size:12px; font-weight:300; color:var(--gray-700); line-height:1.6; }
+  #cta { background:var(--navy); text-align:center; padding:100px 4rem; }
+  .cta-title { font-family:var(--serif); font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:300; color:#fff; line-height:1.2; margin-bottom:1rem; }
+  .cta-title em { font-style:italic; color:var(--gold-light); }
+  .cta-text { font-size:15px; font-weight:300; color:rgba(255,255,255,0.55); max-width:520px; margin:0 auto 2.5rem; line-height:1.8; }
+  .btn-gold { display:inline-block; background:var(--gold); color:var(--navy); font-size:12px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none; padding:16px 32px; transition:background 0.2s; }
+  .btn-gold:hover { background:var(--gold-light); }
+  .btn-outline { display:inline-block; border:1px solid rgba(255,255,255,0.3); color:rgba(255,255,255,0.7); font-size:12px; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; text-decoration:none; padding:15px 28px; margin-left:1rem; transition:all 0.2s; }
+  .btn-outline:hover { border-color:var(--gold); color:var(--gold-light); }
+  footer { background:#07152A; padding:2.5rem 4rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; border-top:1px solid rgba(255,255,255,0.06); }
+  .ft { font-size:11px; font-weight:300; color:rgba(255,255,255,0.3); }
+  .ft strong { color:rgba(255,255,255,0.5); }
+  @media(max-width:900px){ nav{padding:0 1.5rem;} section{padding:60px 1.5rem;} #hero{padding:100px 1.5rem 60px;} .grid2,.grid3,.perfis-grid{grid-template-columns:1fr;} footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;} }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <span class="nav-logo-name">Brary Institute</span>
+    <span class="nav-logo-sub">Sistema de Certificação Metodológica</span>
+  </a>
+  <span class="nav-badge">Em Estruturação</span>
+</nav>
+
+<section id="hero">
+  <div class="hero-rule"></div>
+  <div class="hero-badge-estrut">SBCT — Sistema em Estruturação</div>
+  <p class="hero-tag">Certificação Técnica e Operacional</p>
+  <h1 class="hero-title">Sistema Brary de<br>Certificação Técnica<br><em>e Operacional</em></h1>
+  <p class="hero-sub">O SBCT valida métodos, processos e protocolos desenvolvidos em contextos técnicos e operacionais — onde precisão, segurança e padronização são requisitos críticos, não diferenciais.</p>
+  <div class="hero-aviso">
+    <p><strong>Sistema em estruturação.</strong> O SBCT está sendo desenvolvido com base em demandas reais identificadas em engenharia, agronomia, laudos técnicos e gestão de processos industriais. O primeiro caso âncora está em análise preliminar. Manifestações de interesse são recebidas.</p>
+  </div>
+</section>
+
+<section style="background:var(--cream);">
+  <div class="sec-tag">Sobre o SBCT</div>
+  <h2 class="sec-title">Onde método, processo<br><em>e evidência se encontram</em></h2>
+  <div class="divider"></div>
+  <div class="grid2">
+    <div class="body-text">
+      <p>Engenheiros, agrônomos, técnicos especializados e profissionais de processos industriais desenvolvem metodologias ao longo de anos de prática — protocolos de inspeção, métodos de laudo técnico, processos de padronização, sistemas de controle de qualidade.</p>
+      <p>Essas metodologias raramente são reconhecidas formalmente. Não existe, no Brasil, um organismo independente que valide tecnicamente métodos e processos desenvolvidos fora do ambiente acadêmico e corporativo tradicional.</p>
+      <p>O SBCT foi concebido para preencher esse espaço — aplicando ao universo técnico e operacional os mesmos critérios de rigor, independência e auditabilidade que o SBCM aplica ao universo educacional.</p>
+      <div class="quote">"Em contextos técnicos, método não é diferencial. É requisito de segurança e credibilidade."</div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:1rem;">
+        <div class="card-tag">Áreas de aplicação previstas</div>
+        <div class="item"><div class="dot"></div><div class="item-text">Engenharia — métodos de projeto, inspeção, as-built e documentação técnica</div></div>
+        <div class="item"><div class="dot"></div><div class="item-text">Agronomia — protocolos de laudo técnico, gestão rural e perícia agronômica</div></div>
+        <div class="item"><div class="dot"></div><div class="item-text">Processos industriais — métodos de controle de qualidade e padronização</div></div>
+        <div class="item"><div class="dot"></div><div class="item-text">Construção naval e offshore — metodologias de segurança e operação técnica</div></div>
+        <div class="item"><div class="dot"></div><div class="item-text">Gestão de projetos — métodos proprietários de planejamento e execução</div></div>
+      </div>
+      <div class="card">
+        <div class="card-tag">Critério central</div>
+        <div class="card-text">A metodologia deve ter sido desenvolvida em contexto real de aplicação, produzir resultados verificáveis e estar sistematizada em documentação que permita análise técnica por banca especializada.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--white);">
+  <div class="sec-tag">Primeiro Caso em Análise</div>
+  <h2 class="sec-title">Método MML —<br><em>Laudos Técnicos de Agronomia</em></h2>
+  <div class="divider"></div>
+  <div class="grid2">
+    <div class="case-block">
+      <div class="case-tag">Candidato ao Selo SBCT</div>
+      <div class="case-status">Em estruturação preliminar</div>
+      <div class="case-title-text">Método MML — Meu Melhor Laudo</div>
+      <div class="case-author-text">Autor: Adriano Melo — Engenheiro Agrônomo</div>
+      <div class="case-desc">Metodologia autoral para produção de laudos técnicos de agronomia voltada ao atendimento de advogados e empresas do agronegócio — sistematizando critérios técnicos, estrutura de análise e padrão de entrega para maximizar a qualidade e a credibilidade do laudo perante instâncias jurídicas e comerciais.</div>
+    </div>
+    <div class="body-text">
+      <p>O Método MML nasce da prática acumulada de um Engenheiro Agrônomo que identificou uma lacuna estrutural no mercado: <strong>advogados do agronegócio precisam de laudos técnicos de alta qualidade</strong>, mas o mercado carece de profissionais com metodologia padronizada para produzi-los.</p>
+      <p>A metodologia sistematiza o processo completo de produção de laudos — da análise inicial ao documento final — estabelecendo critérios técnicos objetivos, estrutura de avaliação e padrão de entrega que garante consistência e credibilidade perante clientes e instâncias legais.</p>
+      <p>O SBCT analisará a fundamentação técnica do método, sua aplicabilidade em contextos reais de perícia agronômica e sua originalidade em relação a práticas preexistentes no setor.</p>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--cream);">
+  <div class="sec-tag">Banca Avaliadora</div>
+  <h2 class="sec-title">Perfil dos especialistas<br><em>do SBCT</em></h2>
+  <div class="divider"></div>
+  <p class="sec-lead">A banca do SBCT é composta por especialistas com formação técnica documentada na área da metodologia submetida. Independência, formação verificável e deliberação qualificada são requisitos não negociáveis.</p>
+  <div class="perfis-grid">
+    <div class="perfil">
+      <div class="perfil-title">Especialistas técnicos da área</div>
+      <div class="perfil-text">Profissionais com experiência comprovada na área técnica da metodologia — engenheiros, agrônomos, técnicos especializados. Avaliam a solidez técnica do método e sua pertinência no contexto operacional de aplicação.</div>
+    </div>
+    <div class="perfil">
+      <div class="perfil-title">Especialistas em padronização e processos</div>
+      <div class="perfil-text">Profissionais com formação em gestão de processos, normalização técnica ou controle de qualidade. Avaliam a estrutura metodológica, a replicabilidade e a consistência do processo proposto.</div>
+    </div>
+    <div class="perfil">
+      <div class="perfil-title">Especialista em documentação e aplicabilidade</div>
+      <div class="perfil-text">Profissional com experiência em documentação técnica, laudos ou instrumentos de verificação na área. Avalia a clareza, completude e aplicabilidade prática da metodologia para terceiros.</div>
+    </div>
+    <div class="perfil">
+      <div class="perfil-title">Princípio de independência</div>
+      <div class="perfil-text">Nenhum avaliador possui vínculo comercial ou institucional com o autor da metodologia. O impedimento é declarado e verificado antes de qualquer designação.</div>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <h2 class="cta-title">Tem uma metodologia técnica<br><em>desenvolvida na prática?</em></h2>
+  <p class="cta-text">O SBCT está recebendo manifestações de interesse de profissionais técnicos que desenvolveram metodologias estruturadas em contextos reais de engenharia, agronomia, processos industriais e áreas afins.</p>
+  <a href="submeter.html" class="btn-gold">Manifestar Interesse →</a>
+  <a href="index.html" class="btn-outline">Conhecer o Padrão SBCM</a>
+</section>
+
+<footer>
+  <div class="ft"><strong>Brary Institute</strong> — SBCT · Certificação Técnica e Operacional · Em estruturação</div>
+  <div class="ft">contato@braryeditora.com · Brary Editora Ltda. · Brasil</div>
+</footer>
+
+</body>
+</html>

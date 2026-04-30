@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador de Cartão — Brary Institute</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:#0B1F3A; --gold:#B8963E; --gold-light:#D4AF6A;
+    --cream:#F6F3EC; --white:#FDFCFA; --gray-200:#D6D2C8;
+    --gray-500:#8A8578; --gray-700:#4A4740;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Jost','Segoe UI',sans-serif;
+  }
+  body { font-family:var(--sans); background:#E8E4DC; min-height:100vh; }
+  nav { background:var(--navy); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; border-bottom:2px solid var(--gold); }
+  .nav-brand { color:#fff; font-size:12px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; }
+  .nav-sub { color:var(--gold-light); font-size:9px; letter-spacing:0.2em; text-transform:uppercase; display:block; }
+  .nav-badge { background:var(--gold); color:var(--navy); font-size:10px; font-weight:600; letter-spacing:0.1em; padding:6px 14px; }
+  .layout { display:grid; grid-template-columns:280px 1fr; min-height:calc(100vh - 60px); }
+  .sidebar { background:var(--navy); padding:1.5rem; overflow-y:auto; border-right:1px solid rgba(184,150,62,0.3); }
+  .sidebar-title { font-size:10px; font-weight:600; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-bottom:1.25rem; padding-bottom:0.75rem; border-bottom:1px solid rgba(184,150,62,0.2); }
+  .form-group { margin-bottom:1rem; }
+  .form-label { display:block; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:5px; }
+  .form-input, .form-select { width:100%; background:rgba(255,255,255,0.07); border:1px solid rgba(184,150,62,0.3); color:#fff; font-family:var(--sans); font-size:13px; font-weight:300; padding:8px 10px; outline:none; transition:border-color 0.2s; }
+  .form-input:focus, .form-select:focus { border-color:var(--gold); }
+  .form-select option { background:var(--navy); }
+  .form-divider { border:none; border-top:1px solid rgba(184,150,62,0.15); margin:1.25rem 0; }
+  .form-note { font-size:11px; font-weight:300; color:rgba(255,255,255,0.3); line-height:1.5; margin-top:6px; }
+  .form-fixed { font-size:12px; font-weight:300; color:rgba(184,150,62,0.7); padding:7px 10px; border:1px solid rgba(184,150,62,0.15); background:rgba(184,150,62,0.05); letter-spacing:0.05em; }
+  .btn-print { width:100%; background:var(--gold); color:var(--navy); border:none; font-family:var(--sans); font-size:12px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; padding:14px; cursor:pointer; margin-top:1rem; transition:background 0.2s; }
+  .btn-print:hover { background:var(--gold-light); }
+  .btn-clear { width:100%; background:transparent; color:rgba(255,255,255,0.35); border:1px solid rgba(255,255,255,0.1); font-family:var(--sans); font-size:11px; letter-spacing:0.1em; padding:10px; cursor:pointer; margin-top:0.5rem; transition:all 0.2s; }
+  .btn-clear:hover { color:rgba(255,255,255,0.7); border-color:rgba(255,255,255,0.3); }
+  .main { padding:2rem; display:flex; flex-direction:column; align-items:center; gap:1.5rem; }
+  .preview-label { font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--gray-500); }
+  .card-wrapper { background:#fff; box-shadow:0 4px 24px rgba(0,0,0,0.15); width:100%; max-width:680px; }
+  .print-hint { font-size:11px; font-weight:300; color:var(--gray-500); text-align:center; max-width:500px; }
+
+  @media print {
+    @page { size: 90mm 55mm; margin: 0; }
+    nav, .sidebar, .main > .preview-label, .main > .print-hint { display:none !important; }
+    body { background:white; }
+    .layout { display:block; }
+    .main { padding:0; }
+    .card-wrapper { box-shadow:none; max-width:100%; }
+    #lado-verso { display:none; }
+    svg { width:100% !important; height:auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div>
+    <span class="nav-brand">Brary Institute</span>
+    <span class="nav-sub">Gerador de Cartão de Visita</span>
+  </div>
+  <span class="nav-badge">Uso Interno</span>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-title">Dados do Cartão</div>
+
+    <div class="form-group">
+      <label class="form-label">Tipo de cartão</label>
+      <select class="form-select" id="tipo" onchange="atualizar()">
+        <option value="diretor">Diretor Fundador</option>
+        <option value="especialista">Especialista Avaliador</option>
+        <option value="coordenador">Coordenação SBCM</option>
+        <option value="custom">Cargo personalizado</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Nome completo</label>
+      <input class="form-input" id="nome" type="text" value="Orlando Carvalho" oninput="atualizar()" placeholder="Nome completo">
+    </div>
+
+    <div class="form-group" id="cargo-group" style="display:none;">
+      <label class="form-label">Cargo personalizado</label>
+      <input class="form-input" id="cargo-custom" type="text" oninput="atualizar()" placeholder="Ex: Consultora Editorial">
+    </div>
+
+    <hr class="form-divider">
+
+    <div class="form-group">
+      <label class="form-label">WhatsApp / Telefone</label>
+      <input class="form-input" id="telefone" type="text" value="+55 21 98346-1734" oninput="atualizar()" placeholder="+55 21 9XXXX-XXXX">
+      <p class="form-note">Telefone pessoal do portador — aparece no verso junto ao email institucional.</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Email institucional (fixo)</label>
+      <div class="form-fixed">contato@braryeditora.com</div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Site (fixo)</label>
+      <div class="form-fixed">brary-institute.web.app</div>
+    </div>
+
+    <hr class="form-divider">
+
+    <div class="form-group">
+      <label class="form-label">Lado para imprimir</label>
+      <select class="form-select" id="lado" onchange="alternarLado()">
+        <option value="frente">Frente</option>
+        <option value="verso">Verso</option>
+      </select>
+    </div>
+
+    <button class="btn-print" onclick="window.print()">Imprimir / Salvar PDF</button>
+    <button class="btn-clear" onclick="limpar()">Limpar campos</button>
+  </aside>
+
+  <main class="main">
+    <p class="preview-label">Pré-visualização</p>
+
+    <div class="card-wrapper">
+      <!-- FRENTE -->
+      <svg id="lado-frente" width="100%" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg">
+
+        <rect width="680" height="420" fill="#F6F3EC"/>
+
+        <!-- Barras navy + gold top/bottom -->
+        <rect width="680" height="12" fill="#0B1F3A"/>
+        <rect y="12" width="680" height="3" fill="#B8963E"/>
+        <rect y="405" width="680" height="3" fill="#B8963E"/>
+        <rect y="408" width="680" height="12" fill="#0B1F3A"/>
+
+        <!-- Bordas laterais -->
+        <rect width="3" height="420" fill="#0B1F3A"/>
+        <rect x="677" width="3" height="420" fill="#0B1F3A"/>
+        <rect x="3" y="3" width="1.5" height="414" fill="#B8963E"/>
+        <rect x="675.5" y="3" width="1.5" height="414" fill="#B8963E"/>
+
+        <!-- Ornamentos cantos -->
+        <rect x="3" y="3" width="16" height="16" fill="#0B1F3A"/>
+        <rect x="661" y="3" width="16" height="16" fill="#0B1F3A"/>
+        <rect x="3" y="401" width="16" height="16" fill="#0B1F3A"/>
+        <rect x="661" y="401" width="16" height="16" fill="#0B1F3A"/>
+        <rect x="6" y="6" width="7" height="7" fill="#B8963E"/>
+        <rect x="667" y="6" width="7" height="7" fill="#B8963E"/>
+        <rect x="6" y="407" width="7" height="7" fill="#B8963E"/>
+        <rect x="667" y="407" width="7" height="7" fill="#B8963E"/>
+
+        <!-- BRASÃO -->
+        <path d="M 50,40 L 150,40 L 150,160 Q 146,200 100,220 Q 54,200 50,160 Z" fill="#0B1F3A" stroke="#B8963E" stroke-width="2.5"/>
+        <path d="M 59,49 L 141,49 L 141,158 Q 137,192 100,210 Q 63,192 59,158 Z" fill="none" stroke="#B8963E" stroke-width="0.8"/>
+        <rect x="59" y="118" width="82" height="10" fill="#B8963E"/>
+        <text x="100" y="112" font-family="Georgia,'Times New Roman',serif" font-size="42" font-weight="bold" fill="#B8963E" text-anchor="middle">B</text>
+        <text x="100" y="143" font-family="Georgia,'Times New Roman',serif" font-size="9" font-weight="bold" fill="#D4AF6A" text-anchor="middle" letter-spacing="3">SBCM</text>
+        <text x="100" y="200" font-family="Georgia,'Times New Roman',serif" font-size="9" fill="#B8963E" text-anchor="middle" letter-spacing="1.5">MMXXVI</text>
+
+        <!-- Linha divisória -->
+        <line x1="165" y1="40" x2="165" y2="380" stroke="#B8963E" stroke-width="0.8" opacity="0.5"/>
+
+        <!-- WORDMARK -->
+        <text x="185" y="110" font-family="Georgia,'Times New Roman',serif" font-size="48" font-weight="bold" fill="#0B1F3A" letter-spacing="6">BRARY</text>
+        <text x="187" y="134" font-family="Georgia,'Times New Roman',serif" font-size="18" fill="#4A4740" letter-spacing="13">INSTITUTE</text>
+
+        <line x1="185" y1="148" x2="658" y2="148" stroke="#B8963E" stroke-width="1.2"/>
+        <line x1="185" y1="150.5" x2="658" y2="150.5" stroke="#B8963E" stroke-width="0.4"/>
+
+        <text x="185" y="168" font-family="Georgia,'Times New Roman',serif" font-size="13" fill="#8A8578" letter-spacing="1.8">Sistema de Certificação Metodológica</text>
+        <text x="185" y="186" font-family="Georgia,'Times New Roman',serif" font-size="10" fill="#B8963E" letter-spacing="2">PADRÃO SBCM  ·  BRARY EDITORA LTDA.  ·  BRASIL</text>
+
+        <!-- Linha separadora dados pessoais -->
+        <line x1="185" y1="220" x2="658" y2="220" stroke="#B8963E" stroke-width="0.6" opacity="0.6"/>
+
+        <!-- Dados pessoais -->
+        <text id="f-nome" x="185" y="258" font-family="Georgia,'Times New Roman',serif" font-size="28" fill="#0B1F3A">Orlando Carvalho</text>
+        <text id="f-cargo" x="185" y="280" font-family="Georgia,'Times New Roman',serif" font-size="12" fill="#8A8578" letter-spacing="2">DIRETOR FUNDADOR</text>
+
+        <line x1="185" y1="300" x2="658" y2="300" stroke="#B8963E" stroke-width="0.4" opacity="0.4"/>
+
+        <text id="f-tel" x="185" y="322" font-family="Georgia,'Times New Roman',serif" font-size="13" fill="#4A4740">+55 21 98346-1734</text>
+        <text x="185" y="342" font-family="Georgia,'Times New Roman',serif" font-size="13" fill="#4A4740">contato@braryeditora.com</text>
+        <text x="185" y="362" font-family="Georgia,'Times New Roman',serif" font-size="12" fill="#B8963E" letter-spacing="0.5">brary-institute.web.app</text>
+
+      </svg>
+
+      <!-- VERSO -->
+      <svg id="lado-verso" width="100%" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+
+        <rect width="680" height="420" fill="#FDFCFA"/>
+        <rect width="680" height="12" fill="#0B1F3A"/>
+        <rect y="12" width="680" height="3" fill="#B8963E"/>
+        <rect y="405" width="680" height="3" fill="#B8963E"/>
+        <rect y="408" width="680" height="12" fill="#0B1F3A"/>
+        <rect width="3" height="420" fill="#0B1F3A"/>
+        <rect x="677" width="3" height="420" fill="#0B1F3A"/>
+        <rect x="3" y="3" width="1.5" height="414" fill="#B8963E"/>
+        <rect x="675.5" y="3" width="1.5" height="414" fill="#B8963E"/>
+        <rect x="3" y="3" width="16" height="16" fill="#0B1F3A"/>
+        <rect x="661" y="3" width="16" height="16" fill="#0B1F3A"/>
+        <rect x="3" y="401" width="16" height="16" fill="#0B1F3A"/>
+        <rect x="661" y="401" width="16" height="16" fill="#0B1F3A"/>
+        <rect x="6" y="6" width="7" height="7" fill="#B8963E"/>
+        <rect x="667" y="6" width="7" height="7" fill="#B8963E"/>
+        <rect x="6" y="407" width="7" height="7" fill="#B8963E"/>
+        <rect x="667" y="407" width="7" height="7" fill="#B8963E"/>
+
+        <!-- Brasão central grande -->
+        <path d="M 280,38 L 400,38 L 400,170 Q 395,212 340,232 Q 285,212 280,170 Z" fill="#0B1F3A" stroke="#B8963E" stroke-width="2.5"/>
+        <path d="M 290,48 L 390,48 L 390,168 Q 385,204 340,222 Q 295,204 290,168 Z" fill="none" stroke="#B8963E" stroke-width="0.8"/>
+        <rect x="290" y="122" width="100" height="12" fill="#B8963E"/>
+        <text x="340" y="115" font-family="Georgia,'Times New Roman',serif" font-size="52" font-weight="bold" fill="#B8963E" text-anchor="middle">B</text>
+        <text x="340" y="152" font-family="Georgia,'Times New Roman',serif" font-size="11" font-weight="bold" fill="#D4AF6A" text-anchor="middle" letter-spacing="3">SBCM</text>
+        <text x="340" y="215" font-family="Georgia,'Times New Roman',serif" font-size="10" fill="#B8963E" text-anchor="middle" letter-spacing="1.5">MMXXVI</text>
+
+        <!-- Linha acima dos dados -->
+        <line x1="100" y1="265" x2="580" y2="265" stroke="#B8963E" stroke-width="0.8"/>
+
+        <!-- Nome e cargo -->
+        <text id="v-nome" x="340" y="296" font-family="Georgia,'Times New Roman',serif" font-size="22" fill="#0B1F3A" text-anchor="middle">Orlando Carvalho</text>
+        <text id="v-cargo" x="340" y="316" font-family="Georgia,'Times New Roman',serif" font-size="11" fill="#8A8578" text-anchor="middle" letter-spacing="2">DIRETOR FUNDADOR</text>
+
+        <line x1="100" y1="328" x2="580" y2="328" stroke="#B8963E" stroke-width="0.4" opacity="0.5"/>
+
+        <!-- Contatos verso — separados visualmente -->
+        <text id="v-tel" x="340" y="350" font-family="Georgia,'Times New Roman',serif" font-size="13" fill="#4A4740" text-anchor="middle">+55 21 98346-1734</text>
+        <line x1="320" y1="356" x2="360" y2="356" stroke="#B8963E" stroke-width="0.4" opacity="0.4"/>
+        <text x="340" y="372" font-family="Georgia,'Times New Roman',serif" font-size="12" fill="#8A8578" text-anchor="middle">contato@braryeditora.com</text>
+        <text x="340" y="390" font-family="Georgia,'Times New Roman',serif" font-size="11" fill="#B8963E" text-anchor="middle" letter-spacing="0.5">brary-institute.web.app</text>
+
+      </svg>
+    </div>
+
+    <p class="print-hint">Selecione <strong>Frente</strong> ou <strong>Verso</strong> e clique em <strong>Imprimir / Salvar PDF</strong>. No diálogo, escolha papel personalizado <strong>90mm × 55mm</strong> ou imprima em A4 e corte.</p>
+  </main>
+</div>
+
+<script>
+  const cargos = {
+    "diretor": "DIRETOR FUNDADOR",
+    "especialista": "ESPECIALISTA AVALIADOR SBCM",
+    "coordenador": "COORDENAÇÃO SBCM",
+    "custom": ""
+  };
+
+  function atualizar() {
+    const tipo = document.getElementById("tipo").value;
+    const nome = document.getElementById("nome").value || "[ Nome ]";
+    const tel = document.getElementById("telefone").value || "";
+    const cargoCustom = document.getElementById("cargo-custom").value || "[ Cargo ]";
+    const cargo = tipo === "custom" ? cargoCustom.toUpperCase() : cargos[tipo];
+
+    document.getElementById("cargo-group").style.display = tipo === "custom" ? "block" : "none";
+
+    document.getElementById("f-nome").textContent = nome;
+    document.getElementById("f-cargo").textContent = cargo;
+    document.getElementById("f-tel").textContent = tel;
+    document.getElementById("v-nome").textContent = nome;
+    document.getElementById("v-cargo").textContent = cargo;
+    document.getElementById("v-tel").textContent = tel;
+  }
+
+  function alternarLado() {
+    const lado = document.getElementById("lado").value;
+    document.getElementById("lado-frente").style.display = lado === "frente" ? "block" : "none";
+    document.getElementById("lado-verso").style.display = lado === "verso" ? "block" : "none";
+  }
+
+  function limpar() {
+    document.getElementById("tipo").value = "diretor";
+    document.getElementById("nome").value = "";
+    document.getElementById("telefone").value = "";
+    document.getElementById("cargo-custom").value = "";
+    document.getElementById("lado").value = "frente";
+    alternarLado();
+    atualizar();
+  }
+
+  atualizar();
+</script>
+</body>
+</html>

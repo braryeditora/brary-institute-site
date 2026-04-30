@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBCS — Certificação em Saúde e Reabilitação | Brary Institute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:#0B1F3A; --gold:#B8963E; --gold-light:#D4AF6A;
+    --cream:#F6F3EC; --white:#FDFCFA; --gray-200:#D6D2C8;
+    --gray-500:#8A8578; --gray-700:#4A4740;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Jost','Segoe UI',sans-serif;
+  }
+  body { font-family:var(--sans); background:var(--white); color:var(--gray-700); -webkit-font-smoothing:antialiased; }
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; background:var(--navy); border-bottom:1px solid rgba(184,150,62,0.3); display:flex; align-items:center; justify-content:space-between; padding:0 4rem; height:68px; }
+  .nav-logo { display:flex; flex-direction:column; gap:1px; text-decoration:none; }
+  .nav-logo-name { font-size:13px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#fff; }
+  .nav-logo-sub { font-size:9px; font-weight:300; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold-light); }
+  .nav-badge { font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.4); border:1px solid rgba(255,255,255,0.15); padding:6px 14px; }
+  #hero { background:var(--navy); padding:120px 4rem 80px; position:relative; overflow:hidden; }
+  .hero-rule { position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--gray-500) 0%, var(--gold) 50%, transparent 100%); }
+  .hero-tag { font-size:10px; font-weight:600; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:1.5rem; display:flex; align-items:center; gap:12px; }
+  .hero-tag::before { content:''; display:block; width:24px; height:1px; background:var(--gold); }
+  .hero-badge-estrut { display:inline-block; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; padding:5px 14px; margin-bottom:1.5rem; }
+  .hero-title { font-family:var(--serif); font-size:clamp(2.2rem,4vw,3.5rem); font-weight:300; color:#fff; line-height:1.15; margin-bottom:1rem; }
+  .hero-title em { font-style:italic; color:var(--gold-light); }
+  .hero-sub { font-size:16px; font-weight:300; color:rgba(255,255,255,0.6); max-width:580px; line-height:1.8; margin-bottom:3rem; }
+  .hero-aviso { display:flex; align-items:flex-start; gap:1rem; padding:1.5rem 2rem; border:1px solid rgba(255,255,255,0.1); border-left:3px solid var(--gold); max-width:600px; }
+  .hero-aviso p { font-size:14px; font-weight:300; color:rgba(255,255,255,0.6); line-height:1.7; }
+  .hero-aviso strong { color:var(--gold-light); font-weight:500; }
+  section { padding:80px 4rem; }
+  .sec-tag { font-size:10px; font-weight:600; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem; display:flex; align-items:center; gap:10px; }
+  .sec-tag::before { content:''; display:block; width:20px; height:1px; background:var(--gold); }
+  .sec-title { font-family:var(--serif); font-size:clamp(1.8rem,3vw,2.6rem); font-weight:300; color:var(--navy); line-height:1.2; margin-bottom:1.25rem; }
+  .sec-title em { font-style:italic; }
+  .sec-lead { font-size:16px; font-weight:300; color:var(--gray-700); line-height:1.8; max-width:640px; }
+  .divider { width:40px; height:2px; background:var(--gold); margin:1.5rem 0; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; margin-top:3rem; }
+  .card { padding:2rem 1.75rem; border:1px solid var(--gray-200); border-top:3px solid var(--gray-500); background:var(--white); }
+  .card-tag { font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--gray-500); margin-bottom:0.5rem; }
+  .card-title { font-family:var(--serif); font-size:1.2rem; font-weight:400; color:var(--navy); margin-bottom:0.75rem; }
+  .card-text { font-size:13px; font-weight:300; color:var(--gray-700); line-height:1.7; }
+  .item { display:flex; align-items:flex-start; gap:10px; margin-bottom:0.75rem; }
+  .dot { width:5px; height:5px; border-radius:50%; background:var(--gold); margin-top:7px; flex-shrink:0; }
+  .item-text { font-size:14px; font-weight:300; color:var(--gray-700); line-height:1.6; }
+  .body-text p { font-size:15px; font-weight:300; color:var(--gray-700); line-height:1.9; margin-bottom:1.25rem; }
+  .body-text strong { font-weight:600; color:var(--navy); }
+  .quote { font-family:var(--serif); font-size:1.3rem; font-weight:300; font-style:italic; color:var(--navy); border-left:3px solid var(--gold); padding:1rem 1.5rem; margin:1.5rem 0; line-height:1.5; }
+  .case-block { background:rgba(11,31,58,0.06); border:1px solid var(--gray-200); border-left:4px solid var(--gold); padding:2.5rem; }
+  .case-tag { font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:0.75rem; }
+  .case-status { display:inline-block; border:1px solid var(--gray-200); color:var(--gray-500); font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; padding:5px 12px; margin-bottom:1rem; }
+  .case-title-text { font-family:var(--serif); font-size:1.3rem; font-weight:400; color:var(--navy); margin-bottom:0.5rem; line-height:1.3; }
+  .case-author-text { font-size:12px; font-weight:300; color:var(--gray-500); letter-spacing:0.1em; margin-bottom:1rem; }
+  .case-desc { font-size:13px; font-weight:300; color:var(--gray-700); line-height:1.7; margin-bottom:1rem; }
+  .capitulos { margin-top:1rem; }
+  .cap { font-size:11px; font-weight:300; color:var(--gray-500); padding:5px 0; border-bottom:1px solid var(--gray-200); }
+  .cap:last-child { border-bottom:none; }
+  .perfis-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:2rem; }
+  .perfil { padding:1.25rem 1.5rem; border:1px solid var(--gray-200); border-left:3px solid var(--navy); }
+  .perfil-title { font-size:13px; font-weight:600; color:var(--navy); margin-bottom:4px; }
+  .perfil-text { font-size:12px; font-weight:300; color:var(--gray-700); line-height:1.6; }
+  #cta { background:var(--navy); text-align:center; padding:100px 4rem; }
+  .cta-title { font-family:var(--serif); font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:300; color:#fff; line-height:1.2; margin-bottom:1rem; }
+  .cta-title em { font-style:italic; color:var(--gold-light); }
+  .cta-text { font-size:15px; font-weight:300; color:rgba(255,255,255,0.55); max-width:520px; margin:0 auto 2.5rem; line-height:1.8; }
+  .btn-gold { display:inline-block; background:var(--gold); color:var(--navy); font-size:12px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none; padding:16px 32px; transition:background 0.2s; }
+  .btn-gold:hover { background:var(--gold-light); }
+  .btn-outline { display:inline-block; border:1px solid rgba(255,255,255,0.3); color:rgba(255,255,255,0.7); font-size:12px; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; text-decoration:none; padding:15px 28px; margin-left:1rem; transition:all 0.2s; }
+  .btn-outline:hover { border-color:var(--gold); color:var(--gold-light); }
+  footer { background:#07152A; padding:2.5rem 4rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; border-top:1px solid rgba(255,255,255,0.06); }
+  .ft { font-size:11px; font-weight:300; color:rgba(255,255,255,0.3); }
+  .ft strong { color:rgba(255,255,255,0.5); }
+  @media(max-width:900px){ nav{padding:0 1.5rem;} section{padding:60px 1.5rem;} #hero{padding:100px 1.5rem 60px;} .grid2,.perfis-grid{grid-template-columns:1fr;} footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;} }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <span class="nav-logo-name">Brary Institute</span>
+    <span class="nav-logo-sub">Sistema de Certificação Metodológica</span>
+  </a>
+  <span class="nav-badge">Em Estruturação</span>
+</nav>
+
+<section id="hero">
+  <div class="hero-rule"></div>
+  <div class="hero-badge-estrut">SBCS — Sistema em Estruturação</div>
+  <p class="hero-tag">Certificação em Saúde e Reabilitação</p>
+  <h1 class="hero-title">Sistema Brary de<br>Certificação em Saúde<br><em>e Reabilitação</em></h1>
+  <p class="hero-sub">O SBCS valida protocolos clínicos, terapêuticos e de reabilitação desenvolvidos por profissionais de saúde, com base em evidência científica, aplicabilidade clínica documentada e originalidade metodológica.</p>
+  <div class="hero-aviso">
+    <p><strong>Sistema em estruturação.</strong> O SBCS está sendo constituído a partir de demandas identificadas em fisioterapia, terapia ocupacional, fonoaudiologia e áreas clínicas afins. O primeiro protocolo candidato está em análise. Manifestações de interesse são recebidas.</p>
+  </div>
+</section>
+
+<section style="background:var(--cream);">
+  <div class="sec-tag">Sobre o SBCS</div>
+  <h2 class="sec-title">Protocolos clínicos que<br><em>merecem reconhecimento formal</em></h2>
+  <div class="divider"></div>
+  <div class="grid2">
+    <div class="body-text">
+      <p>Fisioterapeutas, terapeutas ocupacionais, fonoaudiólogos e outros profissionais de saúde desenvolvem ao longo de anos de prática clínica metodologias autorais — protocolos de avaliação, intervenção e monitoramento — que raramente recebem validação formal independente.</p>
+      <p>O registro autoral protege a autoria. A pesquisa acadêmica valida no meio científico. Mas não existe instrumento independente que certifique a solidez clínica, a fundamentação científica e a aplicabilidade prática de protocolos desenvolvidos por profissionais de saúde.</p>
+      <p>O SBCS foi concebido para criar esse instrumento — com critérios técnicos específicos para a área clínica, banca composta por especialistas da área de atuação e processo auditável que respeita a natureza da evidência em saúde.</p>
+      <div class="quote">"Um protocolo clínico validado por banca independente vale mais do que a experiência de quem o criou. Vale também para quem precisa adotá-lo."</div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:1rem;">
+        <div class="card-tag">Áreas de aplicação previstas</div>
+        <div class="item"><div class="dot"></div><div class="item-text">Fisioterapia — protocolos de avaliação postural, reabilitação e intervenção conservadora</div></div>
+        <div class="item"><div class="dot"></div><div class="item-text">Terapia ocupacional — metodologias de reabilitação funcional e inclusão</div></div>
+        <div class="item"><div class="dot"></div><div class="item-text">Fonoaudiologia — protocolos de avaliação e intervenção em linguagem e deglutição</div></div>
+        <div class="item"><div class="dot"></div><div class="item-text">Psicomotricidade — métodos de avaliação e desenvolvimento motor</div></div>
+        <div class="item"><div class="dot"></div><div class="item-text">Outras especialidades clínicas com metodologia autoral estruturada</div></div>
+      </div>
+      <div class="card">
+        <div class="card-tag">Critério central</div>
+        <div class="card-text">O protocolo deve ter fundamentação científica identificável, estrutura clínica definida, aplicabilidade documentada e ser passível de análise por banca de especialistas independentes da mesma área.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--white);">
+  <div class="sec-tag">Primeiro Protocolo Candidato</div>
+  <h2 class="sec-title">Avaliação Tridimensional e<br><em>Intervenção Fisioterapêutica em Escoliose</em></h2>
+  <div class="divider"></div>
+  <div class="grid2">
+    <div class="case-block">
+      <div class="case-tag">Candidato ao Selo SBCS</div>
+      <div class="case-status">Protocolo em estruturação</div>
+      <div class="case-title-text">Escoliose: Avaliação Tridimensional e Intervenção Fisioterapêutica com Coletes</div>
+      <div class="case-author-text">Autora: Amanda Pereira — Fisioterapeuta</div>
+      <div class="case-desc">Protocolo autoral de fisioterapia para avaliação tridimensional e tratamento conservador da escoliose e hipercifose, com ênfase na intervenção com coletes ortopédicos personalizados, prevenção cirúrgica e monitoramento longitudinal baseado em evidências.</div>
+      <div class="capitulos">
+        <div class="cap">Parte I — Fundamentos científicos e anatomia da coluna</div>
+        <div class="cap">Parte II — Classificações, tipos e etiologias da escoliose</div>
+        <div class="cap">Parte III — Avaliação clínica, tridimensional e prognóstica</div>
+        <div class="cap">Parte IV — Tratamento conservador e intervenção com coletes</div>
+        <div class="cap">Parte V — Comparação conservador vs. cirúrgico</div>
+        <div class="cap">Parte VI — Casos clínicos e protocolos de monitoramento</div>
+      </div>
+    </div>
+    <div class="body-text">
+      <p>A escoliose afeta milhões de brasileiros e é frequentemente subdiagnosticada ou tratada de forma tardia. A escolha entre tratamento conservador e intervenção cirúrgica depende de avaliação técnica precisa — e da existência de protocolos clínicos estruturados que orientem a decisão.</p>
+      <p>A fisioterapeuta Amanda Pereira desenvolveu uma <strong>metodologia autoral de avaliação tridimensional e intervenção conservadora</strong> — incluindo confecção e adaptação de coletes ortopédicos personalizados — sistematizada em obra científica com 22 capítulos, estudos de caso documentados e protocolos de avaliação e monitoramento.</p>
+      <p>O protocolo apresenta fundamentação científica consistente, estrutura clínica progressiva, instrumentos de avaliação validados e casos clínicos documentados — reunindo todos os elementos que o SBCS analisará como critérios de certificação.</p>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--cream);">
+  <div class="sec-tag">Banca Avaliadora</div>
+  <h2 class="sec-title">Perfil dos especialistas<br><em>do SBCS</em></h2>
+  <div class="divider"></div>
+  <p class="sec-lead">A banca do SBCS é composta por especialistas clínicos com formação documentada na área de atuação da metodologia submetida — garantindo que a avaliação seja conduzida por quem compreende a natureza do cuidado em saúde.</p>
+  <div class="perfis-grid">
+    <div class="perfil">
+      <div class="perfil-title">Especialista clínico da área</div>
+      <div class="perfil-text">Profissional com formação e prática clínica documentada na especialidade da metodologia — fisioterapeuta, terapeuta ocupacional, fonoaudiólogo ou equivalente. Avalia a solidez clínica e a adequação ao contexto de aplicação.</div>
+    </div>
+    <div class="perfil">
+      <div class="perfil-title">Especialista em evidência científica</div>
+      <div class="perfil-text">Profissional com formação em pesquisa clínica ou metodologia científica em saúde. Avalia a qualidade da fundamentação teórica, as referências utilizadas e a consistência entre evidência e prática proposta.</div>
+    </div>
+    <div class="perfil">
+      <div class="perfil-title">Especialista em aplicabilidade clínica</div>
+      <div class="perfil-text">Profissional com experiência na implementação de protocolos em contextos clínicos reais. Avalia a viabilidade de aplicação, a clareza das instruções e a adequação aos recursos tipicamente disponíveis.</div>
+    </div>
+    <div class="perfil">
+      <div class="perfil-title">Independência e ética</div>
+      <div class="perfil-text">Todos os avaliadores declaram ausência de vínculo com o autor antes da designação. O processo segue os mesmos princípios de independência, transparência e deliberação qualificada do Padrão SBCM.</div>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <h2 class="cta-title">Tem um protocolo clínico<br><em>desenvolvido na prática?</em></h2>
+  <p class="cta-text">O SBCS está recebendo manifestações de interesse de profissionais de saúde que desenvolveram metodologias autorais estruturadas em contextos clínicos reais — com fundamentação científica e aplicabilidade documentada.</p>
+  <a href="submeter.html" class="btn-gold">Manifestar Interesse →</a>
+  <a href="index.html" class="btn-outline">Conhecer o Padrão SBCM</a>
+</section>
+
+<footer>
+  <div class="ft"><strong>Brary Institute</strong> — SBCS · Certificação em Saúde e Reabilitação · Em estruturação</div>
+  <div class="ft">contato@braryeditora.com · Brary Editora Ltda. · Brasil</div>
+</footer>
+
+</body>
+</html>

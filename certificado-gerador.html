@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador de Certificado — Brary Institute SBCM</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0B1F3A; --gold: #B8963E; --gold-light: #D4AF6A;
+    --cream: #F6F3EC; --white: #FDFCFA; --gray-200: #D6D2C8;
+    --gray-500: #8A8578; --gray-700: #4A4740;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', 'Segoe UI', sans-serif;
+  }
+  body { font-family: var(--sans); background: #E8E4DC; min-height: 100vh; }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--navy); padding: 0 2rem; height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 2px solid var(--gold);
+  }
+  .nav-brand { color: #fff; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; }
+  .nav-sub { color: var(--gold-light); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; display: block; }
+  .nav-badge { background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 600; letter-spacing: 0.1em; padding: 6px 14px; }
+
+  /* ── LAYOUT ── */
+  .layout { display: grid; grid-template-columns: 300px 1fr; gap: 0; min-height: calc(100vh - 60px); }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    background: var(--navy); padding: 1.5rem;
+    overflow-y: auto; border-right: 1px solid rgba(184,150,62,0.3);
+  }
+
+  .sidebar-title {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem; border-bottom: 1px solid rgba(184,150,62,0.2);
+  }
+
+  .form-group { margin-bottom: 1rem; }
+  .form-label {
+    display: block; font-size: 10px; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin-bottom: 5px;
+  }
+  .form-input, .form-select, .form-textarea {
+    width: 100%; background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(184,150,62,0.3); color: #fff;
+    font-family: var(--sans); font-size: 13px; font-weight: 300;
+    padding: 8px 10px; outline: none; transition: border-color 0.2s;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--gold);
+  }
+  .form-select option { background: var(--navy); }
+  .form-textarea { resize: vertical; min-height: 52px; }
+
+  .form-divider {
+    border: none; border-top: 1px solid rgba(184,150,62,0.15);
+    margin: 1.25rem 0;
+  }
+
+  .btn-print {
+    width: 100%; background: var(--gold); color: var(--navy);
+    border: none; font-family: var(--sans); font-size: 12px;
+    font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 14px; cursor: pointer; margin-top: 1rem;
+    transition: background 0.2s;
+  }
+  .btn-print:hover { background: var(--gold-light); }
+
+  .btn-clear {
+    width: 100%; background: transparent; color: rgba(255,255,255,0.35);
+    border: 1px solid rgba(255,255,255,0.1); font-family: var(--sans);
+    font-size: 11px; letter-spacing: 0.1em; padding: 10px;
+    cursor: pointer; margin-top: 0.5rem; transition: all 0.2s;
+  }
+  .btn-clear:hover { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.3); }
+
+  .nivel-indicator {
+    padding: 10px 12px; margin-top: 0.75rem;
+    border-left: 3px solid var(--gold);
+  }
+  .nivel-indicator.n1 { background: rgba(184,150,62,0.08); }
+  .nivel-indicator.n2 { background: rgba(184,150,62,0.12); }
+  .nivel-indicator.n3 { background: rgba(184,150,62,0.18); }
+  .nivel-indicator p { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+  /* ── MAIN PREVIEW ── */
+  .main { padding: 2rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+
+  .preview-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gray-500);
+  }
+
+  .certificate-wrapper {
+    background: #F8F5EE; width: 100%; max-width: 860px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  }
+
+  /* ── PRINT STYLES ── */
+  @media print {
+    @page { size: A4 landscape; margin: 0; }
+    nav, .sidebar, .main > .preview-label, .main > .print-hint { display: none !important; }
+    body { background: white; }
+    .layout { display: block; }
+    .main { padding: 0; }
+    .certificate-wrapper { box-shadow: none; max-width: 100%; width: 100%; }
+    svg { width: 100% !important; height: auto !important; }
+  }
+
+  .print-hint {
+    font-size: 11px; font-weight: 300; color: var(--gray-500);
+    text-align: center; max-width: 600px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div>
+    <span class="nav-brand">Brary Institute</span>
+    <span class="nav-sub">Gerador de Certificado SBCM</span>
+  </div>
+  <span class="nav-badge">Uso Interno</span>
+</nav>
+
+<div class="layout">
+
+  <!-- SIDEBAR FORMULÁRIO -->
+  <aside class="sidebar">
+    <div class="sidebar-title">Dados do Certificado</div>
+
+    <div class="form-group">
+      <label class="form-label">Nível de Certificação</label>
+      <select class="form-select" id="nivel" onchange="atualizar()">
+        <option value="I">Nível I — Validação Documental</option>
+        <option value="II">Nível II — Banca de Validação</option>
+        <option value="III" selected>Nível III — Certificação Completa</option>
+      </select>
+      <div class="nivel-indicator n3" id="nivel-desc">
+        <p>Certificação de maior abrangência. Inclui publicação editorial, ISBN, CBL e Registro Público.</p>
+      </div>
+    </div>
+
+    <hr class="form-divider">
+
+    <div class="form-group">
+      <label class="form-label">Nome do Autor / Autora</label>
+      <input class="form-input" id="autor" type="text" value="Lóide da Silva" oninput="atualizar()" placeholder="Nome completo">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Obra Certificada</label>
+      <textarea class="form-textarea" id="obra" oninput="atualizar()" placeholder="Título da obra">Colorindo a Natação — Método Tia Lóide</textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Área Temática</label>
+      <input class="form-input" id="area" type="text" value="Segurança aquática infantil" oninput="atualizar()" placeholder="Ex: Educação física, Fisioterapia...">
+    </div>
+
+    <hr class="form-divider">
+
+    <div class="form-group">
+      <label class="form-label">Número de Protocolo</label>
+      <input class="form-input" id="protocolo" type="text" value="EE-2026-001" oninput="atualizar()" placeholder="EE-AAAA-NNN">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Selo</label>
+      <select class="form-select" id="selo" onchange="atualizar()">
+        <option value="ExerEducação" selected>ExerEducação — SBCM Educacional</option>
+        <option value="SBCT">SBCT — Certificação Técnica</option>
+        <option value="SBCS">SBCS — Saúde e Reabilitação</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Data de Emissão</label>
+      <input class="form-input" id="data" type="text" value="18 de abril de 2026" oninput="atualizar()" placeholder="DD de mês de AAAA">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Especialista da Banca (linha 1)</label>
+      <input class="form-input" id="banca1" type="text" value="Especialista Avaliador Independente" oninput="atualizar()">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Especialista da Banca (linha 2)</label>
+      <input class="form-input" id="banca2" type="text" value="Coordenação e Banca SBCM" oninput="atualizar()">
+    </div>
+
+    <hr class="form-divider">
+
+    <button class="btn-print" onclick="window.print()">Imprimir / Salvar PDF</button>
+    <button class="btn-clear" onclick="limpar()">Limpar campos</button>
+  </aside>
+
+  <!-- PREVIEW DO CERTIFICADO -->
+  <main class="main">
+    <p class="preview-label">Pré-visualização do Certificado</p>
+    <div class="certificate-wrapper">
+      <svg id="cert-svg" width="100%" viewBox="0 0 860 560" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- Background -->
+        <rect width="860" height="560" fill="#F8F5EE"/>
+        <!-- Top bar -->
+        <rect width="860" height="7" fill="#0B1F3A"/>
+        <rect y="7" width="860" height="2.5" fill="#B8963E"/>
+        <!-- Bottom bar -->
+        <rect y="550.5" width="860" height="2.5" fill="#B8963E"/>
+        <rect y="553" width="860" height="7" fill="#0B1F3A"/>
+        <!-- Outer border -->
+        <rect x="14" y="14" width="832" height="532" fill="none" stroke="#0B1F3A" stroke-width="1.8"/>
+        <!-- Inner gold border -->
+        <rect x="22" y="22" width="816" height="516" fill="none" stroke="#B8963E" stroke-width="0.7"/>
+        <!-- Corner squares -->
+        <rect x="14" y="14" width="12" height="12" fill="#0B1F3A"/>
+        <rect x="834" y="14" width="12" height="12" fill="#0B1F3A"/>
+        <rect x="14" y="534" width="12" height="12" fill="#0B1F3A"/>
+        <rect x="834" y="534" width="12" height="12" fill="#0B1F3A"/>
+        <rect x="17" y="17" width="6" height="6" fill="#B8963E"/>
+        <rect x="837" y="17" width="6" height="6" fill="#B8963E"/>
+        <rect x="17" y="537" width="6" height="6" fill="#B8963E"/>
+        <rect x="837" y="537" width="6" height="6" fill="#B8963E"/>
+        <!-- Corner flourishes -->
+        <line x1="38" y1="38" x2="72" y2="38" stroke="#B8963E" stroke-width="0.6"/>
+        <line x1="38" y1="38" x2="38" y2="72" stroke="#B8963E" stroke-width="0.6"/>
+        <line x1="788" y1="38" x2="822" y2="38" stroke="#B8963E" stroke-width="0.6"/>
+        <line x1="822" y1="38" x2="822" y2="72" stroke="#B8963E" stroke-width="0.6"/>
+        <line x1="38" y1="488" x2="38" y2="522" stroke="#B8963E" stroke-width="0.6"/>
+        <line x1="38" y1="522" x2="72" y2="522" stroke="#B8963E" stroke-width="0.6"/>
+        <line x1="822" y1="488" x2="822" y2="522" stroke="#B8963E" stroke-width="0.6"/>
+        <line x1="788" y1="522" x2="822" y2="522" stroke="#B8963E" stroke-width="0.6"/>
+
+        <!-- HERALDIC SHIELD -->
+        <path d="M 395,28 L 465,28 L 465,94 Q 463,122 430,136 Q 397,122 395,94 Z" fill="#0B1F3A" stroke="#B8963E" stroke-width="2"/>
+        <path d="M 402,35 L 458,35 L 458,92 Q 456,113 430,124 Q 404,113 402,92 Z" fill="none" stroke="#B8963E" stroke-width="0.6"/>
+        <rect x="402" y="74" width="56" height="8" fill="#B8963E"/>
+        <text x="430" y="69" font-family="Georgia,'Times New Roman',serif" font-size="19" font-weight="bold" fill="#B8963E" text-anchor="middle">B</text>
+        <text id="c-selo-shield" x="430" y="100" font-family="Georgia,'Times New Roman',serif" font-size="8" font-weight="bold" fill="#D4AF6A" text-anchor="middle" letter-spacing="1.5">EE</text>
+        <text id="c-ano" x="430" y="130" font-family="Georgia,'Times New Roman',serif" font-size="7.5" fill="#B8963E" text-anchor="middle" letter-spacing="1">MMXXVI</text>
+
+        <!-- INSTITUTION HEADER -->
+        <text x="430" y="157" font-family="Georgia,'Times New Roman',serif" font-size="14" font-weight="bold" fill="#0B1F3A" text-anchor="middle" letter-spacing="5">BRARY INSTITUTE</text>
+        <text x="430" y="171" font-family="Georgia,'Times New Roman',serif" font-size="8.5" fill="#8A8578" text-anchor="middle" letter-spacing="0.8">Padrão SBCM de Validação Metodológica  ·  Brary Editora Ltda.</text>
+
+        <line x1="80" y1="180" x2="780" y2="180" stroke="#B8963E" stroke-width="0.8"/>
+        <line x1="100" y1="182" x2="760" y2="182" stroke="#B8963E" stroke-width="0.3"/>
+
+        <!-- CERTIFICATE TYPE -->
+        <text x="430" y="202" font-family="Georgia,'Times New Roman',serif" font-size="13.5" font-weight="bold" fill="#0B1F3A" text-anchor="middle" letter-spacing="3">CERTIFICADO DE METODOLOGIA VALIDADA</text>
+        <text id="c-nivel-label" x="430" y="217" font-family="Georgia,'Times New Roman',serif" font-size="10.5" fill="#B8963E" text-anchor="middle" font-style="italic">Nível III — Certificação Completa com Publicação</text>
+
+        <line x1="230" y1="226" x2="630" y2="226" stroke="#B8963E" stroke-width="0.5"/>
+
+        <!-- BODY -->
+        <text x="430" y="246" font-family="Georgia,'Times New Roman',serif" font-size="10" fill="#4A4740" text-anchor="middle">A Brary Institute certifica que a autora e metodologia abaixo identificadas receberam o</text>
+        <text id="c-nivel-desc" x="430" y="259" font-family="Georgia,'Times New Roman',serif" font-size="10" fill="#4A4740" text-anchor="middle">Certificado de Metodologia Validada com Certificação Completa, mediante deliberação de banca.</text>
+
+        <!-- AUTHOR NAME -->
+        <text id="c-autor" x="430" y="300" font-family="Georgia,'Times New Roman',serif" font-size="34" fill="#0B1F3A" text-anchor="middle" font-style="italic">Lóide da Silva</text>
+        <line id="c-autor-line" x1="200" y1="307" x2="660" y2="307" stroke="#0B1F3A" stroke-width="1.2"/>
+
+        <!-- OBRA -->
+        <text x="430" y="327" font-family="Georgia,'Times New Roman',serif" font-size="9" fill="#8A8578" text-anchor="middle" letter-spacing="1">OBRA CERTIFICADA</text>
+        <text id="c-obra" x="430" y="343" font-family="Georgia,'Times New Roman',serif" font-size="12.5" fill="#0B1F3A" text-anchor="middle" font-style="italic">Colorindo a Natação — Método Tia Lóide</text>
+        <text id="c-area" x="430" y="357" font-family="Georgia,'Times New Roman',serif" font-size="9" fill="#8A8578" text-anchor="middle">Segurança aquática infantil  ·  Metodologia autoral validada pelo Padrão SBCM</text>
+
+        <!-- DATA STRIP -->
+        <rect x="30" y="368" width="800" height="34" fill="#0B1F3A"/>
+        <line x1="297" y1="370" x2="297" y2="400" stroke="#B8963E" stroke-width="0.5" opacity="0.5"/>
+        <line x1="563" y1="370" x2="563" y2="400" stroke="#B8963E" stroke-width="0.5" opacity="0.5"/>
+
+        <text x="163" y="380" font-family="Georgia,'Times New Roman',serif" font-size="7" fill="#B8963E" text-anchor="middle" letter-spacing="1.5">DATA DE CERTIFICAÇÃO</text>
+        <text id="c-data" x="163" y="393" font-family="Georgia,'Times New Roman',serif" font-size="10" fill="#FFFFFF" text-anchor="middle">18 de abril de 2026</text>
+        <text x="430" y="380" font-family="Georgia,'Times New Roman',serif" font-size="7" fill="#B8963E" text-anchor="middle" letter-spacing="1.5">NÚMERO DE PROTOCOLO</text>
+        <text id="c-protocolo" x="430" y="393" font-family="Courier,'Courier New',monospace" font-size="11" fill="#FFFFFF" text-anchor="middle">EE-2026-001</text>
+        <text x="697" y="380" font-family="Georgia,'Times New Roman',serif" font-size="7" fill="#B8963E" text-anchor="middle" letter-spacing="1.5">NÍVEL DE CERTIFICAÇÃO</text>
+        <text id="c-nivel-strip" x="697" y="393" font-family="Georgia,'Times New Roman',serif" font-size="10" fill="#FFFFFF" text-anchor="middle">Nível III — Completo</text>
+
+        <!-- SIGNATURES -->
+        <line x1="60" y1="462" x2="290" y2="462" stroke="#0B1F3A" stroke-width="0.9"/>
+        <text x="175" y="473" font-family="Georgia,'Times New Roman',serif" font-size="9" font-weight="bold" fill="#0B1F3A" text-anchor="middle">Direção Editorial</text>
+        <text x="175" y="484" font-family="Georgia,'Times New Roman',serif" font-size="8" fill="#8A8578" text-anchor="middle">Brary Editora Ltda.</text>
+        <text x="175" y="495" font-family="Georgia,'Times New Roman',serif" font-size="7.5" fill="#8A8578" text-anchor="middle">contato@braryeditora.com</text>
+
+        <line x1="570" y1="462" x2="800" y2="462" stroke="#0B1F3A" stroke-width="0.9"/>
+        <text id="c-banca2" x="685" y="473" font-family="Georgia,'Times New Roman',serif" font-size="9" font-weight="bold" fill="#0B1F3A" text-anchor="middle">Coordenação e Banca SBCM</text>
+        <text id="c-banca1" x="685" y="484" font-family="Georgia,'Times New Roman',serif" font-size="8" fill="#8A8578" text-anchor="middle">Especialista Avaliador Independente</text>
+
+        <!-- CENTRAL SEAL -->
+        <circle cx="430" cy="473" r="32" fill="#F8F5EE" stroke="#B8963E" stroke-width="1.3"/>
+        <circle cx="430" cy="473" r="25" fill="none" stroke="#B8963E" stroke-width="0.4"/>
+        <text id="c-selo-top" x="430" y="468" font-family="Georgia,'Times New Roman',serif" font-size="7.5" font-weight="bold" fill="#B8963E" text-anchor="middle" letter-spacing="1">EXER</text>
+        <text id="c-selo-bot" x="430" y="479" font-family="Georgia,'Times New Roman',serif" font-size="7.5" font-weight="bold" fill="#B8963E" text-anchor="middle" letter-spacing="0.5">EDUCAÇÃO</text>
+
+
+        <!-- BOTTOM HASH -->
+        <line x1="30" y1="510" x2="830" y2="510" stroke="#B8963E" stroke-width="0.4"/>
+        <text id="c-hash" x="430" y="521" font-family="Courier,'Courier New',monospace" font-size="7.5" fill="#8A8578" text-anchor="middle">ee2026·e525c94dbe641d0d1c0670df31beb2774a2952259ce80fb2229dfdb0cebe442d</text>
+        <text x="430" y="533" font-family="Georgia,'Times New Roman',serif" font-size="7.5" fill="#B8963E" text-anchor="middle" letter-spacing="2">BRARY INSTITUTE · PADRÃO SBCM · BRASIL · 2026</text>
+
+        <!-- QR placeholders -->
+        <rect x="760" y="512" width="42" height="42" fill="none" stroke="#B8963E" stroke-width="0.8"/>
+        <rect x="763" y="515" width="9" height="9" fill="#0B1F3A"/>
+        <rect x="763" y="528" width="9" height="9" fill="#0B1F3A"/>
+        <rect x="776" y="515" width="9" height="9" fill="#0B1F3A"/>
+        <rect x="789" y="515" width="9" height="9" fill="#0B1F3A"/>
+        <rect x="789" y="528" width="9" height="9" fill="#0B1F3A"/>
+        <rect x="789" y="541" width="9" height="9" fill="#0B1F3A"/>
+        <rect x="776" y="534" width="6" height="6" fill="#B8963E"/>
+        <rect x="58" y="512" width="42" height="42" fill="none" stroke="#B8963E" stroke-width="0.8"/>
+        <text x="79" y="538" font-family="Georgia,'Times New Roman',serif" font-size="7" fill="#8A8578" text-anchor="middle">verificar</text>
+
+      </svg>
+    </div>
+    <p class="print-hint">Clique em <strong>Imprimir / Salvar PDF</strong> na barra lateral. No diálogo de impressão, selecione <strong>"Salvar como PDF"</strong> e orientação <strong>Paisagem (A4)</strong>.</p>
+  </main>
+</div>
+
+<script>
+  const nivelTextos = {
+    "I": {
+      label: "Nível I — Validação Documental",
+      desc: "Certificado de Análise Documental, mediante análise técnica preliminar por especialista-relator.",
+      strip: "Nível I — Documental",
+      descBox: "Certificado de Validação Documental emitido após análise técnica por especialista-relator SBCM.",
+      indicador: "n1",
+      indicadorTexto: "Análise técnica por especialista-relator. Emissão de Relatório Técnico Preliminar."
+    },
+    "II": {
+      label: "Nível II — Banca de Validação",
+      desc: "Certificado de Banca de Validação, mediante deliberação de três especialistas independentes.",
+      strip: "Nível II — Banca",
+      descBox: "Certificado de Banca de Validação emitido após deliberação qualificada de três especialistas independentes.",
+      indicador: "n2",
+      indicadorTexto: "Processo completo com banca de três especialistas. Emissão de Parecer Técnico Final."
+    },
+    "III": {
+      label: "Nível III — Certificação Completa com Publicação",
+      desc: "Certificado de Metodologia Validada com Certificação Completa, mediante deliberação de banca.",
+      strip: "Nível III — Completo",
+      descBox: "Certificado de Metodologia Validada com Certificação Completa, mediante deliberação de banca de especialistas independentes.",
+      indicador: "n3",
+      indicadorTexto: "Certificação de maior abrangência. Inclui publicação editorial, ISBN, CBL e Registro Público."
+    }
+  };
+
+  const seloTextos = {
+    "ExerEducação": { top: "EXER", bot: "EDUCAÇÃO", shield: "EE" },
+    "SBCT": { top: "SBCT", bot: "TÉCNICO", shield: "TC" },
+    "SBCS": { top: "SBCS", bot: "SAÚDE", shield: "CS" }
+  };
+
+  function atualizar() {
+    const nivel = document.getElementById("nivel").value;
+    const autor = document.getElementById("autor").value || "[ Nome do Autor ]";
+    const obra = document.getElementById("obra").value || "[ Título da Obra ]";
+    const area = document.getElementById("area").value || "[ Área Temática ]";
+    const protocolo = document.getElementById("protocolo").value || "[ Protocolo ]";
+    const data = document.getElementById("data").value || "[ Data ]";
+    const banca1 = document.getElementById("banca1").value || "Especialista Avaliador";
+    const banca2 = document.getElementById("banca2").value || "Coordenação SBCM";
+    const selo = document.getElementById("selo").value;
+    const t = nivelTextos[nivel];
+    const s = seloTextos[selo];
+
+    document.getElementById("c-autor").textContent = autor;
+    document.getElementById("c-obra").textContent = obra;
+    document.getElementById("c-area").textContent = area + "  ·  Metodologia autoral validada pelo Padrão SBCM";
+    document.getElementById("c-protocolo").textContent = protocolo;
+    document.getElementById("c-data").textContent = data;
+    document.getElementById("c-nivel-label").textContent = t.label;
+    document.getElementById("c-nivel-strip").textContent = t.strip;
+    document.getElementById("c-nivel-desc").textContent = t.descBox;
+    document.getElementById("c-banca1").textContent = banca1;
+    document.getElementById("c-banca2").textContent = banca2;
+    document.getElementById("c-selo-top").textContent = s.top;
+    document.getElementById("c-selo-bot").textContent = s.bot;
+    document.getElementById("c-selo-shield").textContent = s.shield;
+
+    const hash = protocolo.toLowerCase().replace(/[^a-z0-9]/g, "") +
+      "·e525c94dbe641d0d1c0670df31beb2774a2952259ce80fb2229dfdb0cebe442d";
+    document.getElementById("c-hash").textContent = hash.substring(0, 72) + "...";
+
+    const desc = document.getElementById("nivel-desc");
+    desc.className = "nivel-indicator " + t.indicador;
+    desc.querySelector("p").textContent = t.indicadorTexto;
+  }
+
+  function limpar() {
+    document.getElementById("nivel").value = "III";
+    document.getElementById("autor").value = "";
+    document.getElementById("obra").value = "";
+    document.getElementById("area").value = "";
+    document.getElementById("protocolo").value = "";
+    document.getElementById("data").value = "";
+    document.getElementById("banca1").value = "Especialista Avaliador Independente";
+    document.getElementById("banca2").value = "Coordenação e Banca SBCM";
+    document.getElementById("selo").value = "ExerEducação";
+    atualizar();
+  }
+
+  atualizar();
+</script>
+</body>
+</html>

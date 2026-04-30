@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Submeter Metodologia — Brary Institute SBCM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0B1F3A; --gold: #B8963E; --gold-light: #D4AF6A;
+    --cream: #F6F3EC; --white: #FDFCFA; --gray-200: #D6D2C8;
+    --gray-500: #8A8578; --gray-700: #4A4740;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', 'Segoe UI', sans-serif;
+  }
+  body { font-family: var(--sans); background: var(--white); color: var(--gray-700); -webkit-font-smoothing: antialiased; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--navy); border-bottom: 1px solid rgba(184,150,62,0.3);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 4rem; height: 68px;
+  }
+  .nav-brand { display: flex; flex-direction: column; gap: 1px; text-decoration: none; }
+  .nav-brand-name { font-size: 13px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; }
+  .nav-brand-sub { font-size: 9px; font-weight: 300; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-light); }
+  .nav-back { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .nav-back:hover { color: var(--gold-light); }
+
+  .page-header {
+    background: var(--navy); padding: 120px 4rem 60px;
+    border-bottom: 3px solid var(--gold);
+  }
+  .page-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
+  .page-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .page-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; color: var(--white); line-height: 1.2; margin-bottom: 1rem; }
+  .page-title em { font-style: italic; color: var(--gold-light); }
+  .page-sub { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.6); max-width: 560px; line-height: 1.8; }
+
+  .requisitos {
+    background: var(--cream); padding: 2rem 4rem;
+    border-bottom: 1px solid var(--gray-200);
+    display: flex; align-items: center; gap: 3rem; flex-wrap: wrap;
+  }
+  .req-label { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-500); white-space: nowrap; }
+  .req-items { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .req-item { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 300; color: var(--gray-700); }
+  .req-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+  .form-container { max-width: 860px; margin: 0 auto; padding: 4rem 2rem; }
+
+  .form-intro { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--gray-200); }
+  .form-intro p { font-size: 14px; font-weight: 300; color: var(--gray-500); line-height: 1.8; }
+  .form-intro strong { color: var(--navy); font-weight: 500; }
+
+  .iframe-wrapper {
+    border: 1px solid var(--gray-200);
+    border-top: 3px solid var(--navy);
+    overflow: hidden;
+  }
+  .iframe-wrapper iframe { display: block; border: none; }
+
+  .form-nota {
+    margin-top: 2rem; padding: 1.5rem 2rem;
+    border-left: 3px solid var(--gold);
+    background: var(--cream);
+  }
+  .form-nota p { font-size: 13px; font-weight: 300; color: var(--gray-700); line-height: 1.7; }
+  .form-nota strong { color: var(--navy); font-weight: 500; }
+
+  footer {
+    background: #07152A; padding: 2rem 4rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-txt { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.3); }
+  .footer-txt strong { color: rgba(255,255,255,0.5); letter-spacing: 0.1em; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1.5rem; }
+    .page-header { padding: 100px 1.5rem 40px; }
+    .requisitos { padding: 1.5rem; gap: 1rem; }
+    .form-container { padding: 2rem 1rem; }
+    footer { padding: 1.5rem; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">
+    <span class="nav-brand-name">Brary Institute</span>
+    <span class="nav-brand-sub">Sistema de Certificação Metodológica</span>
+  </a>
+  <a href="index.html" class="nav-back">&larr; Voltar ao site</a>
+</nav>
+
+<div class="page-header">
+  <p class="page-tag">Formulário de Triagem e Elegibilidade</p>
+  <h1 class="page-title">Submeter Metodologia<br><em>ao Padrão SBCM</em></h1>
+  <p class="page-sub">Preencha o formulário abaixo para iniciar o processo de triagem e verificar a elegibilidade da sua metodologia ao Sistema Brary de Certificação Metodológica.</p>
+</div>
+
+<div class="requisitos">
+  <span class="req-label">Requisitos mínimos:</span>
+  <div class="req-items">
+    <div class="req-item"><div class="req-dot"></div>Metodologia documentada por escrito</div>
+    <div class="req-item"><div class="req-dot"></div>Autoria identificada e declarada</div>
+    <div class="req-item"><div class="req-dot"></div>Evidência de aplicação prática</div>
+    <div class="req-item"><div class="req-dot"></div>Material produzido (livro, guia, curso ou equivalente)</div>
+  </div>
+</div>
+
+<div class="form-container">
+
+  <div class="form-intro">
+    <p>Este formulário é o primeiro passo do processo de certificação. Após o preenchimento, a equipe do SBCM realizará a <strong>análise documental de elegibilidade</strong> em até 15 dias úteis e retornará com parecer de admissibilidade ou orientações de adequação.</p>
+  </div>
+
+  <div class="iframe-wrapper">
+    <iframe
+      src="https://docs.google.com/forms/d/e/1FAIpQLSe7E5w_bd4EJJI3_5_drLdtTZGZnx-pKKMEt18oJL9ewBffGg/viewform?embedded=true"
+      width="100%"
+      height="3951"
+      frameborder="0"
+      marginheight="0"
+      marginwidth="0">
+      Carregando formulário…
+    </iframe>
+  </div>
+
+  <div class="form-nota">
+    <p><strong>Confidencialidade:</strong> Todas as informações submetidas são tratadas com sigilo institucional. O conteúdo da metodologia não é compartilhado com terceiros sem autorização expressa do autor. O processo de análise é conduzido exclusivamente pela equipe técnica do SBCM.</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-txt"><strong>Brary Institute</strong> — Sistema Brary de Certificação Metodológica</div>
+  <div class="footer-txt" style="font-family:monospace;">EE-2026-001 &nbsp;|&nbsp; Brary Editora Ltda. &nbsp;|&nbsp; Brasil</div>
+</footer>
+
+</body>
+</html>
