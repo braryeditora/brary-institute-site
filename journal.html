@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brary Journal — Publicação Técnico-Científica do Brary Institute</title>
+<meta name="description" content="Brary Journal publica quem já provou na prática. Publicação técnico-científica vinculada ao Padrão SBCM.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ===== RESET & BASE ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #0B1F3A;
+    --navy-light: #112647;
+    --gold:   #B8963E;
+    --gold-light: #D4AF6A;
+    --cream:  #F6F3EC;
+    --cream-dark: #EDE8DE;
+    --white:  #FFFFFF;
+    --text-dark: #1a1a1a;
+    --text-mid: #444;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans:  'Jost', sans-serif;
+    --transition: 0.3s ease;
+    --shadow: 0 4px 24px rgba(11,31,58,0.10);
+    --shadow-md: 0 8px 40px rgba(11,31,58,0.14);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    font-weight: 400;
+    color: var(--text-dark);
+    background: var(--cream);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+
+  /* ===== UTILITIES ===== */
+  .container {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .section-label {
+    display: block;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.4rem;
+  }
+  .section-label::before { content: "—— "; }
+  .section-label::after  { content: " ——"; }
+
+  .headline-duo { line-height: 1.15; }
+  .headline-duo .h-line1 {
+    display: block;
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    color: var(--white);
+  }
+  .headline-duo .h-line1.dark { color: var(--navy); }
+  .headline-duo .h-line2 {
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.8rem, 3.6vw, 2.9rem);
+    color: var(--gold-light);
+  }
+
+  /* ===== REVEAL ANIMATION ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== BUTTONS ===== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    padding: 0.8rem 1.8rem;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition), transform var(--transition), box-shadow var(--transition);
+    text-transform: uppercase;
+  }
+  .btn-gold {
+    background: var(--gold);
+    color: var(--white);
+  }
+  .btn-gold:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(184,150,62,0.35);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 1.5px solid rgba(255,255,255,0.45);
+  }
+  .btn-outline:hover {
+    border-color: var(--gold-light);
+    color: var(--gold-light);
+    transform: translateY(-1px);
+  }
+  .btn-outline-navy {
+    background: transparent;
+    color: var(--navy);
+    border: 1.5px solid var(--navy);
+  }
+  .btn-outline-navy:hover {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  /* ===== NAVBAR ===== */
+  #navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: var(--navy);
+    border-bottom: 1px solid rgba(184,150,62,0.15);
+    transition: padding var(--transition), box-shadow var(--transition);
+  }
+  #navbar.scrolled {
+    box-shadow: 0 2px 20px rgba(11,31,58,0.4);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 20px;
+    max-width: 1120px;
+    margin: 0 auto;
+    transition: padding var(--transition);
+  }
+  #navbar.scrolled .nav-inner {
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+  }
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+  .nav-logo-name {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+  .nav-logo-sub {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .nav-links {
+    display: none;
+    gap: 2rem;
+    align-items: center;
+  }
+  .nav-links a {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.75);
+    text-transform: uppercase;
+    transition: color var(--transition);
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-cta {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--white);
+    transition: transform var(--transition), opacity var(--transition);
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    background: var(--navy-light);
+    border-top: 1px solid rgba(184,150,62,0.15);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s ease;
+  }
+  .mobile-menu.open {
+    display: flex;
+    max-height: 400px;
+  }
+  .mobile-menu a {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+    padding: 1rem 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: color var(--transition), background var(--transition);
+  }
+  .mobile-menu a:hover { color: var(--gold-light); background: rgba(255,255,255,0.03); }
+  .mobile-menu .m-cta {
+    margin: 1rem 20px 1.2rem;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .nav-links { display: flex; }
+    .nav-cta { display: block; }
+    .hamburger { display: none; }
+    .mobile-menu { display: none !important; }
+  }
+
+  /* ===== HERO ===== */
+  #hero {
+    background: var(--navy);
+    padding: 140px 20px 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 80% 40%, rgba(184,150,62,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(184,150,62,0.35);
+    padding: 0.35rem 0.9rem;
+    border-radius: 1px;
+    margin-bottom: 2rem;
+  }
+  .hero-eyebrow::before { content: ""; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
+  .hero-headline {
+    max-width: 720px;
+    margin-bottom: 1.6rem;
+  }
+  .hero-para {
+    max-width: 580px;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 0.9rem;
+  }
+  .hero-institutional {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--gold-light);
+    margin-bottom: 2.2rem;
+    max-width: 520px;
+    line-height: 1.55;
+  }
+  .hero-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-bottom: 3.5rem;
+  }
+  .hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem 3rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 2.2rem;
+  }
+  .stat-item { display: flex; flex-direction: column; gap: 0.2rem; }
+  .stat-value {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* ===== SOBRE ===== */
+  #sobre {
+    background: var(--cream);
+    padding: 90px 20px;
+  }
+  .sobre-grid {
+    display: grid;
+    gap: 3rem;
+  }
+  .sobre-intro {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-mid);
+  }
+  .sobre-intro p + p { margin-top: 1.1rem; }
+  .sobre-quote {
+    border-left: 3px solid var(--gold);
+    padding: 1.2rem 1.6rem;
+    background: rgba(184,150,62,0.06);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.55;
+    color: var(--navy);
+    margin: 2rem 0;
+  }
+  .comparison-block {
+    display: grid;
+    gap: 1.5px;
+    background: rgba(11,31,58,0.08);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 2.4rem;
+  }
+  .comparison-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--cream-dark);
+  }
+  .comparison-header span {
+    padding: 0.85rem 1.2rem;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+  .comparison-header span:first-child {
+    border-right: 1.5px solid rgba(11,31,58,0.08);
+    color: var(--text-mid);
+  }
+  .comparison-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--white);
+  }
+  .comparison-row + .comparison-row { border-top: 1.5px solid rgba(11,31,58,0.06); }
+  .comparison-cell {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-mid);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .comparison-cell:first-child {
+    border-right: 1.5px solid rgba(11,31,58,0.06);
+    color: var(--text-mid);
+  }
+  .comparison-cell:last-child { color: var(--navy); font-weight: 500; }
+  .comparison-cell .icon { flex-shrink: 0; margin-top: 2px; }
+  .icon-x { color: #999; }
+  .icon-check { color: var(--gold); }
+
+  @media (min-width: 768px) {
+    .sobre-grid { grid-template-columns: 1fr 1fr; align-items: start; }
+  }
+
+  /* ===== CATEGORIAS ===== */
+  #categorias {
+    background: var(--navy);
+    padding: 90px 20px;
+  }
+  #categorias .section-label { color: var(--gold); }
+  .cat-intro {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.6);
+    max-width: 580px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+  .cat-grid {
+    display: grid;
+    gap: 1px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .cat-card {
+    background: var(--navy-light);
+    padding: 1.8rem 1.6rem;
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    cursor: default;
+    position: relative;
+  }
+  .cat-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: width 0.35s ease;
+  }
+  .cat-card:hover {
+    background: #162e50;
+    box-shadow: inset 0 0 0 1px rgba(184,150,62,0.15);
+  }
+  .cat-card:hover::after { width: 100%; }
+  .cat-number {
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.7rem;
+  }
+  .cat-name {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.3;
+    margin-bottom: 0.7rem;
+  }
+  .cat-desc {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.65;
+    margin-bottom: 0.6rem;
+  }
+  .cat-trigger {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--gold-light);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+  .cat-link {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: gap var(--transition);
+  }
+  .cat-card:hover .cat-link { gap: 0.6rem; }
+
+  @media (min-width: 768px) {
+    .cat-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1024px) {
+    .cat-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ===== MODELO ===== */
+  #modelo {
+    background: var(--cream);
+    padding: 90px 20px;
+  }
+  .modelo-top {
+    display: grid;
+    gap: 3rem;
+    margin-bottom: 4rem;
+  }
+  .modelo-editorial-box {
+    background: var(--white);
+    border-left: 3px solid var(--gold);
+    padding: 1.5rem 1.6rem;
+    border-radius: 0 2px 2px 0;
+    box-shadow: var(--shadow);
+  }
+  .modelo-editorial-box p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-mid);
+    margin-bottom: 0.7rem;
+  }
+  .modelo-editorial-box p:last-child { margin-bottom: 0; }
+  .modelo-editorial-box strong { color: var(--navy); }
+  .modelo-editorial-note {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--navy);
+    margin-top: 0.8rem;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 4rem;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    top: 36px;
+    bottom: 36px;
+    width: 1px;
+    background: rgba(11,31,58,0.12);
+  }
+  .timeline-step {
+    display: flex;
+    gap: 1.4rem;
+    align-items: flex-start;
+    padding-bottom: 2rem;
+    position: relative;
+  }
+  .timeline-step:last-child { padding-bottom: 0; }
+  .step-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    position: relative;
+    z-index: 1;
+  }
+  .step-body { padding-top: 0.4rem; }
+  .step-title {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.35rem;
+  }
+  .step-desc {
+    font-size: 0.84rem;
+    color: var(--text-mid);
+    line-height: 1.65;
+  }
+
+  .pricing-table {
+    display: grid;
+    gap: 1px;
+    background: rgba(11,31,58,0.08);
+    border-radius: 4px;
+    overflow: hidden;
+    max-width: 680px;
+  }
+  .pricing-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    background: var(--navy);
+    color: var(--white);
+  }
+  .pricing-header div {
+    padding: 0.85rem 1.2rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+  }
+  .pricing-header div:first-child { border-right: 1px solid rgba(255,255,255,0.08); }
+  .pricing-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    background: var(--white);
+    transition: background var(--transition);
+  }
+  .pricing-row.featured { background: rgba(184,150,62,0.06); }
+  .pricing-row + .pricing-row { border-top: 1px solid rgba(11,31,58,0.06); }
+  .pricing-cell {
+    padding: 1rem 1.2rem;
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    line-height: 1.5;
+  }
+  .pricing-cell:first-child { border-right: 1px solid rgba(11,31,58,0.06); }
+  .pricing-cell strong { display: block; color: var(--navy); font-size: 0.9rem; margin-bottom: 0.1rem; }
+  .pricing-cell .badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--white);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.5rem;
+    border-radius: 1px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+  .pricing-cell .price {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .pricing-cell .price-label {
+    font-size: 0.7rem;
+    color: var(--text-mid);
+  }
+  .pricing-includes {
+    background: var(--navy);
+    padding: 1rem 1.2rem;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+  }
+  .pricing-includes strong { color: var(--gold-light); }
+
+  .scarcity-note {
+    margin-top: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.8rem;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .scarcity-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+
+  @media (min-width: 768px) {
+    .modelo-top { grid-template-columns: 1fr 1fr; align-items: start; }
+    .timeline::before { left: 20px; }
+  }
+
+  /* ===== CONSELHO ===== */
+  #conselho {
+    background: var(--navy);
+    padding: 90px 20px;
+  }
+  #conselho .section-label { color: var(--gold); }
+  .conselho-intro {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.55);
+    max-width: 580px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+    font-style: italic;
+    font-family: var(--serif);
+    font-size: 1.05rem;
+  }
+  .council-grid {
+    display: grid;
+    gap: 1px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .council-card {
+    background: var(--navy-light);
+    padding: 1.5rem 1.4rem;
+    transition: background var(--transition);
+    position: relative;
+  }
+  .council-card:hover { background: #162e50; }
+  .council-card.featured {
+    background: rgba(184,150,62,0.08);
+    border: 1px solid rgba(184,150,62,0.22);
+  }
+  .council-card.featured:hover { background: rgba(184,150,62,0.12); }
+  .council-area {
+    font-size: 0.67rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+  .council-name {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
+  }
+  .council-card.featured .council-name { font-size: 1.15rem; }
+  .council-role {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.5;
+  }
+  .council-badge {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background: var(--gold);
+    padding: 0.2rem 0.5rem;
+    border-radius: 1px;
+  }
+
+  @media (min-width: 600px) {
+    .council-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1024px) {
+    .council-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ===== SUBMISSÃO ===== */
+  #submissao {
+    background: var(--cream);
+    padding: 90px 20px;
+  }
+  .submissao-grid {
+    display: grid;
+    gap: 3.5rem;
+  }
+  .submissao-left h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1.25;
+    margin-bottom: 1rem;
+  }
+  .submissao-left h2 em {
+    display: block;
+    font-style: italic;
+    color: var(--gold);
+  }
+  .submissao-desc {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+  .req-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .req-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    line-height: 1.55;
+  }
+  .req-icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .req-icon svg { width: 9px; height: 9px; fill: none; stroke: var(--gold-light); stroke-width: 2.5; }
+
+  /* FORM */
+  .form-card {
+    background: var(--white);
+    border-radius: 3px;
+    box-shadow: var(--shadow-md);
+    padding: 2.2rem 2rem;
+  }
+  .form-title {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.3rem;
+  }
+  .form-sub {
+    font-size: 0.8rem;
+    color: var(--text-mid);
+    margin-bottom: 1.8rem;
+  }
+  .form-grid {
+    display: grid;
+    gap: 1rem;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    color: var(--text-dark);
+    background: var(--cream);
+    border: 1.5px solid transparent;
+    border-radius: 2px;
+    padding: 0.75rem 0.9rem;
+    width: 100%;
+    transition: border-color var(--transition), background var(--transition);
+    outline: none;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--gold);
+    background: var(--white);
+  }
+  .form-group input.error,
+  .form-group select.error,
+  .form-group textarea.error {
+    border-color: #c0392b;
+  }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23B8963E' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    padding-right: 2rem;
+  }
+  .form-row { display: grid; gap: 1rem; }
+  .field-error {
+    font-size: 0.7rem;
+    color: #c0392b;
+    display: none;
+  }
+  .field-error.visible { display: block; }
+  .form-submit { margin-top: 0.5rem; }
+  .form-submit .btn { width: 100%; justify-content: center; }
+  .form-microcopy {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-mid);
+    margin-top: 0.8rem;
+    line-height: 1.5;
+  }
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--navy);
+  }
+  .form-success .success-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(184,150,62,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+  }
+  .form-success h3 { font-family: var(--serif); font-size: 1.3rem; margin-bottom: 0.5rem; }
+  .form-success p { font-size: 0.85rem; color: var(--text-mid); }
+
+  @media (min-width: 768px) {
+    .submissao-grid { grid-template-columns: 1fr 1.2fr; align-items: start; }
+    .form-row { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ===== RODAPÉ ===== */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid rgba(184,150,62,0.15);
+    padding: 50px 20px 30px;
+  }
+  .footer-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  .footer-top {
+    display: grid;
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+  }
+  .footer-brand .nav-logo-name { font-size: 1.4rem; }
+  .footer-desc {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.7;
+    margin-top: 0.6rem;
+    max-width: 260px;
+  }
+  .footer-links-group { display: flex; flex-direction: column; gap: 0.8rem; }
+  .footer-links-title {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+  .footer-links-group a {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    transition: color var(--transition);
+  }
+  .footer-links-group a:hover { color: var(--gold-light); }
+  .footer-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.07);
+    margin-bottom: 1.5rem;
+  }
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.3);
+  }
+
+  @media (min-width: 768px) {
+    .footer-top { grid-template-columns: 1.5fr 1fr 1fr; }
+  }
+
+  /* ===== SCROLL TO TOP ===== */
+  #back-top {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    background: var(--gold);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition), transform var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+  }
+  #back-top.visible { opacity: 1; pointer-events: auto; }
+  #back-top:hover { transform: translateY(-3px); }
+  #back-top svg { width: 16px; height: 16px; stroke: var(--white); fill: none; stroke-width: 2; }
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header id="navbar" role="banner">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="Brary Journal">
+      <span class="nav-logo-name">Brary Journal</span>
+      <span class="nav-logo-sub">Publicação Técnico-Científica</span>
+    </a>
+    <nav class="nav-links" aria-label="Menu principal">
+      <a href="#sobre">Sobre</a>
+      <a href="#categorias">Categorias</a>
+      <a href="#submissao">Submeter Artigo</a>
+      <a href="#conselho">Conselho Editorial</a>
+    </nav>
+    <a href="#submissao" class="btn btn-gold nav-cta" aria-label="Submeter artigo">Submeter Artigo</a>
+    <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Menu mobile">
+    <a href="#sobre">Sobre</a>
+    <a href="#categorias">Categorias</a>
+    <a href="#submissao">Submeter Artigo</a>
+    <a href="#conselho">Conselho Editorial</a>
+    <div class="m-cta"><a href="#submissao" class="btn btn-gold">Submeter Artigo</a></div>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section id="hero" aria-label="Apresentação">
+  <div class="container">
+    <div class="hero-eyebrow reveal">Publicação vinculada ao Padrão SBCM</div>
+    <div class="hero-headline reveal">
+      <div class="headline-duo">
+        <span class="h-line1">O conhecimento aplicado</span>
+        <span class="h-line2">merece registro formal.</span>
+      </div>
+    </div>
+    <p class="hero-para reveal">
+      O Brary Journal não é um blog. Não é uma revista informal. É uma publicação técnico-científica com propósito de registro metodológico — voltada a profissionais que já estruturaram e validaram métodos em prática real.
+    </p>
+    <p class="hero-institutional reveal">
+      "Artigos publicados podem ser elegíveis para certificação metodológica pelo Padrão SBCM."
+    </p>
+    <div class="hero-btns reveal">
+      <a href="#submissao" class="btn btn-gold">Submeter Artigo →</a>
+      <a href="#categorias" class="btn btn-outline">Conhecer as categorias</a>
+    </div>
+    <div class="hero-stats reveal">
+      <div class="stat-item">
+        <span class="stat-value">Vol. 1</span>
+        <span class="stat-label">Primeiro volume</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">Trimestral</span>
+        <span class="stat-label">Periodicidade</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">6</span>
+        <span class="stat-label">Categorias</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">R$250</span>
+        <span class="stat-label">Lançamento</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOBRE ===== -->
+<section id="sobre" aria-label="Sobre a revista">
+  <div class="container">
+    <span class="section-label reveal">Sobre a Revista</span>
+    <div class="sobre-grid">
+      <div>
+        <div class="headline-duo reveal" style="margin-bottom:1.6rem;">
+          <span class="h-line1 dark">Uma publicação</span>
+          <span class="h-line2">para quem já provou na prática.</span>
+        </div>
+        <div class="sobre-intro reveal">
+          <p>O Brary Journal publica artigos técnico-científicos de profissionais que desenvolveram metodologias originais e as aplicaram em contextos reais. A revista parte do pressuposto de que o conhecimento produzido fora dos círculos acadêmicos tradicionais também merece registro formal, rigor editorial e circulação qualificada.</p>
+          <p>Diferente de publicações puramente acadêmicas, o Brary Journal valoriza a evidência prática como fundamento do conhecimento técnico. Isso não significa abertura de mão do rigor — significa reposicionar quem produz saber aplicado como autor legítimo de sua área.</p>
+        </div>
+        <div class="sobre-quote reveal">
+          "Quem estrutura um método e o aplica com resultados documentáveis está produzindo conhecimento. O Brary Journal existe para que esse conhecimento tenha endereço."
+        </div>
+      </div>
+      <div>
+        <div class="comparison-block reveal">
+          <div class="comparison-header">
+            <span>Revista Científica Tradicional</span>
+            <span>Brary Journal</span>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-cell">
+              <span class="icon icon-x">○</span>
+              Foco acadêmico teórico
+            </div>
+            <div class="comparison-cell">
+              <span class="icon icon-check">✓</span>
+              Foco aplicado e validado
+            </div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-cell">
+              <span class="icon icon-x">○</span>
+              Linguagem altamente técnica e hermética
+            </div>
+            <div class="comparison-cell">
+              <span class="icon icon-check">✓</span>
+              Linguagem técnica acessível
+            </div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-cell">
+              <span class="icon icon-x">○</span>
+              Baixa aplicação prática
+            </div>
+            <div class="comparison-cell">
+              <span class="icon icon-check">✓</span>
+              Base prática real
+            </div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-cell">
+              <span class="icon icon-x">○</span>
+              Diagramação responsabilidade do autor
+            </div>
+            <div class="comparison-cell">
+              <span class="icon icon-check">✓</span>
+              Diagramação profissional inclusa
+            </div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-cell">
+              <span class="icon icon-x">○</span>
+              Sem vínculo com certificação
+            </div>
+            <div class="comparison-cell">
+              <span class="icon icon-check">✓</span>
+              Elegível ao Padrão SBCM
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CATEGORIAS ===== -->
+<section id="categorias" aria-label="Categorias">
+  <div class="container">
+    <span class="section-label reveal">Categorias</span>
+    <div class="headline-duo reveal" style="margin-bottom:1rem;">
+      <span class="h-line1">Seis áreas.</span>
+      <span class="h-line2">Uma publicação comprometida com o saber aplicado.</span>
+    </div>
+    <p class="cat-intro reveal">Cada categoria representa um campo em que profissionais desenvolvem metodologias originais — e onde o Brary Journal oferece registro e circulação qualificada.</p>
+    <div class="cat-grid">
+
+      <div class="cat-card reveal">
+        <div class="cat-number">01</div>
+        <div class="cat-name">Metodologias Educacionais</div>
+        <div class="cat-desc">Métodos próprios de ensino, aprendizagem e desenvolvimento pedagógico aplicados em ambientes formais e não-formais.</div>
+        <div class="cat-trigger">Para educadores que desenvolvem métodos próprios em sala de aula e precisam de registro formal para o que criaram.</div>
+        <span class="cat-link">Ver artigos →</span>
+      </div>
+
+      <div class="cat-card reveal">
+        <div class="cat-number">02</div>
+        <div class="cat-name">Educação Inclusiva e Especial</div>
+        <div class="cat-desc">Práticas pedagógicas desenvolvidas para contextos de inclusão, acessibilidade e atendimento especializado.</div>
+        <div class="cat-trigger">Para profissionais que construíram abordagens próprias para públicos com necessidades específicas.</div>
+        <span class="cat-link">Ver artigos →</span>
+      </div>
+
+      <div class="cat-card reveal">
+        <div class="cat-number">03</div>
+        <div class="cat-name">STEAM e Inovação Pedagógica</div>
+        <div class="cat-desc">Integrações entre ciência, tecnologia, artes, engenharia e matemática aplicadas em projetos pedagógicos concretos.</div>
+        <div class="cat-trigger">Para quem estruturou projetos interdisciplinares replicáveis em outros contextos escolares.</div>
+        <span class="cat-link">Ver artigos →</span>
+      </div>
+
+      <div class="cat-card reveal">
+        <div class="cat-number">04</div>
+        <div class="cat-name">Saúde, Movimento e Aprendizagem</div>
+        <div class="cat-desc">Relações entre desenvolvimento corporal, saúde funcional e processos cognitivos de aprendizagem.</div>
+        <div class="cat-trigger">Para profissionais da saúde e do movimento que documentam protocolos com impacto educacional.</div>
+        <span class="cat-link">Ver artigos →</span>
+      </div>
+
+      <div class="cat-card reveal">
+        <div class="cat-number">05</div>
+        <div class="cat-name">Gestão, Mentoria e Desenvolvimento</div>
+        <div class="cat-desc">Metodologias aplicadas em desenvolvimento humano, liderança, mentoria e gestão de equipes e processos.</div>
+        <div class="cat-trigger">Para mentores e gestores que estruturam práticas replicáveis e querem torná-las referência.</div>
+        <span class="cat-link">Ver artigos →</span>
+      </div>
+
+      <div class="cat-card reveal">
+        <div class="cat-number">06</div>
+        <div class="cat-name">Certificação e Validação Metodológica</div>
+        <div class="cat-desc">Artigos sobre processos de certificação, padrões metodológicos e critérios de validação de práticas profissionais.</div>
+        <div class="cat-trigger">Para quem desenvolve ou aplica padrões metodológicos e busca reconhecimento institucional.</div>
+        <span class="cat-link">Ver artigos →</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODELO DE PUBLICAÇÃO ===== -->
+<section id="modelo" aria-label="Modelo de publicação">
+  <div class="container">
+    <span class="section-label reveal">Modelo de Publicação</span>
+    <div class="headline-duo reveal" style="margin-bottom:2.5rem;">
+      <span class="h-line1 dark">Como funciona</span>
+      <span class="h-line2">a publicação no Brary Journal.</span>
+    </div>
+
+    <div class="modelo-top">
+      <div class="timeline reveal">
+        <div class="timeline-step">
+          <div class="step-dot">1</div>
+          <div class="step-body">
+            <div class="step-title">Submissão</div>
+            <div class="step-desc">O autor preenche o formulário de submissão com dados do artigo e informações de contato. Nenhuma diagramação é exigida nesta etapa.</div>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-dot">2</div>
+          <div class="step-body">
+            <div class="step-title">Análise Editorial</div>
+            <div class="step-desc">A equipe editorial avalia o alinhamento do artigo às diretrizes da revista: originalidade, autoria identificada, relevância da categoria e potencial de contribuição.</div>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-dot">3</div>
+          <div class="step-body">
+            <div class="step-title">Diagramação Profissional</div>
+            <div class="step-desc">Aprovado o artigo, a equipe Brary realiza a diagramação completa no padrão editorial da revista. O autor foca no conteúdo. Nós garantimos o padrão visual e estrutural.</div>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-dot">4</div>
+          <div class="step-body">
+            <div class="step-title">Publicação</div>
+            <div class="step-desc">O artigo é publicado digitalmente no volume correspondente, com registro de autoria, categoria e número de identificação. DOI em fase de implementação.</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="modelo-editorial-box reveal">
+          <p><strong>Diferente de outras revistas, você não precisa entregar um artigo já diagramado.</strong></p>
+          <p>Produtores de conhecimento são especialistas em seus campos — não em diagramação editorial. Por isso, a Brary assume integralmente a estruturação visual do artigo aprovado para publicação.</p>
+          <p class="modelo-editorial-note">"Você foca no conteúdo. Nós garantimos o padrão editorial."</p>
+        </div>
+
+        <div style="margin-top:2rem;" class="reveal">
+          <div class="pricing-table">
+            <div class="pricing-header">
+              <div>Modalidade</div>
+              <div>Valor</div>
+            </div>
+            <div class="pricing-row featured">
+              <div class="pricing-cell">
+                <strong>Lançamento <span class="badge">Vagas limitadas</span></strong>
+                Primeiros 20 artigos publicados
+              </div>
+              <div class="pricing-cell">
+                <span class="price">R$250</span>
+                <span class="price-label">por artigo</span>
+              </div>
+            </div>
+            <div class="pricing-row">
+              <div class="pricing-cell">
+                <strong>Regular</strong>
+                A partir do 21º artigo publicado
+              </div>
+              <div class="pricing-cell">
+                <span class="price">R$500</span>
+                <span class="price-label">por artigo</span>
+              </div>
+            </div>
+            <div class="pricing-includes">
+              <strong>Incluso em todas as modalidades:</strong> diagramação profissional + publicação digital + registro de autoria + DOI (em implementação)
+            </div>
+          </div>
+          <div class="scarcity-note">
+            <span class="scarcity-dot"></span>
+            Após o lançamento, o valor padrão será aplicado imediatamente.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONSELHO EDITORIAL ===== -->
+<section id="conselho" aria-label="Conselho editorial">
+  <div class="container">
+    <span class="section-label reveal">Conselho Editorial</span>
+    <div class="headline-duo reveal" style="margin-bottom:1rem;">
+      <span class="h-line1">Corpo editorial</span>
+      <span class="h-line2">multidisciplinar e aplicado.</span>
+    </div>
+    <p class="conselho-intro reveal">Corpo editorial com atuação prática nas áreas representadas — profissionais que conhecem de dentro o conhecimento que avaliam.</p>
+    <div class="council-grid">
+
+      <div class="council-card reveal">
+        <div class="council-area">Educação Inclusiva</div>
+        <div class="council-name">Membro do Conselho</div>
+        <div class="council-role">Atuação em práticas inclusivas em contextos escolares e não escolares</div>
+      </div>
+
+      <div class="council-card reveal">
+        <div class="council-area">Educação Especial</div>
+        <div class="council-name">Membro do Conselho</div>
+        <div class="council-role">Doutora com atuação em atendimento educacional especializado</div>
+      </div>
+
+      <div class="council-card reveal">
+        <div class="council-area">Matemática</div>
+        <div class="council-name">Membro do Conselho</div>
+        <div class="council-role">Mestranda em ensino de matemática e metodologias STEAM</div>
+      </div>
+
+      <div class="council-card reveal">
+        <div class="council-area">Fisioterapia</div>
+        <div class="council-name">Membro do Conselho</div>
+        <div class="council-role">Fisioterapeuta com atuação em saúde, movimento e aprendizagem</div>
+      </div>
+
+      <div class="council-card reveal">
+        <div class="council-area">Agronomia e Laudos Técnicos</div>
+        <div class="council-name">Membro do Conselho</div>
+        <div class="council-role">Engenheiro agrônomo com expertise em laudos e validação técnica</div>
+      </div>
+
+      <div class="council-card reveal">
+        <div class="council-area">Neurofeedback</div>
+        <div class="council-name">Membro do Conselho</div>
+        <div class="council-role">Especialista em neurofeedback aplicado ao desenvolvimento cognitivo</div>
+      </div>
+
+      <div class="council-card reveal">
+        <div class="council-area">Direito Empresarial</div>
+        <div class="council-name">Membro do Conselho</div>
+        <div class="council-role">Atuação em direito aplicado à gestão e conformidade metodológica</div>
+      </div>
+
+      <div class="council-card reveal">
+        <div class="council-area">Contabilidade e Mentoria</div>
+        <div class="council-name">Membro do Conselho</div>
+        <div class="council-role">Contador e mentor com foco em gestão financeira e desenvolvimento de lideranças</div>
+      </div>
+
+      <div class="council-card reveal">
+        <div class="council-area">Metodologia Educacional / Facilitação</div>
+        <div class="council-name">Membro do Conselho</div>
+        <div class="council-role">Facilitadora com especialização em metodologias ativas e design instrucional</div>
+      </div>
+
+      <div class="council-card featured reveal" style="grid-column: 1 / -1;">
+        <div class="council-badge">Direção Editorial</div>
+        <div class="council-area">Brary Institute</div>
+        <div class="council-name">Orlando Carvalho</div>
+        <div class="council-role">Projetista naval, escritor e fundador do ecossistema Brary. Criador do Padrão SBCM e da Plataforma GM OS. Diretor editorial do Brary Journal e responsável pela curadoria metodológica do corpo editorial.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== SUBMISSÃO ===== -->
+<section id="submissao" aria-label="Submeter artigo">
+  <div class="container">
+    <span class="section-label reveal">Submeter Artigo</span>
+    <div class="submissao-grid">
+      <div class="submissao-left">
+        <h2 class="reveal">
+          Se você já aplica um método,
+          <em>este é o seu lugar.</em>
+        </h2>
+        <p class="submissao-desc reveal">
+          O Brary Journal recebe artigos de profissionais com prática documentável. Se você desenvolveu uma metodologia, estruturou um protocolo ou sistematizou um processo que funciona — sua produção merece publicação formal.
+        </p>
+        <div class="req-list reveal">
+          <div class="req-item">
+            <div class="req-icon">
+              <svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg>
+            </div>
+            Trabalho original e inédito
+          </div>
+          <div class="req-item">
+            <div class="req-icon">
+              <svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg>
+            </div>
+            Autoria identificada
+          </div>
+          <div class="req-item">
+            <div class="req-icon">
+              <svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg>
+            </div>
+            Mínimo de 4 páginas, máximo de 20
+          </div>
+          <div class="req-item">
+            <div class="req-icon">
+              <svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg>
+            </div>
+            Área alinhada às categorias da revista
+          </div>
+          <div class="req-item">
+            <div class="req-icon">
+              <svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg>
+            </div>
+            Prática documentável — resultados aplicados em contexto real
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="form-card reveal">
+          <div class="form-title">Formulário de Submissão</div>
+          <div class="form-sub">Preencha os dados abaixo. Nossa equipe entrará em contato com orientações editoriais.</div>
+
+          <form id="form-submissao" action="https://api.web3forms.com/submit" method="POST" novalidate>
+            <input type="hidden" name="access_key" value="c9cab4d2-b6fb-429b-89db-0cd5ce56856a">
+            <input type="hidden" name="subject" value="Submissão — Brary Journal">
+            <input type="hidden" name="redirect" value="false">
+            <div class="form-grid">
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="f-nome">Nome completo</label>
+                  <input type="text" id="f-nome" name="nome" placeholder="Seu nome" autocomplete="name">
+                  <span class="field-error" id="err-nome">Campo obrigatório.</span>
+                </div>
+                <div class="form-group">
+                  <label for="f-email">E-mail</label>
+                  <input type="email" id="f-email" name="email" placeholder="seu@email.com" autocomplete="email">
+                  <span class="field-error" id="err-email">E-mail inválido.</span>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="f-tel">Telefone / WhatsApp</label>
+                  <input type="tel" id="f-tel" name="telefone" placeholder="(00) 00000-0000" autocomplete="tel">
+                  <span class="field-error" id="err-tel">Campo obrigatório.</span>
+                </div>
+                <div class="form-group">
+                  <label for="f-cat">Categoria</label>
+                  <select id="f-cat" name="categoria">
+                    <option value="">Selecione...</option>
+                    <option>Metodologias Educacionais</option>
+                    <option>Educação Inclusiva e Especial</option>
+                    <option>STEAM e Inovação Pedagógica</option>
+                    <option>Saúde, Movimento e Aprendizagem</option>
+                    <option>Gestão, Mentoria e Desenvolvimento</option>
+                    <option>Certificação e Validação Metodológica</option>
+                  </select>
+                  <span class="field-error" id="err-cat">Selecione uma categoria.</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="f-titulo">Título do artigo</label>
+                <input type="text" id="f-titulo" name="titulo" placeholder="Título provisório ou definitivo do artigo">
+                <span class="field-error" id="err-titulo">Campo obrigatório.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="f-msg">Resumo ou mensagem</label>
+                <textarea id="f-msg" name="mensagem" placeholder="Descreva brevemente o artigo, a metodologia aplicada e o contexto de desenvolvimento."></textarea>
+                <span class="field-error" id="err-msg">Campo obrigatório.</span>
+              </div>
+
+              <div class="form-submit">
+                <button type="submit" class="btn btn-gold">Enviar Submissão</button>
+                <p class="form-microcopy">Nossa equipe retornará com orientações editoriais em até 3 dias úteis.</p>
+              </div>
+
+            </div>
+          </form>
+
+          <div class="form-success" id="form-success">
+            <div class="success-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#B8963E" stroke-width="2.2"><polyline points="4,11 9,16 18,6"/></svg>
+            </div>
+            <h3>Submissão recebida.</h3>
+            <p>Nossa equipe editorial analisará sua proposta e retornará em até 3 dias úteis com as próximas orientações.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RODAPÉ ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          <span class="nav-logo-name">Brary Journal</span>
+          <span class="nav-logo-sub">Publicação Técnico-Científica</span>
+        </div>
+        <p class="footer-desc">Publicação vinculada ao Padrão SBCM e ao ecossistema Brary Institute. Comprometida com o registro formal do conhecimento aplicado.</p>
+      </div>
+      <div class="footer-links-group">
+        <div class="footer-links-title">Ecossistema</div>
+        <a href="https://brary-institute-site.vercel.app/" target="_blank" rel="noopener">Brary Institute</a>
+        <a href="#">Brary Editora</a>
+        <a href="#">Padrão SBCM</a>
+        <a href="#">Plataforma GM OS</a>
+      </div>
+      <div class="footer-links-group">
+        <div class="footer-links-title">Revista</div>
+        <a href="#categorias">Categorias</a>
+        <a href="#modelo">Modelo de Publicação</a>
+        <a href="#conselho">Conselho Editorial</a>
+        <a href="#submissao">Submeter Artigo</a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <span>© 2026 Brary Editora Ltda. Todos os direitos reservados.</span>
+      <span>Brary Journal — Publicação Técnico-Científica do Brary Institute</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to top -->
+<button id="back-top" aria-label="Voltar ao topo">
+  <svg viewBox="0 0 16 16" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,10 8,5 13,10"/></svg>
+</button>
+
+<script>
+(function () {
+  'use strict';
+
+  /* --- NAVBAR: hamburger + shrink --- */
+  const navbar    = document.getElementById('navbar');
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu= document.getElementById('mobile-menu');
+
+  hamburger.addEventListener('click', function () {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+  });
+
+  // close menu on link click
+  mobileMenu.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // shrink navbar on scroll
+  window.addEventListener('scroll', function () {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+    document.getElementById('back-top').classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  /* --- BACK TO TOP --- */
+  document.getElementById('back-top').addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* --- SCROLL REVEAL --- */
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  /* --- FORM VALIDATION --- */
+  var form = document.getElementById('form-submissao');
+  if (!form) return;
+
+  function setError(id, errId, show) {
+    var field = document.getElementById(id);
+    var err   = document.getElementById(errId);
+    if (!field || !err) return;
+    field.classList.toggle('error', show);
+    err.classList.toggle('visible', show);
+  }
+
+  function validateEmail(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
+
+  form.addEventListener('submit', function (e) {
+    var nome   = document.getElementById('f-nome').value.trim();
+    var email  = document.getElementById('f-email').value.trim();
+    var tel    = document.getElementById('f-tel').value.trim();
+    var cat    = document.getElementById('f-cat').value;
+    var titulo = document.getElementById('f-titulo').value.trim();
+    var msg    = document.getElementById('f-msg').value.trim();
+
+    var valid = true;
+
+    setError('f-nome',  'err-nome',  !nome);   if (!nome)  valid = false;
+    setError('f-email', 'err-email', !validateEmail(email)); if (!validateEmail(email)) valid = false;
+    setError('f-tel',   'err-tel',   !tel);    if (!tel)   valid = false;
+    setError('f-cat',   'err-cat',   !cat);    if (!cat)   valid = false;
+    setError('f-titulo','err-titulo',!titulo); if (!titulo) valid = false;
+    setError('f-msg',   'err-msg',   !msg);    if (!msg)   valid = false;
+
+    if (!valid) { e.preventDefault(); return; }
+
+    e.preventDefault();
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: new FormData(form)
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (res) {
+      if (res.success) {
+        form.style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Enviar Submissão';
+        alert('Erro ao enviar. Tente novamente ou entre em contato por e-mail.');
+      }
+    })
+    .catch(function () {
+      btn.disabled = false;
+      btn.textContent = 'Enviar Submissão';
+      alert('Erro de conexão. Verifique sua internet e tente novamente.');
+    });
+  });
+
+  // Clear error on input
+  ['f-nome','f-email','f-tel','f-cat','f-titulo','f-msg'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('input', function () {
+      el.classList.remove('error');
+      var errId = id.replace('f-', 'err-');
+      var errEl = document.getElementById(errId);
+      if (errEl) errEl.classList.remove('visible');
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
