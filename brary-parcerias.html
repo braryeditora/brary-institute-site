@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecossistema Brary — Parcerias Estratégicas</title>
+<meta name="description" content="Conheça os quatro negócios do ecossistema Brary e as oportunidades de parceria e sociedade estratégica.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+:root{
+  --navy:#0B1F3A;
+  --navy-mid:#122B52;
+  --navy-light:#1D3D6B;
+  --gold:#B8963E;
+  --gold-light:#D4AF6A;
+  --gold-dim:rgba(184,150,62,0.12);
+  --cream:#F6F3EC;
+  --cream-dark:#EDE8DE;
+  --white:#FDFCFA;
+  --gray-200:#D6D2C8;
+  --gray-500:#8A8578;
+  --gray-700:#4A4740;
+  --text:#1A1917;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Jost','Segoe UI',sans-serif;
+}
+
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);font-size:16px;color:var(--text);background:var(--white);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:var(--navy);
+  border-bottom:1px solid rgba(184,150,62,0.2);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 4rem;height:68px;
+}
+.nav-brand{display:flex;flex-direction:column;gap:2px;text-decoration:none;}
+.nav-brand-name{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#fff;}
+.nav-brand-sub{font-size:9px;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-light);}
+.nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none;}
+.nav-links a{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.65);transition:color .2s;}
+.nav-links a:hover{color:var(--gold-light);}
+.nav-cta{
+  font-size:11px!important;font-weight:600!important;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--navy)!important;background:var(--gold);padding:10px 22px!important;
+  text-decoration:none;transition:background .2s;
+}
+.nav-cta:hover{background:var(--gold-light)!important;}
+
+/* ── HERO ── */
+#hero{
+  background:var(--navy);
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:68px 4rem 0;
+  position:relative;overflow:hidden;
+}
+.hero-rule{
+  position:absolute;top:68px;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold) 0%,var(--gold-light) 40%,transparent 100%);
+}
+.hero-watermark{
+  position:absolute;right:-2rem;bottom:-6rem;
+  font-family:var(--serif);font-size:28vw;font-weight:300;
+  color:rgba(255,255,255,0.02);line-height:1;
+  user-select:none;pointer-events:none;
+}
+.hero-inner{padding:80px 0;position:relative;z-index:2;max-width:720px;}
+.hero-tag{
+  font-size:10px;font-weight:500;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:2rem;
+  display:flex;align-items:center;gap:12px;
+  opacity:0;animation:fadeUp .9s ease .1s forwards;
+}
+.hero-tag::before{content:'';display:block;width:36px;height:1px;background:var(--gold);flex-shrink:0;}
+.hero-headline{
+  font-family:var(--serif);
+  font-size:clamp(2.4rem,4vw,3.8rem);
+  font-weight:300;color:var(--white);line-height:1.1;
+  margin-bottom:1.75rem;
+  opacity:0;animation:fadeUp .9s ease .25s forwards;
+}
+.hero-headline em{font-style:italic;color:var(--gold-light);}
+.hero-sub{
+  font-size:15px;font-weight:300;color:rgba(255,255,255,0.6);
+  max-width:540px;line-height:1.85;margin-bottom:2.5rem;
+  opacity:0;animation:fadeUp .9s ease .4s forwards;
+}
+.hero-actions{
+  display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .9s ease .55s forwards;
+}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--gold);color:var(--navy);
+  font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;
+  padding:15px 28px;transition:background .2s;
+}
+.btn-primary:hover{background:var(--gold-light);}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.75);
+  font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;
+  padding:14px 24px;transition:border-color .2s,color .2s;
+}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold-light);}
+.hero-metrics{
+  display:flex;gap:3rem;flex-wrap:wrap;
+  margin-top:3.5rem;padding-top:2.5rem;
+  border-top:1px solid rgba(255,255,255,0.08);
+  opacity:0;animation:fadeUp .9s ease .65s forwards;
+}
+.metric-value{font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--gold-light);line-height:1;margin-bottom:6px;}
+.metric-label{font-size:10px;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);}
+
+/* ── SECTION ── */
+section{padding:100px 4rem;}
+.section-tag{
+  font-size:10px;font-weight:600;letter-spacing:0.35em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1rem;
+  display:flex;align-items:center;gap:10px;
+}
+.section-tag::before{content:'';display:block;width:24px;height:1px;background:var(--gold);flex-shrink:0;}
+.section-title{
+  font-family:var(--serif);
+  font-size:clamp(1.8rem,3vw,2.8rem);
+  font-weight:300;color:var(--navy);line-height:1.2;margin-bottom:1.5rem;
+}
+.section-title em{font-style:italic;color:var(--navy-light);}
+.section-lead{font-size:15px;font-weight:300;color:var(--gray-700);line-height:1.85;max-width:640px;}
+.divider{width:48px;height:2px;background:var(--gold);margin:1.75rem 0;}
+
+/* ── ECOSSISTEMA ── */
+#ecossistema{background:var(--cream);border-top:1px solid var(--gray-200);}
+.eco-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1.5rem;margin-top:3.5rem;
+}
+.eco-card{
+  background:var(--white);
+  border:1px solid var(--gray-200);border-top:3px solid var(--navy);
+  padding:2.5rem 2rem;
+  transition:border-top-color .2s,transform .2s;
+  position:relative;overflow:hidden;
+}
+.eco-card:hover{border-top-color:var(--gold);transform:translateY(-3px);}
+.eco-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.eco-card:hover::after{opacity:1;}
+.eco-card-num{
+  font-family:var(--serif);font-size:3rem;font-weight:300;
+  color:var(--gray-200);line-height:1;margin-bottom:1rem;
+}
+.eco-card-label{
+  font-size:10px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:0.6rem;
+}
+.eco-card-name{
+  font-family:var(--serif);font-size:1.4rem;font-weight:400;
+  color:var(--navy);line-height:1.25;margin-bottom:0.75rem;
+}
+.eco-card-desc{font-size:13px;font-weight:300;color:var(--gray-700);line-height:1.75;margin-bottom:1.25rem;}
+.eco-card-tag{
+  display:inline-block;
+  font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;
+  padding:5px 14px;
+}
+.eco-card-tag.active{background:var(--navy);color:var(--white);}
+.eco-card-tag.b2b{background:rgba(184,150,62,0.15);color:var(--gold);}
+.eco-card-link{
+  display:inline-flex;align-items:center;gap:5px;margin-top:1rem;
+  font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--gold);transition:gap .2s;
+}
+.eco-card:hover .eco-card-link{gap:10px;}
+
+/* ── INDICADORES ── */
+#indicadores{background:var(--navy);}
+#indicadores .section-tag{color:var(--gold-light);}
+#indicadores .section-tag::before{background:var(--gold-light);}
+#indicadores .section-title{color:var(--white);}
+#indicadores .section-title em{color:var(--gold-light);}
+#indicadores .divider{background:var(--gold);}
+#indicadores .section-lead{color:rgba(255,255,255,0.55);}
+
+.ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.07);margin-top:3.5rem;}
+.ind-card{background:var(--navy);padding:2.5rem 1.75rem;}
+.ind-card-label{
+  font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1rem;
+}
+.ind-card-value{
+  font-family:var(--serif);font-size:clamp(1.6rem,2.5vw,2.4rem);font-weight:300;
+  color:var(--white);line-height:1;margin-bottom:0.5rem;
+}
+.ind-card-note{font-size:12px;font-weight:300;color:rgba(255,255,255,0.4);line-height:1.55;}
+
+.ind-scenarios{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:rgba(255,255,255,0.07);
+  margin-top:1px;
+}
+.ind-scenario{background:var(--navy);padding:1.75rem;}
+.ind-scenario-title{
+  font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(255,255,255,0.4);margin-bottom:1.25rem;
+}
+.ind-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.ind-row:last-child{border-bottom:none;}
+.ind-row-label{font-size:13px;color:rgba(255,255,255,0.55);}
+.ind-row-val{font-size:13px;font-weight:500;color:var(--white);}
+.ind-row-badge{
+  display:inline-block;font-size:9px;font-weight:600;letter-spacing:0.08em;
+  padding:2px 7px;border-radius:20px;
+  background:rgba(184,150,62,0.15);color:var(--gold-light);
+  margin-left:8px;
+}
+
+.ind-callout{
+  margin-top:1px;padding:2rem 2.5rem;
+  background:rgba(184,150,62,0.06);
+  border-left:3px solid var(--gold);
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;
+}
+.ind-callout p{
+  font-family:var(--serif);font-size:1.15rem;font-weight:300;font-style:italic;
+  color:var(--gold-light);line-height:1.5;
+}
+.ind-callout-note{
+  font-size:11px;font-weight:300;letter-spacing:0.08em;
+  color:rgba(255,255,255,0.25);white-space:nowrap;text-align:right;
+}
+
+/* ── TESE ── */
+#tese{background:var(--cream);border-top:1px solid var(--gray-200);}
+.tese-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:start;margin-top:3.5rem;}
+.tese-pillar{
+  padding:2rem 1.75rem;
+  border:1px solid var(--gray-200);border-top:3px solid var(--navy);
+  margin-bottom:1.25rem;transition:border-top-color .2s;
+}
+.tese-pillar:hover{border-top-color:var(--gold);}
+.tese-pillar-num{font-size:10px;font-weight:600;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem;}
+.tese-pillar-title{font-family:var(--serif);font-size:1.1rem;font-weight:400;color:var(--navy);margin-bottom:0.5rem;}
+.tese-pillar-text{font-size:13px;font-weight:300;color:var(--gray-700);line-height:1.7;}
+.tese-quote{
+  font-family:var(--serif);font-size:1.35rem;font-weight:300;font-style:italic;
+  color:var(--navy);border-left:3px solid var(--gold);
+  padding:1.25rem 1.75rem;line-height:1.5;margin-top:1.5rem;
+}
+
+/* ── PERFIL ── */
+#perfil{background:var(--white);}
+.perfil-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem;}
+.perfil-card{
+  padding:2rem 1.75rem;
+  background:var(--cream);
+  border:1px solid var(--gray-200);
+  transition:border-color .2s,transform .2s;
+}
+.perfil-card:hover{border-color:var(--navy);transform:translateY(-3px);}
+.perfil-card-icon{
+  width:40px;height:40px;
+  background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1rem;
+}
+.perfil-card-icon svg{fill:var(--gold);}
+.perfil-card-title{font-size:14px;font-weight:500;color:var(--navy);margin-bottom:0.6rem;letter-spacing:0.02em;}
+.perfil-card-text{font-size:13px;font-weight:300;color:var(--gray-700);line-height:1.7;}
+
+.nao-buscamos{
+  margin-top:2.5rem;padding:2rem 2.5rem;
+  border:1px solid var(--gray-200);border-left:4px solid var(--gray-200);
+  background:var(--cream);
+}
+.nao-buscamos-title{
+  font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--gray-500);margin-bottom:0.75rem;
+}
+.nao-buscamos-text{font-size:13px;font-weight:300;color:var(--gray-500);line-height:1.75;}
+
+/* ── CONTATO ── */
+#contato{
+  background:var(--navy);
+  text-align:center;padding:120px 4rem;
+}
+.cta-tag{
+  font-size:10px;font-weight:600;letter-spacing:0.35em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.5rem;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+}
+.cta-tag::before,.cta-tag::after{content:'';display:block;width:36px;height:1px;background:var(--gold);}
+.cta-headline{
+  font-family:var(--serif);
+  font-size:clamp(1.8rem,3.5vw,3rem);
+  font-weight:300;color:var(--white);line-height:1.2;
+  max-width:680px;margin:0 auto 1.5rem;
+}
+.cta-headline em{font-style:italic;color:var(--gold-light);}
+.cta-text{
+  font-size:15px;font-weight:300;color:rgba(255,255,255,0.55);
+  max-width:500px;margin:0 auto 2.5rem;line-height:1.85;
+}
+.cta-actions{display:flex;align-items:center;justify-content:center;gap:1.25rem;flex-wrap:wrap;margin-bottom:3rem;}
+.cta-confidential{
+  font-size:11px;font-weight:300;letter-spacing:0.08em;
+  color:rgba(255,255,255,0.2);
+}
+
+/* ── FOOTER ── */
+footer{background:#07152A;padding:4rem 4rem 2.5rem;border-top:1px solid rgba(255,255,255,0.06);}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr;
+  gap:3rem;align-items:start;
+  margin-bottom:2.5rem;padding-bottom:2.5rem;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.footer-brand-name{font-size:13px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:0.5rem;}
+.footer-brand-sub{font-size:11px;font-weight:300;color:rgba(255,255,255,0.3);margin-bottom:0.75rem;}
+.footer-brand-desc{font-size:11px;font-weight:300;color:rgba(255,255,255,0.2);font-style:italic;}
+.footer-col-title{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.footer-col ul{list-style:none;}
+.footer-col ul li+li{margin-top:0.6rem;}
+.footer-col ul a{font-size:12px;font-weight:300;color:rgba(255,255,255,0.4);transition:color .2s;}
+.footer-col ul a:hover{color:rgba(255,255,255,0.7);}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.footer-copy{font-size:11px;font-weight:300;color:rgba(255,255,255,0.2);}
+.footer-confidential-note{
+  font-size:11px;font-weight:300;letter-spacing:0.06em;
+  color:rgba(255,255,255,0.12);
+  display:flex;align-items:center;gap:8px;
+}
+.footer-confidential-note::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:rgba(184,150,62,0.4);}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(22px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  nav{padding:0 2.5rem;}
+  section{padding:80px 2.5rem;}
+  #hero{padding:68px 2.5rem 0;}
+  #contato{padding:100px 2.5rem;}
+  footer{padding:3rem 2.5rem 2rem;}
+  .ind-grid{grid-template-columns:repeat(2,1fr);}
+}
+
+@media(max-width:768px){
+  nav{padding:0 1.25rem;}
+  .nav-links,.nav-cta{display:none;}
+
+  #hero{padding:100px 1.25rem 60px;min-height:auto;}
+  .hero-watermark{display:none;}
+  .hero-metrics{gap:1.5rem;}
+  .hero-actions{flex-direction:column;align-items:stretch;}
+  .btn-primary,.btn-secondary{text-align:center;justify-content:center;}
+
+  section{padding:60px 1.25rem;}
+  #contato{padding:80px 1.25rem;}
+
+  .eco-grid,.tese-grid,.ind-grid,.ind-scenarios,.footer-grid{grid-template-columns:1fr;}
+  .perfil-grid{grid-template-columns:1fr;}
+
+  footer{padding:3rem 1.25rem 2rem;}
+  .footer-bottom{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- ════ NAV ════ -->
+<nav>
+  <a class="nav-brand" href="#hero">
+    <span class="nav-brand-name">Brary</span>
+    <span class="nav-brand-sub">Ecossistema · Parcerias Estratégicas</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#ecossistema">Ecossistema</a></li>
+    <li><a href="#indicadores">Indicadores</a></li>
+    <li><a href="#tese">Tese</a></li>
+    <li><a href="#perfil">Perfil</a></li>
+    <li><a href="#contato" class="nav-cta">Conversar</a></li>
+  </ul>
+</nav>
+
+<!-- ════ HERO ════ -->
+<section id="hero">
+  <div class="hero-rule"></div>
+  <div class="hero-watermark">B</div>
+  <div class="hero-inner">
+    <p class="hero-tag">Ecossistema Brary · Acesso Restrito</p>
+    <h1 class="hero-headline">
+      Quatro negócios.<br>
+      Uma visão.<br>
+      <em>Uma parceria com propósito.</em>
+    </h1>
+    <p class="hero-sub">
+      O ecossistema Brary foi construído para transformar conhecimento em autoridade — para autores, educadores, especialistas e empresários. Esta página apresenta a visão completa do negócio para quem avalia uma parceria estratégica.
+    </p>
+    <div class="hero-actions">
+      <a href="#ecossistema" class="btn-primary">Ver o ecossistema →</a>
+      <a href="#contato" class="btn-secondary">Iniciar conversa</a>
+    </div>
+    <div class="hero-metrics">
+      <div>
+        <div class="metric-value">4</div>
+        <div class="metric-label">Negócios no ecossistema</div>
+      </div>
+      <div>
+        <div class="metric-value">+10</div>
+        <div class="metric-label">Anos de atuação editorial</div>
+      </div>
+      <div>
+        <div class="metric-value">175+</div>
+        <div class="metric-label">Países de distribuição</div>
+      </div>
+      <div>
+        <div class="metric-value">Est. 2013</div>
+        <div class="metric-label">Fundação da Brary</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ ECOSSISTEMA ════ -->
+<section id="ecossistema">
+  <div class="section-tag reveal">O Ecossistema</div>
+  <h2 class="section-title reveal">Quatro braços.<br><em>Uma arquitetura integrada.</em></h2>
+  <div class="divider"></div>
+  <p class="section-lead reveal">Cada negócio do ecossistema opera de forma independente e se fortalece mutuamente. A Brary não é uma editora — é uma plataforma de autoridade que transforma conhecimento em ativos permanentes.</p>
+
+  <div class="eco-grid">
+
+    <div class="eco-card reveal">
+      <div class="eco-card-num">01</div>
+      <div class="eco-card-label">Editorial</div>
+      <h3 class="eco-card-name">Brary Editora</h3>
+      <p class="eco-card-desc">Ghostwriting &amp; Publicação Estratégica fundada em 2013. Transforma especialistas, empresários e criadores em autores publicados com autoridade real no mercado. Ghostwriting Completo, Estruturação Estratégica e Registro Autoral. Distribuição em 175+ países. Número limitado de projetos por trimestre — posicionamento seleto e premium.</p>
+      <span class="eco-card-tag active">B2C / B2B</span>
+      <a href="https://braryeditora.com.br" target="_blank" rel="noopener" class="eco-card-link">braryeditora.com.br →</a>
+    </div>
+
+    <div class="eco-card reveal">
+      <div class="eco-card-num">02</div>
+      <div class="eco-card-label">Certificação</div>
+      <h3 class="eco-card-name">Brary Institute</h3>
+      <p class="eco-card-desc">Primeiro organismo independente do Brasil constituído para analisar, validar e certificar metodologias educacionais pelo Padrão SBCM — Sistema Brary de Certificação Metodológica. Banca de especialistas independentes. Três campos de atuação: Educacional (ativo), Técnico e Saúde (em estruturação). Primeiro caso certificado: Método Tia Lóide, protocolo EE-2026-001.</p>
+      <span class="eco-card-tag active">Institucional</span>
+      <a href="https://brary-institute-site.vercel.app" target="_blank" rel="noopener" class="eco-card-link">brary-institute-site.vercel.app →</a>
+    </div>
+
+    <div class="eco-card reveal">
+      <div class="eco-card-num">03</div>
+      <div class="eco-card-label">Publicação Científica</div>
+      <h3 class="eco-card-name">Brary Journal</h3>
+      <p class="eco-card-desc">Publicação técnico-científica trimestral vinculada ao Padrão SBCM. Voltada a profissionais que desenvolveram metodologias com resultados documentáveis. Diagramação profissional inclusa. Modelo de lançamento: R$250/artigo — regular R$500. Seis categorias editoriais. Conselho com 9 especialistas multidisciplinares.</p>
+      <span class="eco-card-tag active">B2C / Institucional</span>
+      <a href="https://brary-institute-site.vercel.app/journal.html" target="_blank" rel="noopener" class="eco-card-link">Brary Journal →</a>
+    </div>
+
+    <div class="eco-card reveal">
+      <div class="eco-card-num">04</div>
+      <div class="eco-card-label">SaaS · Sistema Operacional</div>
+      <h3 class="eco-card-name">Plataforma GM OS™</h3>
+      <p class="eco-card-desc">Sistema Operacional de Governo para negócios B2B. 6 ambientes operacionais (Q1–Q6), 21 frameworks ativos, IA integrada (Capitão Oliver). 140+ empresas estruturadas. Crescimento médio de 3× ao ano. Planos: Operação R$147/mês, Gestão R$497/mês, Governo sob medida com white label. Atuação documentada: Brasília, Romênia, Houston, Rio, MG e SP.</p>
+      <span class="eco-card-tag b2b">B2B · SaaS</span>
+      <a href="https://plataforma-gm-os.vercel.app" target="_blank" rel="noopener" class="eco-card-link">plataforma-gm-os.vercel.app →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════ INDICADORES ════ -->
+<section id="indicadores">
+  <div class="section-tag reveal">Indicadores Operacionais</div>
+  <h2 class="section-title reveal">Brary Editora —<br><em>Capacidade e potencial de retorno.</em></h2>
+  <div class="divider"></div>
+  <p class="section-lead reveal">Números extraídos da planilha de cotação e precificação em vigor — maio de 2026. Base de cálculo: perfis de clientes com tiragens de 200 e 1.000 exemplares, os mais frequentes.</p>
+
+  <div class="ind-grid">
+    <div class="ind-card reveal">
+      <div class="ind-card-label">Capacidade de produção</div>
+      <div class="ind-card-value">10–20</div>
+      <div class="ind-card-note">livros produzidos por mês com a estrutura atual</div>
+    </div>
+    <div class="ind-card reveal">
+      <div class="ind-card-label">Clientes atendidos/mês</div>
+      <div class="ind-card-value">10–20</div>
+      <div class="ind-card-note">projetos simultâneos com time escalável</div>
+    </div>
+    <div class="ind-card reveal">
+      <div class="ind-card-label">Ticket médio por cliente</div>
+      <div class="ind-card-value">R$ 28.685</div>
+      <div class="ind-card-note">média entre tiragens de 200 e 1.000 livros</div>
+    </div>
+    <div class="ind-card reveal">
+      <div class="ind-card-label">Lucro bruto por cliente</div>
+      <div class="ind-card-value">R$ 11.509</div>
+      <div class="ind-card-note">antes de comissões sobre parcelas</div>
+    </div>
+  </div>
+
+  <div class="ind-scenarios">
+    <div class="ind-scenario reveal">
+      <div class="ind-scenario-title">Lucro bruto por tiragem</div>
+      <div class="ind-row">
+        <span class="ind-row-label">100 livros</span>
+        <span class="ind-row-val">R$ 7.124</span>
+      </div>
+      <div class="ind-row">
+        <span class="ind-row-label">200 livros <span class="ind-row-badge">perfil comum</span></span>
+        <span class="ind-row-val">R$ 8.241</span>
+      </div>
+      <div class="ind-row">
+        <span class="ind-row-label">300 livros</span>
+        <span class="ind-row-val">R$ 9.357</span>
+      </div>
+      <div class="ind-row">
+        <span class="ind-row-label">1.000 livros <span class="ind-row-badge">perfil comum</span></span>
+        <span class="ind-row-val">R$ 14.776</span>
+      </div>
+    </div>
+    <div class="ind-scenario reveal">
+      <div class="ind-scenario-title">Estrutura de produção</div>
+      <div class="ind-row">
+        <span class="ind-row-label">Prazo por livro</span>
+        <span class="ind-row-val">45 dias</span>
+      </div>
+      <div class="ind-row">
+        <span class="ind-row-label">Custo fixo mensal</span>
+        <span class="ind-row-val">R$ 12.977</span>
+      </div>
+      <div class="ind-row">
+        <span class="ind-row-label">Time operacional</span>
+        <span class="ind-row-val">Orlando · Cesar · Ana Paula · Print Park</span>
+      </div>
+      <div class="ind-row">
+        <span class="ind-row-label">Escala</span>
+        <span class="ind-row-val">Freelancers + gráficas + Amazon KDP</span>
+      </div>
+      <div class="ind-row">
+        <span class="ind-row-label">Faixa de serviço</span>
+        <span class="ind-row-val">R$ 4.500 – R$ 40.513</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ind-callout reveal">
+    <p>"Um livro bem posicionado abre portas que anos de currículo não conseguem — porque ele faz por você o que você não consegue fazer sozinho: estar presente sem estar na sala."</p>
+    <div class="ind-callout-note">
+      Planilha de cotação Brary Editora<br>
+      <span style="opacity:.5;">05/05/2026</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════ TESE ════ -->
+<section id="tese">
+  <div class="section-tag reveal">Tese de Parceria</div>
+  <h2 class="section-title reveal">O que estamos construindo<br><em>e o que buscamos num sócio.</em></h2>
+  <div class="divider"></div>
+
+  <div class="tese-grid">
+    <div>
+      <p style="font-size:15px;font-weight:300;color:var(--gray-700);line-height:1.9;margin-bottom:1.5rem;" class="reveal">
+        O ecossistema Brary opera hoje com quatro braços que se retroalimentam: a Editora gera autores, o Institute certifica metodologias, o Journal publica o conhecimento e o GM OS estrutura a operação dos especialistas que passam por esses braços.
+      </p>
+      <p style="font-size:15px;font-weight:300;color:var(--gray-700);line-height:1.9;margin-bottom:1.5rem;" class="reveal">
+        O que estamos buscando não é capital. É <strong style="color:var(--navy);font-weight:600;">inteligência estratégica em execução</strong> — alguém que entenda de lançamento, de escala digital e de construção de movimento, e que queira construir junto um dos ecossistemas mais completos de desenvolvimento de autoridade do Brasil.
+      </p>
+      <blockquote class="tese-quote reveal">
+        "Se tem alguém que sabe fazer acontecer, é a pessoa certa para entrar nesse ecossistema."
+      </blockquote>
+    </div>
+
+    <div>
+      <div class="tese-pillar reveal">
+        <div class="tese-pillar-num">O que a Brary oferece</div>
+        <div class="tese-pillar-title">Estrutura editorial e metodológica consolidada</div>
+        <div class="tese-pillar-text">Mais de 10 anos de experiência editorial, 4 produtos com proposta clara, clientes reais, casos certificados e uma plataforma SaaS em operação. A Brary não é uma ideia — é um negócio em andamento.</div>
+      </div>
+      <div class="tese-pillar reveal">
+        <div class="tese-pillar-num">O que buscamos no parceiro</div>
+        <div class="tese-pillar-title">Estratégia, execução e conexão de mercado</div>
+        <div class="tese-pillar-text">Conhecimento em lançamento digital, mentorias e esteiras de produto. Capacidade de estruturar e executar processos de crescimento. Rede de contatos estratégicos. Visão de longo prazo e alinhamento de valores.</div>
+      </div>
+      <div class="tese-pillar reveal">
+        <div class="tese-pillar-num">O modelo</div>
+        <div class="tese-pillar-title">Sociedade estratégica — não investimento passivo</div>
+        <div class="tese-pillar-text">A parceria Brary é para quem quer construir junto, não apenas participar dos resultados. A pessoa certa será protagonista da estratégia — não uma figura decorativa no cap table.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ PERFIL ════ -->
+<section id="perfil">
+  <div class="section-tag reveal">Perfil do Parceiro</div>
+  <h2 class="section-title reveal">Para quem é esta conversa.<br><em>E para quem não é.</em></h2>
+  <div class="divider"></div>
+  <p class="section-lead reveal">A Brary escolhe seus sócios com o mesmo critério com que escolhe seus autores — com cuidado, com propósito e com alinhamento real.</p>
+
+  <div class="perfil-grid">
+    <div class="perfil-card reveal">
+      <div class="perfil-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+      </div>
+      <div class="perfil-card-title">Estrategista de lançamento digital</div>
+      <div class="perfil-card-text">Experiência comprovada com lançamentos, funis, mentorias e esteiras de produto. Sabe transformar conteúdo em resultado mensurável.</div>
+    </div>
+    <div class="perfil-card reveal">
+      <div class="perfil-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+      </div>
+      <div class="perfil-card-title">Executora com rede estratégica</div>
+      <div class="perfil-card-text">Capacidade de conectar o ecossistema Brary a parceiros, clientes e oportunidades que hoje estão fora do alcance da operação atual.</div>
+    </div>
+    <div class="perfil-card reveal">
+      <div class="perfil-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+      </div>
+      <div class="perfil-card-title">Alinhamento de valores</div>
+      <div class="perfil-card-text">A Brary é um projeto com propósito cristão e visão de impacto. O parceiro ideal compartilha esses fundamentos — não como pré-requisito religioso, mas como bússola de decisão.</div>
+    </div>
+  </div>
+
+  <div class="nao-buscamos reveal">
+    <div class="nao-buscamos-title">O que não buscamos</div>
+    <div class="nao-buscamos-text">Não buscamos investidores passivos, figuras sem envolvimento operacional, ou perfis que encaram parceria como compra de participação. A Brary não está à venda — está em expansão. A diferença é fundamental.</div>
+  </div>
+</section>
+
+<!-- ════ CONTATO ════ -->
+<section id="contato">
+  <p class="cta-tag">Próximo Passo</p>
+  <h2 class="cta-headline">
+    Esta página é o início.<br>
+    <em>A conversa é o que define.</em>
+  </h2>
+  <p class="cta-text">
+    Se o que você leu até aqui faz sentido para o que você constrói e para quem você é, vale trinta minutos de conversa. Sem compromisso. Com honestidade de ambos os lados.
+  </p>
+  <div class="cta-actions">
+    <a href="https://wa.me/5521983461734?text=Olá%20Orlando%2C%20acessei%20a%20página%20de%20parcerias%20do%20ecossistema%20Brary%20e%20gostaria%20de%20conversar." target="_blank" rel="noopener" class="btn-primary">Iniciar conversa no WhatsApp →</a>
+    <a href="mailto:contato@braryeditora.com?subject=Parceria%20Estratégica%20—%20Ecossistema%20Brary" class="btn-secondary">Enviar e-mail</a>
+  </div>
+  <p class="cta-confidential">Esta página é de acesso restrito e não está indexada em buscadores. Compartilhe apenas com pessoas de sua confiança.</p>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">Ecossistema Brary</div>
+      <div class="footer-brand-sub">Parcerias Estratégicas — Acesso Restrito</div>
+      <div class="footer-brand-desc">Documento preparado para apresentação a parceiros em avaliação. Não destinado a circulação pública.</div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Os 4 negócios</div>
+      <ul>
+        <li><a href="https://braryeditora.com.br" target="_blank" rel="noopener">Brary Editora ↗</a></li>
+        <li><a href="https://brary-institute-site.vercel.app" target="_blank" rel="noopener">Brary Institute ↗</a></li>
+        <li><a href="https://brary-institute-site.vercel.app/journal.html" target="_blank" rel="noopener">Brary Journal ↗</a></li>
+        <li><a href="https://plataforma-gm-os.vercel.app" target="_blank" rel="noopener">Plataforma GM OS ↗</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Contato</div>
+      <ul>
+        <li><a href="mailto:contato@braryeditora.com">contato@braryeditora.com</a></li>
+        <li><a href="https://wa.me/5521983461734" target="_blank" rel="noopener">+55 21 98346-1734</a></li>
+        <li><a href="https://www.instagram.com/orlandocarvalho.mentor/" target="_blank" rel="noopener">@orlandocarvalho.mentor</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Brary Editora Ltda. · Orlando Carvalho — Todos os direitos reservados.</div>
+    <div class="footer-confidential-note">Documento confidencial · Não indexado</div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Smooth anchor scroll
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 68, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+</body>
+</html>
