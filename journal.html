@@ -3,1012 +3,1236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brary Journal — Publicação Técnico-Científica do Brary Institute</title>
-<meta name="description" content="Brary Journal publica quem já provou na prática. Publicação técnico-científica vinculada ao Padrão SBCM.">
+<title>Brary Journal — Registro do Conhecimento Aplicado</title>
+<meta name="description" content="Publicação oficial do ecossistema Brary dedicada a registrar, preservar e compartilhar conhecimento aplicado produzido por especialistas e metodologias com impacto real.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  /* ===== RESET & BASE ===== */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --navy:   #0B1F3A;
-    --navy-light: #112647;
-    --gold:   #B8963E;
-    --gold-light: #D4AF6A;
-    --cream:  #F6F3EC;
-    --cream-dark: #EDE8DE;
-    --white:  #FFFFFF;
-    --text-dark: #1a1a1a;
-    --text-mid: #444;
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --sans:  'Jost', sans-serif;
-    --transition: 0.3s ease;
-    --shadow: 0 4px 24px rgba(11,31,58,0.10);
-    --shadow-md: 0 8px 40px rgba(11,31,58,0.14);
-  }
+:root {
+  --navy:        #0B1D33;
+  --navy-mid:    #122441;
+  --navy-light:  #1a3254;
+  --gold:        #C9A14A;
+  --gold-light:  #DEC07A;
+  --gold-dim:    #a07e38;
+  --cream:       #F4F1EA;
+  --cream-dark:  #E8E3D8;
+  --cream-mid:   #EDE8DF;
+  --white:       #FFFFFF;
+  --text-dark:   #1C1C1C;
+  --text-mid:    #4A4A4A;
+  --text-light:  #7A7A7A;
+  --serif:  'Playfair Display', Georgia, serif;
+  --sans:   'Source Sans 3', system-ui, sans-serif;
+  --transition: 0.3s ease;
+  --shadow:    0 2px 20px rgba(11,29,51,0.08);
+  --shadow-md: 0 6px 40px rgba(11,29,51,0.12);
+}
 
-  html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
 
-  body {
-    font-family: var(--sans);
-    font-weight: 400;
-    color: var(--text-dark);
-    background: var(--cream);
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-  }
+body {
+  font-family: var(--sans);
+  font-weight: 400;
+  color: var(--text-dark);
+  background: var(--cream);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
 
-  img { max-width: 100%; display: block; }
-  a { color: inherit; text-decoration: none; }
-  ul { list-style: none; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
 
-  /* ===== UTILITIES ===== */
-  .container {
-    width: 100%;
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
 
-  .section-label {
-    display: block;
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 0.7rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.4rem;
-  }
-  .section-label::before { content: "—— "; }
-  .section-label::after  { content: " ——"; }
+/* ===== REVEAL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-  .headline-duo { line-height: 1.15; }
-  .headline-duo .h-line1 {
-    display: block;
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    color: var(--white);
-  }
-  .headline-duo .h-line1.dark { color: var(--navy); }
-  .headline-duo .h-line2 {
-    display: block;
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 400;
-    font-size: clamp(1.8rem, 3.6vw, 2.9rem);
-    color: var(--gold-light);
-  }
+/* ===== EYEBROW ===== */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.65rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.4rem;
+}
 
-  /* ===== REVEAL ANIMATION ===== */
-  .reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.65s ease, transform 0.65s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.btn-gold {
+  background: var(--gold);
+  color: var(--white);
+}
+.btn-gold:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(201,161,74,0.32);
+}
+.btn-outline-white {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.35);
+}
+.btn-outline-white:hover {
+  border-color: var(--gold-light);
+  color: var(--gold-light);
+}
+.btn-outline-navy {
+  background: transparent;
+  color: var(--navy);
+  border: 1px solid var(--navy);
+}
+.btn-outline-navy:hover {
+  background: var(--navy);
+  color: var(--white);
+}
 
-  /* ===== BUTTONS ===== */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 0.82rem;
-    letter-spacing: 0.06em;
-    padding: 0.8rem 1.8rem;
-    border-radius: 2px;
-    border: none;
-    cursor: pointer;
-    transition: background var(--transition), color var(--transition), transform var(--transition), box-shadow var(--transition);
-    text-transform: uppercase;
-  }
-  .btn-gold {
-    background: var(--gold);
-    color: var(--white);
-  }
-  .btn-gold:hover {
-    background: var(--gold-light);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(184,150,62,0.35);
-  }
-  .btn-outline {
-    background: transparent;
-    color: var(--white);
-    border: 1.5px solid rgba(255,255,255,0.45);
-  }
-  .btn-outline:hover {
-    border-color: var(--gold-light);
-    color: var(--gold-light);
-    transform: translateY(-1px);
-  }
-  .btn-outline-navy {
-    background: transparent;
-    color: var(--navy);
-    border: 1.5px solid var(--navy);
-  }
-  .btn-outline-navy:hover {
-    background: var(--navy);
-    color: var(--white);
-  }
+/* ===== NAVBAR ===== */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: var(--navy);
+  border-bottom: 1px solid rgba(201,161,74,0.12);
+  transition: box-shadow var(--transition);
+}
+#navbar.scrolled {
+  box-shadow: 0 2px 24px rgba(11,29,51,0.45);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  transition: padding var(--transition);
+}
+#navbar.scrolled .nav-inner { padding-top: 0.75rem; padding-bottom: 0.75rem; }
 
-  /* ===== NAVBAR ===== */
-  #navbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 1000;
-    background: var(--navy);
-    border-bottom: 1px solid rgba(184,150,62,0.15);
-    transition: padding var(--transition), box-shadow var(--transition);
-  }
-  #navbar.scrolled {
-    box-shadow: 0 2px 20px rgba(11,31,58,0.4);
-  }
-  .nav-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.1rem 20px;
-    max-width: 1120px;
-    margin: 0 auto;
-    transition: padding var(--transition);
-  }
-  #navbar.scrolled .nav-inner {
-    padding-top: 0.7rem;
-    padding-bottom: 0.7rem;
-  }
-  .nav-logo {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.15;
-  }
-  .nav-logo-name {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: 1.25rem;
-    color: var(--white);
-    letter-spacing: 0.02em;
-  }
-  .nav-logo-sub {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 0.62rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .nav-links {
-    display: none;
-    gap: 2rem;
-    align-items: center;
-  }
-  .nav-links a {
-    font-family: var(--sans);
-    font-weight: 400;
-    font-size: 0.8rem;
-    letter-spacing: 0.06em;
-    color: rgba(255,255,255,0.75);
-    text-transform: uppercase;
-    transition: color var(--transition);
-  }
-  .nav-links a:hover { color: var(--gold-light); }
-  .nav-cta {
-    display: none;
-  }
-  .hamburger {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    padding: 4px;
-    background: none;
-    border: none;
-  }
-  .hamburger span {
-    display: block;
-    width: 24px;
-    height: 1.5px;
-    background: var(--white);
-    transition: transform var(--transition), opacity var(--transition);
-  }
-  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  .hamburger.open span:nth-child(2) { opacity: 0; }
-  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.nav-logo { display: flex; flex-direction: column; line-height: 1.2; }
+.nav-logo-name {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--white);
+  letter-spacing: 0.01em;
+}
+.nav-logo-sub {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
 
-  .mobile-menu {
-    display: none;
-    flex-direction: column;
-    gap: 0;
-    background: var(--navy-light);
-    border-top: 1px solid rgba(184,150,62,0.15);
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.4s ease;
-  }
-  .mobile-menu.open {
-    display: flex;
-    max-height: 400px;
-  }
-  .mobile-menu a {
-    font-family: var(--sans);
-    font-weight: 400;
-    font-size: 0.82rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.8);
-    padding: 1rem 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    transition: color var(--transition), background var(--transition);
-  }
-  .mobile-menu a:hover { color: var(--gold-light); background: rgba(255,255,255,0.03); }
-  .mobile-menu .m-cta {
-    margin: 1rem 20px 1.2rem;
-    text-align: center;
-  }
+.nav-links {
+  display: none;
+  gap: 2rem;
+  align-items: center;
+}
+.nav-links a {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.65);
+  text-transform: uppercase;
+  transition: color var(--transition);
+}
+.nav-links a:hover { color: var(--gold-light); }
+.nav-cta { display: none; }
 
-  @media (min-width: 768px) {
-    .nav-links { display: flex; }
-    .nav-cta { display: block; }
-    .hamburger { display: none; }
-    .mobile-menu { display: none !important; }
-  }
+.hamburger {
+  display: flex; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 4px;
+  background: none; border: none;
+}
+.hamburger span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--white);
+  transition: transform var(--transition), opacity var(--transition);
+}
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-  /* ===== HERO ===== */
-  #hero {
-    background: var(--navy);
-    padding: 140px 20px 100px;
-    position: relative;
-    overflow: hidden;
-  }
-  #hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 60% 50% at 80% 40%, rgba(184,150,62,0.07) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--sans);
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    border: 1px solid rgba(184,150,62,0.35);
-    padding: 0.35rem 0.9rem;
-    border-radius: 1px;
-    margin-bottom: 2rem;
-  }
-  .hero-eyebrow::before { content: ""; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
-  .hero-headline {
-    max-width: 720px;
-    margin-bottom: 1.6rem;
-  }
-  .hero-para {
-    max-width: 580px;
-    font-size: 1rem;
-    line-height: 1.75;
-    color: rgba(255,255,255,0.7);
-    margin-bottom: 0.9rem;
-  }
-  .hero-institutional {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 1.05rem;
-    color: var(--gold-light);
-    margin-bottom: 2.2rem;
-    max-width: 520px;
-    line-height: 1.55;
-  }
-  .hero-btns {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.9rem;
-    margin-bottom: 3.5rem;
-  }
-  .hero-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem 3rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 2.2rem;
-  }
-  .stat-item { display: flex; flex-direction: column; gap: 0.2rem; }
-  .stat-value {
-    font-family: var(--serif);
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: var(--gold-light);
-    line-height: 1;
-  }
-  .stat-label {
-    font-size: 0.7rem;
-    font-weight: 400;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
-  }
+.mobile-menu {
+  display: none; flex-direction: column;
+  background: var(--navy-mid);
+  border-top: 1px solid rgba(201,161,74,0.12);
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.mobile-menu.open { display: flex; max-height: 400px; }
+.mobile-menu a {
+  font-family: var(--sans); font-size: 0.8rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.75); padding: 1rem 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: color var(--transition), background var(--transition);
+}
+.mobile-menu a:hover { color: var(--gold-light); background: rgba(255,255,255,0.03); }
+.mobile-menu .m-cta { margin: 1rem 24px 1.4rem; }
 
-  /* ===== SOBRE ===== */
-  #sobre {
-    background: var(--cream);
-    padding: 90px 20px;
-  }
-  .sobre-grid {
-    display: grid;
-    gap: 3rem;
-  }
-  .sobre-intro {
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: var(--text-mid);
-  }
-  .sobre-intro p + p { margin-top: 1.1rem; }
-  .sobre-quote {
-    border-left: 3px solid var(--gold);
-    padding: 1.2rem 1.6rem;
-    background: rgba(184,150,62,0.06);
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 1.25rem;
-    line-height: 1.55;
-    color: var(--navy);
-    margin: 2rem 0;
-  }
-  .comparison-block {
-    display: grid;
-    gap: 1.5px;
-    background: rgba(11,31,58,0.08);
-    border-radius: 3px;
-    overflow: hidden;
-    margin-top: 2.4rem;
-  }
-  .comparison-header {
-    display: grid;
+@media (min-width: 768px) {
+  .nav-links { display: flex; }
+  .nav-cta { display: block; }
+  .hamburger { display: none; }
+  .mobile-menu { display: none !important; }
+}
+
+/* ===== HERO CAPA 2026 ===== */
+.hero-capa-row {
+  position: relative; z-index: 1;
+  padding: 3rem 0 0;
+  display: flex;
+  justify-content: center;
+}
+.hero-capa-img {
+  width: clamp(160px, 22vw, 280px);
+  height: auto;
+  display: block;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45), -4px 0 16px rgba(0,0,0,0.2);
+  transform: perspective(700px) rotateY(-5deg);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.hero-capa-img:hover {
+  transform: perspective(700px) rotateY(0deg);
+  box-shadow: 0 28px 70px rgba(0,0,0,0.5);
+}
+@media (min-width: 900px) {
+  .hero-capa-row { justify-content: flex-start; }
+  .hero-capa-img { width: clamp(180px, 20vw, 280px); }
+}
+
+/* ===== SISTEMA DE CAPAS ===== */
+#capas {
+  background: var(--cream);
+  padding: 80px 0;
+  overflow: hidden;
+}
+.capas-eyebrow { display: block; margin-bottom: 0.5rem; }
+.capas-desc {
+  font-family: var(--serif); font-style: italic;
+  font-size: 1.05rem; color: var(--text-mid);
+  margin-bottom: 3rem;
+}
+.capas-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  max-width: 100%;
+}
+.capa-item {
+  display: flex; flex-direction: column;
+  align-items: center;
+  padding: 0 1.5rem 2rem;
+  transition: transform 0.3s ease;
+}
+.capa-item:hover { transform: translateY(-6px); }
+.capa-item img {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  display: block;
+  box-shadow: 0 8px 32px rgba(11,29,51,0.15);
+  margin-bottom: 1rem;
+}
+.capa-label {
+  font-family: var(--sans); font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold-dim);
+}
+@media (max-width: 640px) {
+  .capas-grid { grid-template-columns: 1fr 1fr; gap: 0; }
+  .capa-item { padding: 0 0.8rem 1.5rem; }
+}
+
+/* ===== EDICAO MOCKUPS (updated) ===== */
+.edicao-mockups {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mockup-revistas {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+}
+
+/* ===== HERO PILLARS STRIP ===== */
+.hero-pillars {
+  position: relative; z-index: 1;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 2.4rem 0 3rem;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+  gap: 0;
+  align-items: start;
+}
+.hero-pillar {
+  display: flex; flex-direction: column;
+  align-items: flex-start; gap: 0.5rem;
+  padding: 0 1.4rem;
+}
+.hero-pillar:first-child { padding-left: 0; }
+.hero-pillar svg {
+  width: 22px; height: 22px;
+  stroke: var(--gold); flex-shrink: 0;
+}
+.hp-title {
+  font-family: var(--sans); font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold);
+}
+.hp-text {
+  font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.55;
+}
+.hero-pillar-div {
+  width: 1px; background: rgba(255,255,255,0.08);
+  align-self: stretch; margin-top: 0.2rem;
+}
+@media (max-width: 767px) {
+  .hero-pillars {
     grid-template-columns: 1fr 1fr;
-    background: var(--cream-dark);
+    gap: 1.5rem 0;
   }
-  .comparison-header span {
-    padding: 0.85rem 1.2rem;
-    font-family: var(--sans);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--navy);
-  }
-  .comparison-header span:first-child {
-    border-right: 1.5px solid rgba(11,31,58,0.08);
-    color: var(--text-mid);
-  }
-  .comparison-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background: var(--white);
-  }
-  .comparison-row + .comparison-row { border-top: 1.5px solid rgba(11,31,58,0.06); }
-  .comparison-cell {
-    padding: 0.8rem 1.2rem;
-    font-size: 0.85rem;
-    line-height: 1.5;
-    color: var(--text-mid);
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-  .comparison-cell:first-child {
-    border-right: 1.5px solid rgba(11,31,58,0.06);
-    color: var(--text-mid);
-  }
-  .comparison-cell:last-child { color: var(--navy); font-weight: 500; }
-  .comparison-cell .icon { flex-shrink: 0; margin-top: 2px; }
-  .icon-x { color: #999; }
-  .icon-check { color: var(--gold); }
+  .hero-pillar-div { display: none; }
+  .hero-pillar { padding: 0; }
+}
 
-  @media (min-width: 768px) {
-    .sobre-grid { grid-template-columns: 1fr 1fr; align-items: start; }
-  }
+/* ===== HERO ===== */
+#hero {
+  background: var(--navy);
+  padding: 140px 24px 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+#hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 55% 60% at 85% 30%, rgba(201,161,74,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+/* Vertical line accent */
+#hero::after {
+  content: '';
+  position: absolute;
+  left: 50%; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(201,161,74,0.08) 30%, rgba(201,161,74,0.08) 70%, transparent);
+  pointer-events: none;
+  display: none;
+}
+@media (min-width: 1024px) { #hero::after { display: block; } }
 
-  /* ===== CATEGORIAS ===== */
-  #categorias {
-    background: var(--navy);
-    padding: 90px 20px;
-  }
-  #categorias .section-label { color: var(--gold); }
-  .cat-intro {
-    font-size: 0.95rem;
-    color: rgba(255,255,255,0.6);
-    max-width: 580px;
-    line-height: 1.7;
-    margin-bottom: 3rem;
-  }
-  .cat-grid {
-    display: grid;
-    gap: 1px;
-    background: rgba(255,255,255,0.07);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  .cat-card {
-    background: var(--navy-light);
-    padding: 1.8rem 1.6rem;
-    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
-    cursor: default;
-    position: relative;
-  }
-  .cat-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--gold);
-    transition: width 0.35s ease;
-  }
-  .cat-card:hover {
-    background: #162e50;
-    box-shadow: inset 0 0 0 1px rgba(184,150,62,0.15);
-  }
-  .cat-card:hover::after { width: 100%; }
-  .cat-number {
-    font-family: var(--serif);
-    font-size: 0.8rem;
-    font-weight: 300;
-    color: var(--gold);
-    letter-spacing: 0.1em;
-    margin-bottom: 0.7rem;
-  }
-  .cat-name {
-    font-family: var(--serif);
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: var(--white);
-    line-height: 1.3;
-    margin-bottom: 0.7rem;
-  }
-  .cat-desc {
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.65;
-    margin-bottom: 0.6rem;
-  }
-  .cat-trigger {
-    font-size: 0.78rem;
-    font-style: italic;
-    color: var(--gold-light);
-    margin-bottom: 1rem;
-    line-height: 1.5;
-  }
-  .cat-link {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    transition: gap var(--transition);
-  }
-  .cat-card:hover .cat-link { gap: 0.6rem; }
+.hero-inner {
+  position: relative; z-index: 1;
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: center;
+}
 
-  @media (min-width: 768px) {
-    .cat-grid { grid-template-columns: 1fr 1fr; }
-  }
-  @media (min-width: 1024px) {
-    .cat-grid { grid-template-columns: repeat(3, 1fr); }
-  }
+.hero-content { max-width: 680px; padding-bottom: 80px; }
 
-  /* ===== MODELO ===== */
-  #modelo {
-    background: var(--cream);
-    padding: 90px 20px;
-  }
-  .modelo-top {
-    display: grid;
-    gap: 3rem;
-    margin-bottom: 4rem;
-  }
-  .modelo-editorial-box {
-    background: var(--white);
-    border-left: 3px solid var(--gold);
-    padding: 1.5rem 1.6rem;
-    border-radius: 0 2px 2px 0;
-    box-shadow: var(--shadow);
-  }
-  .modelo-editorial-box p {
-    font-size: 0.9rem;
-    line-height: 1.7;
-    color: var(--text-mid);
-    margin-bottom: 0.7rem;
-  }
-  .modelo-editorial-box p:last-child { margin-bottom: 0; }
-  .modelo-editorial-box strong { color: var(--navy); }
-  .modelo-editorial-note {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 1.05rem;
-    color: var(--navy);
-    margin-top: 0.8rem;
-  }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: var(--sans); font-size: 0.66rem; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201,161,74,0.3);
+  padding: 0.4rem 1rem;
+  margin-bottom: 2.4rem;
+}
+.hero-tag::before {
+  content: ''; width: 5px; height: 5px;
+  background: var(--gold); border-radius: 50%;
+}
 
-  .timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    margin-bottom: 4rem;
-    position: relative;
-  }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 18px;
-    top: 36px;
-    bottom: 36px;
-    width: 1px;
-    background: rgba(11,31,58,0.12);
-  }
-  .timeline-step {
-    display: flex;
-    gap: 1.4rem;
-    align-items: flex-start;
-    padding-bottom: 2rem;
-    position: relative;
-  }
-  .timeline-step:last-child { padding-bottom: 0; }
-  .step-dot {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--navy);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-family: var(--serif);
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--gold-light);
-    position: relative;
-    z-index: 1;
-  }
-  .step-body { padding-top: 0.4rem; }
-  .step-title {
-    font-family: var(--serif);
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 0.35rem;
-  }
-  .step-desc {
-    font-size: 0.84rem;
-    color: var(--text-mid);
-    line-height: 1.65;
-  }
+.hero-h1 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 1.6rem;
+  letter-spacing: -0.01em;
+}
+.hero-h1 em {
+  font-style: italic;
+  color: var(--gold-light);
+}
 
-  .pricing-table {
-    display: grid;
-    gap: 1px;
-    background: rgba(11,31,58,0.08);
-    border-radius: 4px;
-    overflow: hidden;
-    max-width: 680px;
-  }
-  .pricing-header {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    background: var(--navy);
-    color: var(--white);
-  }
-  .pricing-header div {
-    padding: 0.85rem 1.2rem;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.6);
-  }
-  .pricing-header div:first-child { border-right: 1px solid rgba(255,255,255,0.08); }
-  .pricing-row {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    background: var(--white);
-    transition: background var(--transition);
-  }
-  .pricing-row.featured { background: rgba(184,150,62,0.06); }
-  .pricing-row + .pricing-row { border-top: 1px solid rgba(11,31,58,0.06); }
-  .pricing-cell {
-    padding: 1rem 1.2rem;
-    font-size: 0.85rem;
-    color: var(--text-mid);
-    line-height: 1.5;
-  }
-  .pricing-cell:first-child { border-right: 1px solid rgba(11,31,58,0.06); }
-  .pricing-cell strong { display: block; color: var(--navy); font-size: 0.9rem; margin-bottom: 0.1rem; }
-  .pricing-cell .badge {
-    display: inline-block;
-    background: var(--gold);
-    color: var(--white);
-    font-size: 0.6rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.15rem 0.5rem;
-    border-radius: 1px;
-    margin-left: 0.5rem;
-    vertical-align: middle;
-  }
-  .pricing-cell .price {
-    font-family: var(--serif);
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--navy);
-  }
-  .pricing-cell .price-label {
-    font-size: 0.7rem;
-    color: var(--text-mid);
-  }
-  .pricing-includes {
-    background: var(--navy);
-    padding: 1rem 1.2rem;
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.6;
-    letter-spacing: 0.02em;
-  }
-  .pricing-includes strong { color: var(--gold-light); }
+.hero-sub {
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.6);
+  max-width: 520px;
+  margin-bottom: 2.6rem;
+}
 
-  .scarcity-note {
-    margin-top: 1.4rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.8rem;
-    color: var(--gold);
-    font-weight: 500;
-  }
-  .scarcity-dot {
-    width: 7px;
-    height: 7px;
-    background: var(--gold);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-    flex-shrink: 0;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.35; }
-  }
+.hero-btns {
+  display: flex; flex-wrap: wrap; gap: 0.9rem;
+  margin-bottom: 4rem;
+}
 
-  @media (min-width: 768px) {
-    .modelo-top { grid-template-columns: 1fr 1fr; align-items: start; }
-    .timeline::before { left: 20px; }
-  }
+/* Cover mockup strip at bottom of hero */
+.hero-cover-strip {
+  position: relative; z-index: 1;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 3rem 0 0;
+  display: flex; align-items: flex-end; gap: 1.5rem;
+  overflow: hidden;
+}
+.cover-main {
+  flex-shrink: 0;
+  width: clamp(160px, 22vw, 240px);
+  background: var(--cream);
+  padding: 2rem 1.5rem 2.5rem;
+  position: relative;
+  transform: perspective(600px) rotateY(-4deg);
+  box-shadow: 12px 0 40px rgba(0,0,0,0.4), -2px 0 8px rgba(0,0,0,0.15);
+}
+.cover-edition {
+  font-family: var(--sans); font-size: 0.55rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold-dim); margin-bottom: 0.8rem;
+  text-align: right;
+}
+.cover-title-brary {
+  font-family: var(--serif); font-weight: 700;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  color: var(--navy); line-height: 1;
+  letter-spacing: -0.02em;
+}
+.cover-title-journal {
+  font-family: var(--sans); font-weight: 600;
+  font-size: clamp(0.55rem, 1.5vw, 0.85rem);
+  letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--gold-dim); margin-bottom: 1rem;
+}
+.cover-rule {
+  width: 40px; height: 1px;
+  background: var(--gold-dim); margin: 0.6rem 0 0.6rem;
+}
+.cover-tagline {
+  font-family: var(--sans); font-size: 0.52rem; font-weight: 400;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-mid); line-height: 1.6; margin-bottom: 1.2rem;
+}
+/* Shield SVG in cover */
+.cover-shield {
+  width: 65%; margin: 0 auto 1.4rem;
+  opacity: 0.13;
+}
+.cover-number {
+  font-family: var(--serif); font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  color: var(--gold-dim); text-align: center;
+  line-height: 1; margin-bottom: 0.4rem;
+}
+.cover-number-rule {
+  width: 30px; height: 1px;
+  background: var(--gold-dim); margin: 0 auto 0.8rem;
+}
+.cover-sub {
+  font-family: var(--sans); font-size: 0.48rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-dark); text-align: center; line-height: 1.5;
+}
+.cover-sub2 {
+  font-family: var(--sans); font-size: 0.44rem; font-weight: 300;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-light); text-align: center; margin-top: 0.2rem;
+}
 
-  /* ===== CONSELHO ===== */
-  #conselho {
-    background: var(--navy);
-    padding: 90px 20px;
-  }
-  #conselho .section-label { color: var(--gold); }
-  .conselho-intro {
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.55);
-    max-width: 580px;
-    line-height: 1.7;
-    margin-bottom: 3rem;
-    font-style: italic;
-    font-family: var(--serif);
-    font-size: 1.05rem;
-  }
-  .council-grid {
-    display: grid;
-    gap: 1px;
-    background: rgba(255,255,255,0.07);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  .council-card {
-    background: var(--navy-light);
-    padding: 1.5rem 1.4rem;
-    transition: background var(--transition);
-    position: relative;
-  }
-  .council-card:hover { background: #162e50; }
-  .council-card.featured {
-    background: rgba(184,150,62,0.08);
-    border: 1px solid rgba(184,150,62,0.22);
-  }
-  .council-card.featured:hover { background: rgba(184,150,62,0.12); }
-  .council-area {
-    font-size: 0.67rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.6rem;
-  }
-  .council-name {
-    font-family: var(--serif);
-    font-size: 1.05rem;
-    font-weight: 500;
-    color: var(--white);
-    margin-bottom: 0.3rem;
-    line-height: 1.3;
-  }
-  .council-card.featured .council-name { font-size: 1.15rem; }
-  .council-role {
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.45);
-    line-height: 1.5;
-  }
-  .council-badge {
-    position: absolute;
-    top: 1rem; right: 1rem;
-    font-size: 0.58rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--navy);
-    background: var(--gold);
-    padding: 0.2rem 0.5rem;
-    border-radius: 1px;
-  }
+.cover-side-info {
+  flex: 1; padding-bottom: 2rem;
+}
+.cover-principle {
+  display: flex; align-items: flex-start; gap: 0.9rem;
+  margin-bottom: 1.4rem;
+}
+.cover-principle-icon {
+  width: 28px; height: 28px; flex-shrink: 0;
+  border: 1px solid rgba(201,161,74,0.4);
+  display: flex; align-items: center; justify-content: center;
+}
+.cover-principle-icon svg {
+  width: 14px; height: 14px;
+  stroke: var(--gold); fill: none; stroke-width: 1.5;
+}
+.cover-principle-title {
+  font-family: var(--sans); font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.2rem;
+}
+.cover-principle-text {
+  font-family: var(--sans); font-size: 0.78rem;
+  color: rgba(255,255,255,0.5); line-height: 1.5;
+}
 
-  @media (min-width: 600px) {
-    .council-grid { grid-template-columns: 1fr 1fr; }
-  }
-  @media (min-width: 1024px) {
-    .council-grid { grid-template-columns: repeat(3, 1fr); }
-  }
+/* ===== SOBRE — O QUE É ===== */
+#sobre {
+  background: var(--cream);
+  padding: 100px 24px;
+}
+.sobre-layout {
+  display: grid;
+  gap: 4rem;
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .sobre-layout { grid-template-columns: 1fr 1fr; }
+}
 
-  /* ===== SUBMISSÃO ===== */
-  #submissao {
-    background: var(--cream);
-    padding: 90px 20px;
-  }
-  .submissao-grid {
-    display: grid;
-    gap: 3.5rem;
-  }
-  .submissao-left h2 {
-    font-family: var(--serif);
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 500;
-    color: var(--navy);
-    line-height: 1.25;
-    margin-bottom: 1rem;
-  }
-  .submissao-left h2 em {
-    display: block;
-    font-style: italic;
-    color: var(--gold);
-  }
-  .submissao-desc {
-    font-size: 0.9rem;
-    color: var(--text-mid);
-    line-height: 1.75;
-    margin-bottom: 2rem;
-  }
-  .req-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-  .req-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.7rem;
-    font-size: 0.85rem;
-    color: var(--text-mid);
-    line-height: 1.55;
-  }
-  .req-icon {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: var(--navy);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .req-icon svg { width: 9px; height: 9px; fill: none; stroke: var(--gold-light); stroke-width: 2.5; }
+.section-h2 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  color: var(--navy);
+  line-height: 1.2;
+  margin-bottom: 1.4rem;
+}
+.section-h2 em { font-style: italic; color: var(--gold-dim); }
 
-  /* FORM */
-  .form-card {
-    background: var(--white);
-    border-radius: 3px;
-    box-shadow: var(--shadow-md);
-    padding: 2.2rem 2rem;
-  }
-  .form-title {
-    font-family: var(--serif);
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 0.3rem;
-  }
-  .form-sub {
-    font-size: 0.8rem;
-    color: var(--text-mid);
-    margin-bottom: 1.8rem;
-  }
-  .form-grid {
-    display: grid;
-    gap: 1rem;
-  }
-  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-  .form-group label {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--navy);
-  }
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    font-family: var(--sans);
-    font-size: 0.88rem;
-    color: var(--text-dark);
-    background: var(--cream);
-    border: 1.5px solid transparent;
-    border-radius: 2px;
-    padding: 0.75rem 0.9rem;
-    width: 100%;
-    transition: border-color var(--transition), background var(--transition);
-    outline: none;
-    appearance: none;
-  }
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    border-color: var(--gold);
-    background: var(--white);
-  }
-  .form-group input.error,
-  .form-group select.error,
-  .form-group textarea.error {
-    border-color: #c0392b;
-  }
-  .form-group textarea { resize: vertical; min-height: 100px; }
-  .form-group select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23B8963E' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.9rem center;
-    padding-right: 2rem;
-  }
-  .form-row { display: grid; gap: 1rem; }
-  .field-error {
-    font-size: 0.7rem;
-    color: #c0392b;
-    display: none;
-  }
-  .field-error.visible { display: block; }
-  .form-submit { margin-top: 0.5rem; }
-  .form-submit .btn { width: 100%; justify-content: center; }
-  .form-microcopy {
-    text-align: center;
-    font-size: 0.75rem;
-    color: var(--text-mid);
-    margin-top: 0.8rem;
-    line-height: 1.5;
-  }
-  .form-success {
-    display: none;
-    text-align: center;
-    padding: 2rem 1rem;
-    color: var(--navy);
-  }
-  .form-success .success-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: rgba(184,150,62,0.12);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1rem;
-  }
-  .form-success h3 { font-family: var(--serif); font-size: 1.3rem; margin-bottom: 0.5rem; }
-  .form-success p { font-size: 0.85rem; color: var(--text-mid); }
+.sobre-body {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--text-mid);
+}
+.sobre-body p + p { margin-top: 1.1rem; }
 
-  @media (min-width: 768px) {
-    .submissao-grid { grid-template-columns: 1fr 1.2fr; align-items: start; }
-    .form-row { grid-template-columns: 1fr 1fr; }
-  }
+.sobre-pullquote {
+  margin-top: 2rem;
+  padding: 1.4rem 1.8rem;
+  border-left: 2px solid var(--gold);
+  background: rgba(201,161,74,0.05);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--navy);
+}
 
-  /* ===== RODAPÉ ===== */
-  footer {
-    background: var(--navy);
-    border-top: 1px solid rgba(184,150,62,0.15);
-    padding: 50px 20px 30px;
-  }
-  .footer-inner {
-    max-width: 1120px;
-    margin: 0 auto;
-  }
-  .footer-top {
-    display: grid;
-    gap: 2.5rem;
-    margin-bottom: 3rem;
-  }
-  .footer-brand .nav-logo-name { font-size: 1.4rem; }
-  .footer-desc {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.4);
-    line-height: 1.7;
-    margin-top: 0.6rem;
-    max-width: 260px;
-  }
-  .footer-links-group { display: flex; flex-direction: column; gap: 0.8rem; }
-  .footer-links-title {
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.4rem;
-  }
-  .footer-links-group a {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.5);
-    transition: color var(--transition);
-  }
-  .footer-links-group a:hover { color: var(--gold-light); }
-  .footer-divider {
-    height: 1px;
-    background: rgba(255,255,255,0.07);
-    margin-bottom: 1.5rem;
-  }
-  .footer-bottom {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.8rem;
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.3);
-  }
+.sobre-right { display: flex; flex-direction: column; gap: 1.5rem; }
 
-  @media (min-width: 768px) {
-    .footer-top { grid-template-columns: 1.5fr 1fr 1fr; }
-  }
+.pillar {
+  display: flex; align-items: flex-start; gap: 1.2rem;
+  padding: 1.4rem 1.6rem;
+  background: var(--white);
+  border-bottom: 2px solid var(--cream-dark);
+  transition: border-color var(--transition);
+}
+.pillar:hover { border-color: var(--gold); }
+.pillar-num {
+  font-family: var(--serif); font-size: 1.8rem; font-weight: 300;
+  color: rgba(201,161,74,0.35); line-height: 1; flex-shrink: 0;
+  width: 36px; text-align: center;
+}
+.pillar-title {
+  font-family: var(--sans); font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold-dim); margin-bottom: 0.35rem;
+}
+.pillar-text {
+  font-size: 0.88rem; line-height: 1.65; color: var(--text-mid);
+}
 
-  /* ===== SCROLL TO TOP ===== */
-  #back-top {
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    width: 40px;
-    height: 40px;
-    background: var(--gold);
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity var(--transition), transform var(--transition);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 500;
-  }
-  #back-top.visible { opacity: 1; pointer-events: auto; }
-  #back-top:hover { transform: translateY(-3px); }
-  #back-top svg { width: 16px; height: 16px; stroke: var(--white); fill: none; stroke-width: 2; }
+/* ===== EDIÇÃO INAUGURAL ===== */
+#edicao {
+  background: var(--navy);
+  padding: 100px 24px;
+}
+.edicao-layout {
+  display: grid; gap: 4rem; align-items: center;
+}
+@media (min-width: 900px) {
+  .edicao-layout { grid-template-columns: 1.1fr 1fr; }
+}
+
+.edicao-content .eyebrow { color: var(--gold); }
+.edicao-h2 {
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  color: var(--white); line-height: 1.2; margin-bottom: 1.4rem;
+}
+.edicao-h2 em { font-style: italic; color: var(--gold-light); }
+.edicao-body {
+  font-size: 0.95rem; line-height: 1.8;
+  color: rgba(255,255,255,0.6); margin-bottom: 2rem;
+}
+.edicao-numbers {
+  display: flex; gap: 2.5rem; flex-wrap: wrap;
+  padding: 1.6rem 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 2rem;
+}
+.edicao-num { display: flex; flex-direction: column; }
+.edicao-num-val {
+  font-family: var(--serif); font-size: 2rem; font-weight: 600;
+  color: var(--gold-light); line-height: 1;
+}
+.edicao-num-label {
+  font-size: 0.68rem; font-weight: 400; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,255,255,0.35);
+  margin-top: 0.2rem;
+}
+
+/* Cover grid — 4 variations */
+.cover-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.cover-variant {
+  aspect-ratio: 3/4;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 1.2rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.cover-variant.v-cream { background: var(--cream); }
+.cover-variant.v-navy  { background: var(--navy-light); border: 1px solid rgba(201,161,74,0.2); }
+.cover-variant.v-slate { background: #3a3f4a; }
+.cover-variant.v-gold  { background: #b08530; }
+.cv-edition {
+  font-family: var(--sans); font-size: 0.42rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  position: absolute; top: 0.7rem; right: 0.7rem;
+}
+.v-cream .cv-edition, .v-gold .cv-edition { color: var(--gold-dim); }
+.v-navy  .cv-edition, .v-slate .cv-edition { color: rgba(255,255,255,0.4); }
+.cv-brary {
+  font-family: var(--serif); font-weight: 700; line-height: 1;
+  letter-spacing: -0.02em;
+}
+.v-cream .cv-brary, .v-slate .cv-brary { color: var(--navy); font-size: 1.3rem; }
+.v-navy  .cv-brary, .v-gold  .cv-brary { color: var(--white); font-size: 1.3rem; }
+.cv-journal {
+  font-family: var(--sans); font-weight: 600; font-size: 0.38rem;
+  letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 0.5rem;
+}
+.v-cream .cv-journal, .v-slate .cv-journal { color: var(--gold-dim); }
+.v-navy  .cv-journal, .v-gold  .cv-journal { color: rgba(255,255,255,0.7); }
+.cv-shield {
+  width: 45%; opacity: 0.1; margin: 0.3rem 0 0.5rem;
+}
+.v-navy .cv-shield  { opacity: 0.15; }
+.v-gold .cv-shield  { opacity: 0.2; filter: brightness(3); }
+.v-slate .cv-shield { opacity: 0.12; filter: brightness(3); }
+.cv-num {
+  font-family: var(--serif); font-weight: 700; font-size: 1.6rem;
+  line-height: 1;
+}
+.v-cream .cv-num, .v-slate .cv-num { color: var(--gold-dim); }
+.v-navy  .cv-num  { color: var(--gold-light); }
+.v-gold  .cv-num  { color: var(--white); }
+.cv-rule { width: 24px; height: 1px; margin: 0.3rem auto 0.35rem; }
+.v-cream .cv-rule, .v-slate .cv-rule { background: var(--gold-dim); }
+.v-navy  .cv-rule { background: var(--gold-light); }
+.v-gold  .cv-rule { background: rgba(255,255,255,0.6); }
+.cv-sub {
+  font-family: var(--sans); font-size: 0.38rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  text-align: center; line-height: 1.5;
+}
+.v-cream .cv-sub, .v-slate .cv-sub { color: var(--navy); }
+.v-navy  .cv-sub  { color: rgba(255,255,255,0.65); }
+.v-gold  .cv-sub  { color: rgba(255,255,255,0.85); }
+
+/* ===== FLUXO ===== */
+#fluxo {
+  background: var(--cream-mid);
+  padding: 100px 24px;
+}
+.fluxo-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+.fluxo-inner .eyebrow { color: var(--gold-dim); }
+.fluxo-inner .section-h2 { margin-bottom: 0.8rem; }
+.fluxo-desc {
+  font-size: 0.95rem; line-height: 1.8;
+  color: var(--text-mid); max-width: 560px; margin: 0 auto 4rem;
+}
+.fluxo-steps {
+  display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: 0;
+}
+.fluxo-step {
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+}
+.fluxo-step-dot {
+  width: 54px; height: 54px; border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 0.9rem;
+  box-shadow: 0 2px 12px rgba(11,29,51,0.07);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.fluxo-step:hover .fluxo-step-dot {
+  border-color: var(--gold);
+  box-shadow: 0 4px 20px rgba(201,161,74,0.2);
+}
+.fluxo-step-dot svg {
+  width: 22px; height: 22px;
+  stroke: var(--navy); fill: none; stroke-width: 1.4;
+}
+.fluxo-step-label {
+  font-family: var(--serif); font-size: 0.88rem; font-weight: 500;
+  color: var(--navy);
+}
+.fluxo-arrow {
+  width: 2.5rem; height: 1px;
+  background: rgba(11,29,51,0.15);
+  position: relative; flex-shrink: 0;
+  margin: 0 0.2rem; margin-bottom: 1.8rem;
+}
+.fluxo-arrow::after {
+  content: '';
+  position: absolute; right: -1px; top: -3px;
+  width: 7px; height: 7px;
+  border-top: 1px solid rgba(11,29,51,0.2);
+  border-right: 1px solid rgba(11,29,51,0.2);
+  transform: rotate(45deg);
+}
+.fluxo-tagline {
+  font-family: var(--serif); font-style: italic;
+  font-size: 1.05rem; color: var(--navy);
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--cream-dark);
+}
+
+/* ===== CATEGORIAS ===== */
+#categorias {
+  background: var(--navy);
+  padding: 100px 24px;
+}
+.cat-header { margin-bottom: 3.5rem; }
+.cat-header .eyebrow { color: var(--gold); }
+.cat-h2 {
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  color: var(--white); line-height: 1.2; margin-bottom: 1rem;
+}
+.cat-h2 em { font-style: italic; color: var(--gold-light); }
+.cat-lead {
+  font-size: 0.9rem; line-height: 1.75;
+  color: rgba(255,255,255,0.5); max-width: 560px;
+}
+.cat-grid {
+  display: grid; gap: 1px;
+  background: rgba(255,255,255,0.06);
+}
+@media (min-width: 640px)  { .cat-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .cat-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.cat-card {
+  background: var(--navy-mid);
+  padding: 2rem 1.8rem;
+  position: relative;
+  transition: background var(--transition);
+}
+.cat-card::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 0; width: 0; height: 2px;
+  background: var(--gold); transition: width 0.35s ease;
+}
+.cat-card:hover { background: var(--navy-light); }
+.cat-card:hover::after { width: 100%; }
+.cat-num {
+  font-family: var(--serif); font-size: 0.8rem; font-weight: 300;
+  color: rgba(201,161,74,0.45); letter-spacing: 0.08em;
+  margin-bottom: 0.8rem;
+}
+.cat-name {
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 500;
+  color: var(--white); line-height: 1.3; margin-bottom: 0.7rem;
+}
+.cat-desc {
+  font-size: 0.82rem; color: rgba(255,255,255,0.45);
+  line-height: 1.7; margin-bottom: 1rem;
+}
+.cat-cta {
+  font-family: var(--sans); font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); display: inline-flex; align-items: center; gap: 0.3rem;
+  transition: gap var(--transition);
+}
+.cat-card:hover .cat-cta { gap: 0.6rem; }
+
+/* ===== ECOSSISTEMA ===== */
+#ecossistema {
+  background: var(--cream);
+  padding: 100px 24px;
+}
+.eco-header { text-align: center; max-width: 620px; margin: 0 auto 4rem; }
+.eco-header .eyebrow { color: var(--gold-dim); }
+.eco-header .section-h2 { margin-bottom: 0.8rem; }
+.eco-header p {
+  font-size: 0.9rem; line-height: 1.8; color: var(--text-mid);
+}
+.eco-grid {
+  display: grid; gap: 1.5rem;
+}
+@media (min-width: 640px)  { .eco-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .eco-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.eco-card {
+  padding: 1.8rem 1.6rem;
+  background: var(--white);
+  border-bottom: 2px solid var(--cream-dark);
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.eco-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.eco-icon {
+  width: 36px; height: 36px; margin-bottom: 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(201,161,74,0.3);
+}
+.eco-icon svg {
+  width: 18px; height: 18px;
+  stroke: var(--gold-dim); fill: none; stroke-width: 1.5;
+}
+.eco-name {
+  font-family: var(--serif); font-size: 1rem; font-weight: 600;
+  color: var(--navy); margin-bottom: 0.5rem;
+}
+.eco-role {
+  font-size: 0.8rem; line-height: 1.65; color: var(--text-mid);
+}
+.eco-card.featured {
+  background: var(--navy); border-color: var(--navy);
+}
+.eco-card.featured .eco-name { color: var(--white); }
+.eco-card.featured .eco-role { color: rgba(255,255,255,0.55); }
+.eco-card.featured .eco-icon { border-color: rgba(201,161,74,0.4); }
+.eco-card.featured .eco-icon svg { stroke: var(--gold); }
+.eco-card.featured:hover { border-color: var(--gold); }
+
+/* ===== PARA QUEM ===== */
+#paraquem {
+  background: var(--navy-mid);
+  padding: 100px 24px;
+}
+.paraquem-layout {
+  display: grid; gap: 4rem; align-items: start;
+}
+@media (min-width: 900px) { .paraquem-layout { grid-template-columns: 1fr 1fr; } }
+
+.paraquem-left .eyebrow { color: var(--gold); }
+.paraquem-h2 {
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  color: var(--white); line-height: 1.2; margin-bottom: 1.4rem;
+}
+.paraquem-h2 em { font-style: italic; color: var(--gold-light); }
+.paraquem-body {
+  font-size: 0.9rem; line-height: 1.8;
+  color: rgba(255,255,255,0.55);
+}
+
+.paraquem-list {
+  display: flex; flex-direction: column; gap: 0;
+}
+.paraquem-item {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1.1rem 1.4rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: background var(--transition);
+}
+.paraquem-item:hover { background: rgba(255,255,255,0.03); }
+.paraquem-item:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+.paraquem-bullet {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold); flex-shrink: 0;
+}
+.paraquem-text {
+  font-size: 0.9rem; color: rgba(255,255,255,0.7);
+}
+
+/* ===== CONSELHO ===== */
+#conselho {
+  background: var(--cream);
+  padding: 100px 24px;
+}
+.conselho-header { margin-bottom: 3.5rem; }
+.conselho-header .eyebrow { color: var(--gold-dim); }
+.conselho-header .section-h2 { margin-bottom: 0.9rem; }
+.conselho-desc {
+  font-family: var(--serif); font-style: italic;
+  font-size: 1rem; line-height: 1.7; color: var(--text-mid);
+  max-width: 540px;
+}
+.council-grid {
+  display: grid; gap: 1px;
+  background: var(--cream-dark);
+}
+@media (min-width: 640px)  { .council-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .council-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.council-card {
+  background: var(--white);
+  padding: 1.6rem 1.5rem;
+  transition: background var(--transition);
+  position: relative;
+}
+.council-card:hover { background: var(--cream); }
+.council-area {
+  font-size: 0.64rem; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.5rem;
+}
+.council-name {
+  font-family: var(--serif); font-size: 1rem; font-weight: 500;
+  color: var(--navy); margin-bottom: 0.3rem; line-height: 1.3;
+}
+.council-role {
+  font-size: 0.8rem; color: var(--text-light); line-height: 1.55;
+}
+.council-card.director {
+  background: var(--navy); grid-column: 1 / -1;
+}
+.council-card.director .council-area { color: var(--gold); }
+.council-card.director .council-name { color: var(--white); font-size: 1.2rem; }
+.council-card.director .council-role { color: rgba(255,255,255,0.5); }
+.council-card.director:hover { background: var(--navy-light); }
+.director-badge {
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  font-size: 0.58rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--navy);
+  background: var(--gold); padding: 0.2rem 0.55rem;
+}
+
+/* ===== SUBMISSÃO ===== */
+#submissao {
+  background: var(--cream-mid);
+  padding: 100px 24px;
+}
+.submissao-layout {
+  display: grid; gap: 4rem; align-items: start;
+}
+@media (min-width: 900px) { .submissao-layout { grid-template-columns: 1fr 1.15fr; } }
+
+.submissao-left .eyebrow { color: var(--gold-dim); }
+.submissao-h2 {
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: var(--navy); line-height: 1.25; margin-bottom: 1.1rem;
+}
+.submissao-h2 em { font-style: italic; color: var(--gold-dim); display: block; }
+.submissao-desc {
+  font-size: 0.9rem; line-height: 1.8;
+  color: var(--text-mid); margin-bottom: 2rem;
+}
+.req-list { display: flex; flex-direction: column; gap: 0.7rem; }
+.req-item {
+  display: flex; align-items: flex-start; gap: 0.8rem;
+  font-size: 0.85rem; color: var(--text-mid); line-height: 1.55;
+}
+.req-check {
+  width: 17px; height: 17px; border-radius: 50%;
+  background: var(--navy); display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0; margin-top: 1px;
+}
+.req-check svg { width: 8px; height: 8px; fill: none; stroke: var(--gold-light); stroke-width: 2.5; }
+
+/* FORM */
+.form-card {
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+  padding: 2.4rem 2.2rem;
+}
+.form-title {
+  font-family: var(--serif); font-size: 1.25rem; font-weight: 600;
+  color: var(--navy); margin-bottom: 0.3rem;
+}
+.form-sub {
+  font-size: 0.8rem; color: var(--text-light); margin-bottom: 1.8rem; line-height: 1.5;
+}
+.form-grid { display: flex; flex-direction: column; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-group label {
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--navy);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  font-family: var(--sans); font-size: 0.88rem; color: var(--text-dark);
+  background: var(--cream); border: 1px solid transparent;
+  padding: 0.78rem 0.95rem; width: 100%;
+  transition: border-color var(--transition), background var(--transition);
+  outline: none; appearance: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--gold);
+  background: var(--white);
+}
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error { border-color: #b33; }
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23C9A14A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0.9rem center;
+  padding-right: 2rem;
+}
+.form-row { display: grid; gap: 1rem; }
+@media (min-width: 600px) { .form-row { grid-template-columns: 1fr 1fr; } }
+.field-error { font-size: 0.7rem; color: #b33; display: none; }
+.field-error.visible { display: block; }
+.form-submit { margin-top: 0.5rem; }
+.form-submit .btn { width: 100%; justify-content: center; }
+.form-microcopy {
+  text-align: center; font-size: 0.75rem;
+  color: var(--text-light); margin-top: 0.8rem; line-height: 1.5;
+}
+.form-success {
+  display: none; text-align: center; padding: 2.5rem 1rem;
+}
+.form-success-icon {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(201,161,74,0.1);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.2rem;
+}
+.form-success h3 {
+  font-family: var(--serif); font-size: 1.3rem; color: var(--navy); margin-bottom: 0.5rem;
+}
+.form-success p { font-size: 0.85rem; color: var(--text-mid); }
+
+/* ===== VERSO / CONTRACAPA ===== */
+#verso {
+  background: var(--navy);
+  padding: 80px 24px;
+  text-align: center;
+}
+.verso-inner { max-width: 560px; margin: 0 auto; }
+.verso-rule { width: 40px; height: 1px; background: var(--gold); margin: 0 auto 2rem; }
+.verso-text {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1.2rem, 3vw, 1.7rem);
+  color: rgba(255,255,255,0.8); line-height: 1.55; margin-bottom: 1.2rem;
+}
+.verso-sub {
+  font-family: var(--sans); font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 2rem;
+}
+.verso-scripture {
+  font-family: var(--sans); font-size: 0.75rem;
+  color: rgba(255,255,255,0.25); line-height: 1.7;
+  max-width: 400px; margin: 0 auto;
+  font-style: italic;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--navy);
+  border-top: 1px solid rgba(201,161,74,0.1);
+  padding: 52px 24px 28px;
+}
+.footer-inner { max-width: 1100px; margin: 0 auto; }
+.footer-top {
+  display: grid; gap: 2.5rem; margin-bottom: 3rem;
+}
+@media (min-width: 768px) { .footer-top { grid-template-columns: 1.6fr 1fr 1fr; } }
+
+.footer-brand-name {
+  font-family: var(--serif); font-weight: 600;
+  font-size: 1.15rem; color: var(--white); margin-bottom: 0.2rem;
+}
+.footer-brand-sub {
+  font-family: var(--sans); font-size: 0.58rem; font-weight: 300;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.8rem;
+}
+.footer-desc {
+  font-size: 0.8rem; color: rgba(255,255,255,0.35); line-height: 1.7;
+  max-width: 260px;
+}
+.footer-col-title {
+  font-size: 0.64rem; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
+}
+.footer-col { display: flex; flex-direction: column; gap: 0.7rem; }
+.footer-col a {
+  font-size: 0.8rem; color: rgba(255,255,255,0.4);
+  transition: color var(--transition);
+}
+.footer-col a:hover { color: var(--gold-light); }
+.footer-divider { height: 1px; background: rgba(255,255,255,0.06); margin-bottom: 1.4rem; }
+.footer-bottom {
+  display: flex; flex-wrap: wrap; justify-content: space-between;
+  align-items: center; gap: 0.8rem;
+  font-size: 0.7rem; color: rgba(255,255,255,0.25);
+}
+
+/* ===== BACK TO TOP ===== */
+#back-top {
+  position: fixed; bottom: 1.5rem; right: 1.5rem;
+  width: 40px; height: 40px;
+  background: var(--gold); border: none; cursor: pointer;
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--transition), transform var(--transition);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 500;
+}
+#back-top.visible { opacity: 1; pointer-events: auto; }
+#back-top:hover { transform: translateY(-3px); }
+#back-top svg { width: 15px; height: 15px; stroke: var(--white); fill: none; stroke-width: 2; }
+
+/* ===== PRICING ===== */
+.pricing-wrap { margin-top: 2.4rem; }
+.pricing-table {
+  border: 1px solid var(--cream-dark); overflow: hidden;
+  max-width: 640px;
+}
+.pricing-head {
+  display: grid; grid-template-columns: 2fr 1fr;
+  background: var(--navy);
+}
+.pricing-head div {
+  padding: 0.8rem 1.1rem; font-size: 0.66rem; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+.pricing-head div:first-child { border-right: 1px solid rgba(255,255,255,0.07); }
+.pricing-row {
+  display: grid; grid-template-columns: 2fr 1fr;
+  background: var(--white); border-top: 1px solid var(--cream-dark);
+}
+.pricing-row.hl { background: rgba(201,161,74,0.05); }
+.pricing-cell {
+  padding: 1rem 1.1rem; font-size: 0.84rem;
+  color: var(--text-mid); line-height: 1.5;
+}
+.pricing-cell:first-child { border-right: 1px solid var(--cream-dark); }
+.pricing-cell strong { display: block; color: var(--navy); font-size: 0.88rem; margin-bottom: 0.1rem; }
+.badge {
+  display: inline-block; background: var(--gold); color: var(--white);
+  font-size: 0.58rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 0.14rem 0.45rem;
+  margin-left: 0.4rem; vertical-align: middle;
+}
+.price {
+  font-family: var(--serif); font-size: 1.45rem; font-weight: 600; color: var(--navy);
+}
+.price-label { font-size: 0.7rem; color: var(--text-light); }
+.pricing-foot {
+  background: var(--navy); padding: 0.9rem 1.1rem;
+  font-size: 0.77rem; color: rgba(255,255,255,0.45); line-height: 1.6;
+  border-top: 1px solid rgba(201,161,74,0.1);
+}
+.pricing-foot strong { color: var(--gold-light); }
+.scarcity {
+  display: flex; align-items: center; gap: 0.6rem;
+  font-size: 0.78rem; color: var(--gold); font-weight: 500; margin-top: 1.1rem;
+}
+.scarcity-dot {
+  width: 7px; height: 7px; background: var(--gold); border-radius: 50%;
+  animation: pulse 2s infinite; flex-shrink: 0;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+/* ===== TIMELINE ===== */
+.timeline { display: flex; flex-direction: column; gap: 0; position: relative; }
+.timeline::before {
+  content: ''; position: absolute;
+  left: 17px; top: 34px; bottom: 34px;
+  width: 1px; background: rgba(11,29,51,0.1);
+}
+.tl-step {
+  display: flex; gap: 1.3rem; align-items: flex-start; padding-bottom: 2rem;
+}
+.tl-step:last-child { padding-bottom: 0; }
+.tl-dot {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--navy); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-size: 0.9rem; font-weight: 600;
+  color: var(--gold-light); z-index: 1; position: relative;
+}
+.tl-body { padding-top: 0.3rem; }
+.tl-title {
+  font-family: var(--serif); font-size: 1.05rem; font-weight: 600;
+  color: var(--navy); margin-bottom: 0.3rem;
+}
+.tl-desc { font-size: 0.83rem; color: var(--text-mid); line-height: 1.65; }
+
+/* Sobre second section (modelo) */
+#modelo {
+  background: var(--white);
+  padding: 100px 24px;
+}
+.modelo-layout {
+  display: grid; gap: 4rem; align-items: start;
+}
+@media (min-width: 900px) { .modelo-layout { grid-template-columns: 1fr 1fr; } }
+.modelo-note {
+  background: var(--cream); border-left: 2px solid var(--gold);
+  padding: 1.4rem 1.6rem; margin-bottom: 2rem;
+}
+.modelo-note p {
+  font-size: 0.88rem; line-height: 1.7; color: var(--text-mid);
+  margin-bottom: 0.6rem;
+}
+.modelo-note p:last-child { margin-bottom: 0; }
+.modelo-note strong { color: var(--navy); }
+.modelo-note em {
+  font-family: var(--serif); font-style: italic;
+  font-size: 1rem; color: var(--navy); display: block; margin-top: 0.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
 </style>
 </head>
 <body>
@@ -1018,145 +1242,251 @@
   <div class="nav-inner">
     <a href="#" class="nav-logo" aria-label="Brary Journal">
       <span class="nav-logo-name">Brary Journal</span>
-      <span class="nav-logo-sub">Publicação Técnico-Científica</span>
+      <span class="nav-logo-sub">Registro do Conhecimento Aplicado</span>
     </a>
     <nav class="nav-links" aria-label="Menu principal">
       <a href="#sobre">Sobre</a>
+      <a href="#edicao">Edição Inaugural</a>
       <a href="#categorias">Categorias</a>
-      <a href="#submissao">Submeter Artigo</a>
-      <a href="#conselho">Conselho Editorial</a>
+      <a href="#submissao">Publicar Artigo</a>
+      <a href="#ecossistema">Ecossistema</a>
     </nav>
-    <a href="#submissao" class="btn btn-gold nav-cta" aria-label="Submeter artigo">Submeter Artigo</a>
+    <a href="#submissao" class="btn btn-gold nav-cta">Publicar Artigo</a>
     <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
   <nav class="mobile-menu" id="mobile-menu" aria-label="Menu mobile">
     <a href="#sobre">Sobre</a>
+    <a href="#edicao">Edição Inaugural</a>
     <a href="#categorias">Categorias</a>
-    <a href="#submissao">Submeter Artigo</a>
-    <a href="#conselho">Conselho Editorial</a>
-    <div class="m-cta"><a href="#submissao" class="btn btn-gold">Submeter Artigo</a></div>
+    <a href="#submissao">Publicar Artigo</a>
+    <a href="#ecossistema">Ecossistema</a>
+    <div class="m-cta"><a href="#submissao" class="btn btn-gold">Publicar Artigo</a></div>
   </nav>
 </header>
 
 <!-- ===== HERO ===== -->
-<section id="hero" aria-label="Apresentação">
+<section id="hero" aria-label="Brary Journal">
   <div class="container">
-    <div class="hero-eyebrow reveal">Publicação vinculada ao Padrão SBCM</div>
-    <div class="hero-headline reveal">
-      <div class="headline-duo">
-        <span class="h-line1">O conhecimento aplicado</span>
-        <span class="h-line2">merece registro formal.</span>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-tag reveal">Publicação oficial do ecossistema Brary</div>
+        <h1 class="hero-h1 reveal">
+          Conhecimento aplicado.<br>
+          <em>Legado que permanece.</em>
+        </h1>
+        <p class="hero-sub reveal">
+          A publicação oficial do ecossistema Brary para registrar, preservar e
+          compartilhar o conhecimento produzido por especialistas, profissionais
+          e metodologias com impacto real.
+        </p>
+        <div class="hero-btns reveal">
+          <a href="#submissao" class="btn btn-gold">Publicar Artigo →</a>
+          <a href="#edicao" class="btn btn-outline-white">Conhecer a Edição Inaugural</a>
+        </div>
       </div>
-    </div>
-    <p class="hero-para reveal">
-      O Brary Journal não é um blog. Não é uma revista informal. É uma publicação técnico-científica com propósito de registro metodológico — voltada a profissionais que já estruturaram e validaram métodos em prática real.
-    </p>
-    <p class="hero-institutional reveal">
-      "Artigos publicados podem ser elegíveis para certificação metodológica pelo Padrão SBCM."
-    </p>
-    <div class="hero-btns reveal">
-      <a href="#submissao" class="btn btn-gold">Submeter Artigo →</a>
-      <a href="#categorias" class="btn btn-outline">Conhecer as categorias</a>
-    </div>
-    <div class="hero-stats reveal">
-      <div class="stat-item">
-        <span class="stat-value">Vol. 1</span>
-        <span class="stat-label">Primeiro volume</span>
+
+      <!-- Capa 2026 + pilares -->
+      <div class="hero-capa-row reveal">
+        <img
+          src="revista2026.png"
+          alt="Brary Journal — edição 2026"
+          class="hero-capa-img"
+          loading="eager"
+        >
       </div>
-      <div class="stat-item">
-        <span class="stat-value">Trimestral</span>
-        <span class="stat-label">Periodicidade</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value">6</span>
-        <span class="stat-label">Categorias</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value">R$250</span>
-        <span class="stat-label">Lançamento</span>
+
+      <div class="hero-pillars reveal">
+        <div class="hero-pillar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          <span class="hp-title">Registro</span>
+          <span class="hp-text">Transformamos experiência em patrimônio intelectual.</span>
+        </div>
+        <div class="hero-pillar-div"></div>
+        <div class="hero-pillar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="hp-title">Validação</span>
+          <span class="hp-text">Métodos avaliados com critérios de excelência.</span>
+        </div>
+        <div class="hero-pillar-div"></div>
+        <div class="hero-pillar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          <span class="hp-title">Publicação</span>
+          <span class="hp-text">Publicamos o que gera impacto real.</span>
+        </div>
+        <div class="hero-pillar-div"></div>
+        <div class="hero-pillar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="1"/><path d="M8 21h8M12 17v4"/></svg>
+          <span class="hp-title">Legado</span>
+          <span class="hp-text">Seu conhecimento permanece e inspira gerações.</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ===== SOBRE ===== -->
-<section id="sobre" aria-label="Sobre a revista">
+<section id="sobre" aria-label="Sobre a Brary Journal">
   <div class="container">
-    <span class="section-label reveal">Sobre a Revista</span>
-    <div class="sobre-grid">
+    <div class="sobre-layout">
       <div>
-        <div class="headline-duo reveal" style="margin-bottom:1.6rem;">
-          <span class="h-line1 dark">Uma publicação</span>
-          <span class="h-line2">para quem já provou na prática.</span>
+        <span class="eyebrow reveal">O registro editorial do conhecimento aplicado</span>
+        <h2 class="section-h2 reveal">Uma publicação para o que<br><em>merece permanecer.</em></h2>
+        <div class="sobre-body reveal">
+          <p>A Brary Journal nasce para dar endereço ao conhecimento que costuma permanecer invisível: métodos criados na prática, experiências profissionais transformadoras, protocolos aplicados, modelos de atuação e saberes construídos ao longo de anos.</p>
+          <p>Ela não substitui a academia. Ela amplia o campo do conhecimento publicado. A revista existe para profissionais que desenvolveram saberes relevantes fora dos círculos tradicionais de publicação, mas que precisam transformar essa experiência em registro formal, autoridade e legado.</p>
         </div>
-        <div class="sobre-intro reveal">
-          <p>O Brary Journal publica artigos técnico-científicos de profissionais que desenvolveram metodologias originais e as aplicaram em contextos reais. A revista parte do pressuposto de que o conhecimento produzido fora dos círculos acadêmicos tradicionais também merece registro formal, rigor editorial e circulação qualificada.</p>
-          <p>Diferente de publicações puramente acadêmicas, o Brary Journal valoriza a evidência prática como fundamento do conhecimento técnico. Isso não significa abertura de mão do rigor — significa reposicionar quem produz saber aplicado como autor legítimo de sua área.</p>
-        </div>
-        <div class="sobre-quote reveal">
-          "Quem estrutura um método e o aplica com resultados documentáveis está produzindo conhecimento. O Brary Journal existe para que esse conhecimento tenha endereço."
+        <div class="sobre-pullquote reveal">
+          "Conhecimento não registrado é experiência que se perde. Conhecimento publicado é legado que multiplica."
         </div>
       </div>
-      <div>
-        <div class="comparison-block reveal">
-          <div class="comparison-header">
-            <span>Revista Científica Tradicional</span>
-            <span>Brary Journal</span>
+      <div class="sobre-right reveal">
+        <div class="pillar">
+          <div class="pillar-num">1</div>
+          <div>
+            <div class="pillar-title">Capital Intelectual</div>
+            <div class="pillar-text">Cada artigo é um artefato de capital intelectual — registro formal do que você sabe e como isso funciona no mundo real.</div>
           </div>
-          <div class="comparison-row">
-            <div class="comparison-cell">
-              <span class="icon icon-x">○</span>
-              Foco acadêmico teórico
-            </div>
-            <div class="comparison-cell">
-              <span class="icon icon-check">✓</span>
-              Foco aplicado e validado
-            </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">2</div>
+          <div>
+            <div class="pillar-title">Legado</div>
+            <div class="pillar-text">O artigo trabalha enquanto você não está. Chega a quem você nunca conhecerá. Permanece depois que você parar.</div>
           </div>
-          <div class="comparison-row">
-            <div class="comparison-cell">
-              <span class="icon icon-x">○</span>
-              Linguagem altamente técnica e hermética
-            </div>
-            <div class="comparison-cell">
-              <span class="icon icon-check">✓</span>
-              Linguagem técnica acessível
-            </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">3</div>
+          <div>
+            <div class="pillar-title">Autoridade</div>
+            <div class="pillar-text">Publicação formal transforma expertise em evidência. Não é o que você sabe — é o que você consegue demonstrar que sabe.</div>
           </div>
-          <div class="comparison-row">
-            <div class="comparison-cell">
-              <span class="icon icon-x">○</span>
-              Baixa aplicação prática
-            </div>
-            <div class="comparison-cell">
-              <span class="icon icon-check">✓</span>
-              Base prática real
-            </div>
-          </div>
-          <div class="comparison-row">
-            <div class="comparison-cell">
-              <span class="icon icon-x">○</span>
-              Diagramação responsabilidade do autor
-            </div>
-            <div class="comparison-cell">
-              <span class="icon icon-check">✓</span>
-              Diagramação profissional inclusa
-            </div>
-          </div>
-          <div class="comparison-row">
-            <div class="comparison-cell">
-              <span class="icon icon-x">○</span>
-              Sem vínculo com certificação
-            </div>
-            <div class="comparison-cell">
-              <span class="icon icon-check">✓</span>
-              Elegível ao Padrão SBCM
-            </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">4</div>
+          <div>
+            <div class="pillar-title">Evidência Prática</div>
+            <div class="pillar-text">A Brary Journal valoriza o conhecimento nascido da prática como fundamento legítimo — com o rigor editorial que ele merece.</div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EDIÇÃO INAUGURAL ===== -->
+<section id="edicao" aria-label="Edição inaugural">
+  <div class="container">
+    <div class="edicao-layout">
+      <div>
+        <span class="eyebrow reveal">Edição Inaugural</span>
+        <h2 class="edicao-h2 reveal">Edição 01:<br><em>o início do acervo.</em></h2>
+        <p class="edicao-body reveal">A primeira edição da Brary Journal reúne especialistas de diferentes áreas em torno de uma mesma premissa: conhecimento aplicado também merece registro. Este é o início de um acervo que permanecerá.</p>
+        <div class="edicao-numbers reveal">
+          <div class="edicao-num">
+            <span class="edicao-num-val">Vol. 1</span>
+            <span class="edicao-num-label">Primeiro volume</span>
+          </div>
+          <div class="edicao-num">
+            <span class="edicao-num-val">6</span>
+            <span class="edicao-num-label">Categorias</span>
+          </div>
+          <div class="edicao-num">
+            <span class="edicao-num-val">Trim.</span>
+            <span class="edicao-num-label">Periodicidade</span>
+          </div>
+        </div>
+        <a href="#submissao" class="btn btn-gold reveal">Fazer parte da Edição 01 →</a>
+      </div>
+
+      <!-- Mockup empilhado real -->
+      <div class="edicao-mockups reveal">
+        <img
+          src="revistas.png"
+          alt="Brary Journal — quatro variações de capa empilhadas"
+          class="mockup-revistas"
+          loading="lazy"
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SISTEMA DE CAPAS ===== -->
+<section id="capas" aria-label="Sistema de capas">
+  <div class="capas-inner">
+    <div class="container">
+      <span class="eyebrow capas-eyebrow reveal">Sistema de Capas</span>
+      <p class="capas-desc reveal">Quatro variações. Uma identidade.</p>
+    </div>
+    <div class="capas-grid reveal">
+      <div class="capa-item">
+        <img src="capacreme.png" alt="Brary Journal — capa creme" loading="lazy">
+        <span class="capa-label">Creme</span>
+      </div>
+      <div class="capa-item">
+        <img src="capaazul.png" alt="Brary Journal — capa azul" loading="lazy">
+        <span class="capa-label">Azul</span>
+      </div>
+      <div class="capa-item">
+        <img src="capacinza.png" alt="Brary Journal — capa cinza" loading="lazy">
+        <span class="capa-label">Cinza</span>
+      </div>
+      <div class="capa-item">
+        <img src="capadourada.png" alt="Brary Journal — capa dourada" loading="lazy">
+        <span class="capa-label">Dourada</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FLUXO ===== -->
+<section id="fluxo" aria-label="Da experiência ao registro">
+  <div class="container">
+    <div class="fluxo-inner">
+      <span class="eyebrow reveal">Da experiência ao registro</span>
+      <h2 class="section-h2 reveal">O artigo não é apenas um texto.<br>É um artefato de capital intelectual.</h2>
+      <p class="fluxo-desc reveal">A Brary Journal transforma a experiência profissional em registro editorial permanente. Cada publicação é um elo na cadeia do conhecimento aplicado.</p>
+
+      <div class="fluxo-steps reveal">
+        <div class="fluxo-step">
+          <div class="fluxo-step-dot">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </div>
+          <div class="fluxo-step-label">Experiência</div>
+        </div>
+        <div class="fluxo-arrow"></div>
+        <div class="fluxo-step">
+          <div class="fluxo-step-dot">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="fluxo-step-label">Método</div>
+        </div>
+        <div class="fluxo-arrow"></div>
+        <div class="fluxo-step">
+          <div class="fluxo-step-dot">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="fluxo-step-label">Artigo</div>
+        </div>
+        <div class="fluxo-arrow"></div>
+        <div class="fluxo-step">
+          <div class="fluxo-step-dot">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="8 12 12 16 16 12"/><line x1="12" y1="8" x2="12" y2="16"/></svg>
+          </div>
+          <div class="fluxo-step-label">Publicação</div>
+        </div>
+        <div class="fluxo-arrow"></div>
+        <div class="fluxo-step">
+          <div class="fluxo-step-dot">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="fluxo-step-label">Legado</div>
+        </div>
+      </div>
+
+      <p class="fluxo-tagline reveal">"Registramos hoje o que constrói o amanhã."</p>
     </div>
   </div>
 </section>
@@ -1164,60 +1494,53 @@
 <!-- ===== CATEGORIAS ===== -->
 <section id="categorias" aria-label="Categorias">
   <div class="container">
-    <span class="section-label reveal">Categorias</span>
-    <div class="headline-duo reveal" style="margin-bottom:1rem;">
-      <span class="h-line1">Seis áreas.</span>
-      <span class="h-line2">Uma publicação comprometida com o saber aplicado.</span>
+    <div class="cat-header">
+      <span class="eyebrow reveal">O que publicamos</span>
+      <h2 class="cat-h2 reveal">Seis campos.<br><em>Um acervo permanente.</em></h2>
+      <p class="cat-lead reveal">Cada categoria representa um domínio em que especialistas produzem conhecimento aplicado com impacto real — e onde a Brary Journal oferece registro e circulação qualificada.</p>
     </div>
-    <p class="cat-intro reveal">Cada categoria representa um campo em que profissionais desenvolvem metodologias originais — e onde o Brary Journal oferece registro e circulação qualificada.</p>
     <div class="cat-grid">
 
       <div class="cat-card reveal">
-        <div class="cat-number">01</div>
-        <div class="cat-name">Metodologias Educacionais</div>
-        <div class="cat-desc">Métodos próprios de ensino, aprendizagem e desenvolvimento pedagógico aplicados em ambientes formais e não-formais.</div>
-        <div class="cat-trigger">Para educadores que desenvolvem métodos próprios em sala de aula e precisam de registro formal para o que criaram.</div>
-        <span class="cat-link">Ver artigos →</span>
+        <div class="cat-num">01</div>
+        <div class="cat-name">Negócios e Gestão Aplicada</div>
+        <div class="cat-desc">Artigos sobre métodos, experiências e modelos aplicados à gestão, empreendedorismo, liderança, estratégia e desenvolvimento organizacional.</div>
+        <span class="cat-cta">Ver artigos →</span>
       </div>
 
       <div class="cat-card reveal">
-        <div class="cat-number">02</div>
-        <div class="cat-name">Educação Inclusiva e Especial</div>
-        <div class="cat-desc">Práticas pedagógicas desenvolvidas para contextos de inclusão, acessibilidade e atendimento especializado.</div>
-        <div class="cat-trigger">Para profissionais que construíram abordagens próprias para públicos com necessidades específicas.</div>
-        <span class="cat-link">Ver artigos →</span>
+        <div class="cat-num">02</div>
+        <div class="cat-name">Saúde e Prática Clínica</div>
+        <div class="cat-desc">Registros de práticas, abordagens, protocolos e experiências profissionais aplicadas ao cuidado, movimento, reabilitação e desenvolvimento humano.</div>
+        <span class="cat-cta">Ver artigos →</span>
       </div>
 
       <div class="cat-card reveal">
-        <div class="cat-number">03</div>
-        <div class="cat-name">STEAM e Inovação Pedagógica</div>
-        <div class="cat-desc">Integrações entre ciência, tecnologia, artes, engenharia e matemática aplicadas em projetos pedagógicos concretos.</div>
-        <div class="cat-trigger">Para quem estruturou projetos interdisciplinares replicáveis em outros contextos escolares.</div>
-        <span class="cat-link">Ver artigos →</span>
+        <div class="cat-num">03</div>
+        <div class="cat-name">Direito e Segurança Pública</div>
+        <div class="cat-desc">Produções aplicadas à prática jurídica, atuação policial, segurança institucional, ética, gestão de riscos e proteção social.</div>
+        <span class="cat-cta">Ver artigos →</span>
       </div>
 
       <div class="cat-card reveal">
-        <div class="cat-number">04</div>
-        <div class="cat-name">Saúde, Movimento e Aprendizagem</div>
-        <div class="cat-desc">Relações entre desenvolvimento corporal, saúde funcional e processos cognitivos de aprendizagem.</div>
-        <div class="cat-trigger">Para profissionais da saúde e do movimento que documentam protocolos com impacto educacional.</div>
-        <span class="cat-link">Ver artigos →</span>
+        <div class="cat-num">04</div>
+        <div class="cat-name">Educação e Desenvolvimento Humano</div>
+        <div class="cat-desc">Métodos, práticas pedagógicas, processos de aprendizagem, inclusão e inovação educacional aplicados em contextos formais e não formais.</div>
+        <span class="cat-cta">Ver artigos →</span>
       </div>
 
       <div class="cat-card reveal">
-        <div class="cat-number">05</div>
-        <div class="cat-name">Gestão, Mentoria e Desenvolvimento</div>
-        <div class="cat-desc">Metodologias aplicadas em desenvolvimento humano, liderança, mentoria e gestão de equipes e processos.</div>
-        <div class="cat-trigger">Para mentores e gestores que estruturam práticas replicáveis e querem torná-las referência.</div>
-        <span class="cat-link">Ver artigos →</span>
+        <div class="cat-num">05</div>
+        <div class="cat-name">Metodologias Profissionais</div>
+        <div class="cat-desc">Frameworks, protocolos e sistemas desenvolvidos por profissionais para resolver problemas reais — com estrutura replicável e resultados documentáveis.</div>
+        <span class="cat-cta">Ver artigos →</span>
       </div>
 
       <div class="cat-card reveal">
-        <div class="cat-number">06</div>
-        <div class="cat-name">Certificação e Validação Metodológica</div>
-        <div class="cat-desc">Artigos sobre processos de certificação, padrões metodológicos e critérios de validação de práticas profissionais.</div>
-        <div class="cat-trigger">Para quem desenvolve ou aplica padrões metodológicos e busca reconhecimento institucional.</div>
-        <span class="cat-link">Ver artigos →</span>
+        <div class="cat-num">06</div>
+        <div class="cat-name">Capital Intelectual e Legado</div>
+        <div class="cat-desc">Artigos sobre registro de conhecimento organizacional, construção de autoridade, patrimônio intelectual e gestão do conhecimento como ativo estratégico.</div>
+        <span class="cat-cta">Ver artigos →</span>
       </div>
 
     </div>
@@ -1227,58 +1550,22 @@
 <!-- ===== MODELO DE PUBLICAÇÃO ===== -->
 <section id="modelo" aria-label="Modelo de publicação">
   <div class="container">
-    <span class="section-label reveal">Modelo de Publicação</span>
-    <div class="headline-duo reveal" style="margin-bottom:2.5rem;">
-      <span class="h-line1 dark">Como funciona</span>
-      <span class="h-line2">a publicação no Brary Journal.</span>
-    </div>
-
-    <div class="modelo-top">
-      <div class="timeline reveal">
-        <div class="timeline-step">
-          <div class="step-dot">1</div>
-          <div class="step-body">
-            <div class="step-title">Submissão</div>
-            <div class="step-desc">O autor preenche o formulário de submissão com dados do artigo e informações de contato. Nenhuma diagramação é exigida nesta etapa.</div>
-          </div>
-        </div>
-        <div class="timeline-step">
-          <div class="step-dot">2</div>
-          <div class="step-body">
-            <div class="step-title">Análise Editorial</div>
-            <div class="step-desc">A equipe editorial avalia o alinhamento do artigo às diretrizes da revista: originalidade, autoria identificada, relevância da categoria e potencial de contribuição.</div>
-          </div>
-        </div>
-        <div class="timeline-step">
-          <div class="step-dot">3</div>
-          <div class="step-body">
-            <div class="step-title">Diagramação Profissional</div>
-            <div class="step-desc">Aprovado o artigo, a equipe Brary realiza a diagramação completa no padrão editorial da revista. O autor foca no conteúdo. Nós garantimos o padrão visual e estrutural.</div>
-          </div>
-        </div>
-        <div class="timeline-step">
-          <div class="step-dot">4</div>
-          <div class="step-body">
-            <div class="step-title">Publicação</div>
-            <div class="step-desc">O artigo é publicado digitalmente no volume correspondente, com registro de autoria, categoria e número de identificação. DOI em fase de implementação.</div>
-          </div>
-        </div>
-      </div>
-
+    <span class="eyebrow reveal">Modelo de Publicação</span>
+    <div class="modelo-layout">
       <div>
-        <div class="modelo-editorial-box reveal">
+        <h2 class="section-h2 reveal">Como funciona a publicação<br>na <em>Brary Journal.</em></h2>
+        <div class="modelo-note reveal">
           <p><strong>Diferente de outras revistas, você não precisa entregar um artigo já diagramado.</strong></p>
           <p>Produtores de conhecimento são especialistas em seus campos — não em diagramação editorial. Por isso, a Brary assume integralmente a estruturação visual do artigo aprovado para publicação.</p>
-          <p class="modelo-editorial-note">"Você foca no conteúdo. Nós garantimos o padrão editorial."</p>
+          <em>"Você foca no conteúdo. Nós garantimos o padrão editorial."</em>
         </div>
-
-        <div style="margin-top:2rem;" class="reveal">
+        <div class="pricing-wrap reveal">
           <div class="pricing-table">
-            <div class="pricing-header">
+            <div class="pricing-head">
               <div>Modalidade</div>
               <div>Valor</div>
             </div>
-            <div class="pricing-row featured">
+            <div class="pricing-row hl">
               <div class="pricing-cell">
                 <strong>Lançamento <span class="badge">Vagas limitadas</span></strong>
                 Primeiros 20 artigos publicados
@@ -1298,13 +1585,136 @@
                 <span class="price-label">por artigo</span>
               </div>
             </div>
-            <div class="pricing-includes">
-              <strong>Incluso em todas as modalidades:</strong> diagramação profissional + publicação digital + registro de autoria + DOI (em implementação)
+            <div class="pricing-foot">
+              <strong>Incluso em todas as modalidades:</strong> diagramação profissional · publicação digital · registro de autoria · DOI em implementação
             </div>
           </div>
-          <div class="scarcity-note">
+          <div class="scarcity">
             <span class="scarcity-dot"></span>
             Após o lançamento, o valor padrão será aplicado imediatamente.
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="timeline reveal">
+          <div class="tl-step">
+            <div class="tl-dot">1</div>
+            <div class="tl-body">
+              <div class="tl-title">Submissão</div>
+              <div class="tl-desc">O autor preenche o formulário de submissão com dados do artigo e informações de contato. Nenhuma diagramação é exigida nesta etapa.</div>
+            </div>
+          </div>
+          <div class="tl-step">
+            <div class="tl-dot">2</div>
+            <div class="tl-body">
+              <div class="tl-title">Análise Editorial</div>
+              <div class="tl-desc">A equipe editorial avalia o alinhamento com as diretrizes da revista: originalidade, autoria identificada, relevância temática e potencial de contribuição.</div>
+            </div>
+          </div>
+          <div class="tl-step">
+            <div class="tl-dot">3</div>
+            <div class="tl-body">
+              <div class="tl-title">Diagramação Profissional</div>
+              <div class="tl-desc">Aprovado o artigo, a equipe Brary realiza a diagramação completa no padrão editorial da revista. O autor foca no conteúdo.</div>
+            </div>
+          </div>
+          <div class="tl-step">
+            <div class="tl-dot">4</div>
+            <div class="tl-body">
+              <div class="tl-title">Publicação</div>
+              <div class="tl-desc">O artigo é publicado digitalmente no volume correspondente, com registro de autoria, categoria e número de identificação. DOI em fase de implementação.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ECOSSISTEMA ===== -->
+<section id="ecossistema" aria-label="Ecossistema Brary">
+  <div class="container">
+    <div class="eco-header">
+      <span class="eyebrow reveal">Ecossistema Brary</span>
+      <h2 class="section-h2 reveal">Publicação e validação<br>caminham juntas.</h2>
+      <p class="reveal">A Brary Journal integra o ecossistema Brary. Cada unidade tem uma função específica — e o valor do conjunto está exatamente nessa especialização.</p>
+    </div>
+    <div class="eco-grid">
+      <div class="eco-card reveal">
+        <div class="eco-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        </div>
+        <div class="eco-name">Brary Editora</div>
+        <div class="eco-role">Transforma conhecimento em livro. Casa de estruturação de capital intelectual desde 2013.</div>
+      </div>
+      <div class="eco-card reveal">
+        <div class="eco-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="eco-name">Brary Institute</div>
+        <div class="eco-role">Valida e certifica metodologias. Estrutura critérios de qualificação pelo Padrão SBCM.</div>
+      </div>
+      <div class="eco-card featured reveal">
+        <div class="eco-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="eco-name">Brary Journal</div>
+        <div class="eco-role">Registra, preserva e publica o conhecimento aplicado. Acervo permanente do ecossistema.</div>
+      </div>
+      <div class="eco-card reveal">
+        <div class="eco-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <div class="eco-name">Brary Hub</div>
+        <div class="eco-role">Criação, publicação e monetização com IA e tecnologia. Escala o alcance do conhecimento.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PARA QUEM ===== -->
+<section id="paraquem" aria-label="Para quem é a Brary Journal">
+  <div class="container">
+    <div class="paraquem-layout">
+      <div class="paraquem-left">
+        <span class="eyebrow reveal">Para especialistas que têm algo a deixar</span>
+        <h2 class="paraquem-h2 reveal">Para quem já acumulou<br><em>experiência suficiente.</em></h2>
+        <p class="paraquem-body reveal">A Brary Journal é para quem já provou na prática. Para quem desenvolveu um método, aplicou um protocolo ou construiu um saber que merece registro — e que não pode se perder.</p>
+      </div>
+      <div class="reveal">
+        <div class="paraquem-list">
+          <div class="paraquem-item">
+            <span class="paraquem-bullet"></span>
+            <span class="paraquem-text">Profissionais com método próprio</span>
+          </div>
+          <div class="paraquem-item">
+            <span class="paraquem-bullet"></span>
+            <span class="paraquem-text">Consultores e mentores</span>
+          </div>
+          <div class="paraquem-item">
+            <span class="paraquem-bullet"></span>
+            <span class="paraquem-text">Profissionais da saúde</span>
+          </div>
+          <div class="paraquem-item">
+            <span class="paraquem-bullet"></span>
+            <span class="paraquem-text">Educadores</span>
+          </div>
+          <div class="paraquem-item">
+            <span class="paraquem-bullet"></span>
+            <span class="paraquem-text">Juristas e especialistas em segurança pública</span>
+          </div>
+          <div class="paraquem-item">
+            <span class="paraquem-bullet"></span>
+            <span class="paraquem-text">Empresários com modelos aplicados</span>
+          </div>
+          <div class="paraquem-item">
+            <span class="paraquem-bullet"></span>
+            <span class="paraquem-text">Pesquisadores independentes</span>
+          </div>
+          <div class="paraquem-item">
+            <span class="paraquem-bullet"></span>
+            <span class="paraquem-text">Autores em construção de autoridade</span>
           </div>
         </div>
       </div>
@@ -1315,71 +1725,52 @@
 <!-- ===== CONSELHO EDITORIAL ===== -->
 <section id="conselho" aria-label="Conselho editorial">
   <div class="container">
-    <span class="section-label reveal">Conselho Editorial</span>
-    <div class="headline-duo reveal" style="margin-bottom:1rem;">
-      <span class="h-line1">Corpo editorial</span>
-      <span class="h-line2">multidisciplinar e aplicado.</span>
+    <div class="conselho-header">
+      <span class="eyebrow reveal">Conselho Editorial</span>
+      <h2 class="section-h2 reveal">Conselho em formação.</h2>
+      <p class="conselho-desc reveal">A Brary Journal está estruturando seu conselho editorial multidisciplinar com profissionais de reconhecida experiência prática, técnica e institucional. Durante a edição inaugural, a curadoria editorial é conduzida pela direção da Brary, com apoio de especialistas convidados por área.</p>
     </div>
-    <p class="conselho-intro reveal">Corpo editorial com atuação prática nas áreas representadas — profissionais que conhecem de dentro o conhecimento que avaliam.</p>
     <div class="council-grid">
 
       <div class="council-card reveal">
-        <div class="council-area">Educação Inclusiva</div>
-        <div class="council-name">Membro do Conselho</div>
-        <div class="council-role">Atuação em práticas inclusivas em contextos escolares e não escolares</div>
-      </div>
-
-      <div class="council-card reveal">
-        <div class="council-area">Educação Especial</div>
-        <div class="council-name">Membro do Conselho</div>
-        <div class="council-role">Doutora com atuação em atendimento educacional especializado</div>
-      </div>
-
-      <div class="council-card reveal">
-        <div class="council-area">Matemática</div>
-        <div class="council-name">Membro do Conselho</div>
-        <div class="council-role">Mestranda em ensino de matemática e metodologias STEAM</div>
-      </div>
-
-      <div class="council-card reveal">
         <div class="council-area">Fisioterapia</div>
-        <div class="council-name">Membro do Conselho</div>
-        <div class="council-role">Fisioterapeuta com atuação em saúde, movimento e aprendizagem</div>
+        <div class="council-name">Especialista convidada</div>
+        <div class="council-role">Atuação em saúde, movimento e reabilitação — curadoria técnica na área</div>
       </div>
 
       <div class="council-card reveal">
         <div class="council-area">Agronomia e Laudos Técnicos</div>
-        <div class="council-name">Membro do Conselho</div>
-        <div class="council-role">Engenheiro agrônomo com expertise em laudos e validação técnica</div>
-      </div>
-
-      <div class="council-card reveal">
-        <div class="council-area">Neurofeedback</div>
-        <div class="council-name">Membro do Conselho</div>
-        <div class="council-role">Especialista em neurofeedback aplicado ao desenvolvimento cognitivo</div>
+        <div class="council-name">Especialista convidado</div>
+        <div class="council-role">Engenharia agronômica com expertise em laudos e validação técnica</div>
       </div>
 
       <div class="council-card reveal">
         <div class="council-area">Direito Empresarial</div>
-        <div class="council-name">Membro do Conselho</div>
-        <div class="council-role">Atuação em direito aplicado à gestão e conformidade metodológica</div>
+        <div class="council-name">Especialista convidado</div>
+        <div class="council-role">Direito aplicado à gestão e conformidade metodológica</div>
+      </div>
+
+      <div class="council-card reveal">
+        <div class="council-area">Neurofeedback</div>
+        <div class="council-name">Especialista convidada</div>
+        <div class="council-role">Neurofeedback aplicado ao desenvolvimento cognitivo</div>
+      </div>
+
+      <div class="council-card reveal">
+        <div class="council-area">Matemática e Educação</div>
+        <div class="council-name">Especialista convidada</div>
+        <div class="council-role">Ensino de matemática e metodologias STEAM em contexto escolar</div>
       </div>
 
       <div class="council-card reveal">
         <div class="council-area">Contabilidade e Mentoria</div>
-        <div class="council-name">Membro do Conselho</div>
-        <div class="council-role">Contador e mentor com foco em gestão financeira e desenvolvimento de lideranças</div>
+        <div class="council-name">Especialista convidado</div>
+        <div class="council-role">Gestão financeira e desenvolvimento de lideranças — primeiro autor Brary</div>
       </div>
 
-      <div class="council-card reveal">
-        <div class="council-area">Metodologia Educacional / Facilitação</div>
-        <div class="council-name">Membro do Conselho</div>
-        <div class="council-role">Facilitadora com especialização em metodologias ativas e design instrucional</div>
-      </div>
-
-      <div class="council-card featured reveal" style="grid-column: 1 / -1;">
-        <div class="council-badge">Direção Editorial</div>
-        <div class="council-area">Brary Institute</div>
+      <div class="council-card director reveal">
+        <div class="director-badge">Direção Editorial</div>
+        <div class="council-area">Brary Institute · Brary Editora</div>
         <div class="council-name">Orlando Carvalho</div>
         <div class="council-role">Projetista naval, escritor e fundador do ecossistema Brary. Criador do Padrão SBCM e da Plataforma GM OS. Diretor editorial do Brary Journal e responsável pela curadoria metodológica do corpo editorial.</div>
       </div>
@@ -1391,46 +1782,33 @@
 <!-- ===== SUBMISSÃO ===== -->
 <section id="submissao" aria-label="Submeter artigo">
   <div class="container">
-    <span class="section-label reveal">Submeter Artigo</span>
-    <div class="submissao-grid">
-      <div class="submissao-left">
-        <h2 class="reveal">
-          Se você já aplica um método,
+    <div class="submissao-layout">
+      <div>
+        <span class="eyebrow reveal">Submeta seu artigo para análise editorial</span>
+        <h2 class="submissao-h2 reveal">Se você já aplica um método,
           <em>este é o seu lugar.</em>
         </h2>
-        <p class="submissao-desc reveal">
-          O Brary Journal recebe artigos de profissionais com prática documentável. Se você desenvolveu uma metodologia, estruturou um protocolo ou sistematizou um processo que funciona — sua produção merece publicação formal.
-        </p>
+        <p class="submissao-desc reveal">Recebemos artigos de profissionais que desenvolveram conhecimento aplicado em contextos reais. O envio não garante publicação automática. Cada proposta passa por análise editorial, alinhamento temático e avaliação de aderência ao propósito da revista.</p>
         <div class="req-list reveal">
           <div class="req-item">
-            <div class="req-icon">
-              <svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg>
-            </div>
+            <div class="req-check"><svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg></div>
             Trabalho original e inédito
           </div>
           <div class="req-item">
-            <div class="req-icon">
-              <svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg>
-            </div>
+            <div class="req-check"><svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg></div>
             Autoria identificada
           </div>
           <div class="req-item">
-            <div class="req-icon">
-              <svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg>
-            </div>
+            <div class="req-check"><svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg></div>
             Mínimo de 4 páginas, máximo de 20
           </div>
           <div class="req-item">
-            <div class="req-icon">
-              <svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg>
-            </div>
+            <div class="req-check"><svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg></div>
             Área alinhada às categorias da revista
           </div>
           <div class="req-item">
-            <div class="req-icon">
-              <svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg>
-            </div>
-            Prática documentável — resultados aplicados em contexto real
+            <div class="req-check"><svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg></div>
+            Prática documentável — conhecimento nascido da experiência real
           </div>
         </div>
       </div>
@@ -1438,14 +1816,14 @@
       <div>
         <div class="form-card reveal">
           <div class="form-title">Formulário de Submissão</div>
-          <div class="form-sub">Preencha os dados abaixo. Nossa equipe entrará em contato com orientações editoriais.</div>
+          <div class="form-sub">Preencha os dados abaixo. Nossa equipe entrará em contato com orientações editoriais em até 3 dias úteis.</div>
 
           <form id="form-submissao" action="https://api.web3forms.com/submit" method="POST" novalidate>
             <input type="hidden" name="access_key" value="c9cab4d2-b6fb-429b-89db-0cd5ce56856a">
             <input type="hidden" name="subject" value="Submissão — Brary Journal">
             <input type="hidden" name="redirect" value="false">
-            <div class="form-grid">
 
+            <div class="form-grid">
               <div class="form-row">
                 <div class="form-group">
                   <label for="f-nome">Nome completo</label>
@@ -1461,48 +1839,62 @@
 
               <div class="form-row">
                 <div class="form-group">
-                  <label for="f-tel">Telefone / WhatsApp</label>
+                  <label for="f-tel">WhatsApp</label>
                   <input type="tel" id="f-tel" name="telefone" placeholder="(00) 00000-0000" autocomplete="tel">
                   <span class="field-error" id="err-tel">Campo obrigatório.</span>
                 </div>
                 <div class="form-group">
-                  <label for="f-cat">Categoria</label>
-                  <select id="f-cat" name="categoria">
-                    <option value="">Selecione...</option>
-                    <option>Metodologias Educacionais</option>
-                    <option>Educação Inclusiva e Especial</option>
-                    <option>STEAM e Inovação Pedagógica</option>
-                    <option>Saúde, Movimento e Aprendizagem</option>
-                    <option>Gestão, Mentoria e Desenvolvimento</option>
-                    <option>Certificação e Validação Metodológica</option>
-                  </select>
-                  <span class="field-error" id="err-cat">Selecione uma categoria.</span>
+                  <label for="f-area">Área de atuação</label>
+                  <input type="text" id="f-area" name="area" placeholder="Ex.: Fisioterapia, Direito…">
+                  <span class="field-error" id="err-area">Campo obrigatório.</span>
                 </div>
               </div>
 
               <div class="form-group">
-                <label for="f-titulo">Título do artigo</label>
-                <input type="text" id="f-titulo" name="titulo" placeholder="Título provisório ou definitivo do artigo">
+                <label for="f-cat">Categoria</label>
+                <select id="f-cat" name="categoria">
+                  <option value="">Selecione...</option>
+                  <option>Negócios e Gestão Aplicada</option>
+                  <option>Saúde e Prática Clínica</option>
+                  <option>Direito e Segurança Pública</option>
+                  <option>Educação e Desenvolvimento Humano</option>
+                  <option>Metodologias Profissionais</option>
+                  <option>Capital Intelectual e Legado</option>
+                </select>
+                <span class="field-error" id="err-cat">Selecione uma categoria.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="f-titulo">Título provisório do artigo</label>
+                <input type="text" id="f-titulo" name="titulo" placeholder="Título ou tema principal">
                 <span class="field-error" id="err-titulo">Campo obrigatório.</span>
               </div>
 
               <div class="form-group">
-                <label for="f-msg">Resumo ou mensagem</label>
-                <textarea id="f-msg" name="mensagem" placeholder="Descreva brevemente o artigo, a metodologia aplicada e o contexto de desenvolvimento."></textarea>
+                <label for="f-msg">O que torna este conhecimento relevante?</label>
+                <textarea id="f-msg" name="mensagem" placeholder="Descreva brevemente o artigo, a experiência que o fundamenta e o que ele pode deixar como contribuição."></textarea>
                 <span class="field-error" id="err-msg">Campo obrigatório.</span>
               </div>
 
-              <div class="form-submit">
-                <button type="submit" class="btn btn-gold">Enviar Submissão</button>
-                <p class="form-microcopy">Nossa equipe retornará com orientações editoriais em até 3 dias úteis.</p>
+              <div class="form-group">
+                <label for="f-sbcm">Deseja saber mais sobre certificação SBCM?</label>
+                <select id="f-sbcm" name="interesse_sbcm">
+                  <option value="">Selecione...</option>
+                  <option>Sim, tenho interesse</option>
+                  <option>Não por enquanto</option>
+                </select>
               </div>
 
+              <div class="form-submit">
+                <button type="submit" class="btn btn-gold">Enviar para análise editorial</button>
+                <p class="form-microcopy">Retorno em até 3 dias úteis com as próximas orientações.</p>
+              </div>
             </div>
           </form>
 
           <div class="form-success" id="form-success">
-            <div class="success-icon">
-              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#B8963E" stroke-width="2.2"><polyline points="4,11 9,16 18,6"/></svg>
+            <div class="form-success-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#C9A14A" stroke-width="2.2"><polyline points="4,11 9,16 18,6"/></svg>
             </div>
             <h3>Submissão recebida.</h3>
             <p>Nossa equipe editorial analisará sua proposta e retornará em até 3 dias úteis com as próximas orientações.</p>
@@ -1513,36 +1905,49 @@
   </div>
 </section>
 
-<!-- ===== RODAPÉ ===== -->
+<!-- ===== VERSO / CITAÇÃO FINAL ===== -->
+<section id="verso" aria-label="Encerramento">
+  <div class="verso-inner">
+    <div class="verso-rule"></div>
+    <p class="verso-text">"Tudo o que é verdadeiro, nobre, justo, puro, amável e de boa fama — se houver alguma excelência e se algo for digno de louvor — nisso pensai."</p>
+    <div class="verso-sub">Filipenses 4:8 · Âncora da Brary Journal</div>
+    <p class="verso-scripture">Registramos hoje o que constrói o amanhã. Valorizamos o saber que gera impacto real e promove transformação com propósito.</p>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-brand">
-        <div class="nav-logo">
-          <span class="nav-logo-name">Brary Journal</span>
-          <span class="nav-logo-sub">Publicação Técnico-Científica</span>
+      <div>
+        <div class="footer-brand-name">Brary Journal</div>
+        <div class="footer-brand-sub">Registro do Conhecimento Aplicado</div>
+        <p class="footer-desc">Publicação oficial do ecossistema Brary dedicada a registrar, preservar e compartilhar conhecimento aplicado com impacto real.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Ecossistema</div>
+        <div class="footer-col">
+          <a href="https://brary-institute-site.vercel.app/" target="_blank" rel="noopener">Brary Institute</a>
+          <a href="https://braryeditora.com.br" target="_blank" rel="noopener">Brary Editora</a>
+          <a href="#" >Padrão SBCM</a>
+          <a href="https://plataforma-gm-os.vercel.app/" target="_blank" rel="noopener">Plataforma GM OS</a>
         </div>
-        <p class="footer-desc">Publicação vinculada ao Padrão SBCM e ao ecossistema Brary Institute. Comprometida com o registro formal do conhecimento aplicado.</p>
       </div>
-      <div class="footer-links-group">
-        <div class="footer-links-title">Ecossistema</div>
-        <a href="https://brary-institute-site.vercel.app/" target="_blank" rel="noopener">Brary Institute</a>
-        <a href="#">Brary Editora</a>
-        <a href="#">Padrão SBCM</a>
-        <a href="https://plataforma-gm-os.vercel.app/" target="_blank" rel="noopener">Plataforma GM OS</a>
-      </div>
-      <div class="footer-links-group">
-        <div class="footer-links-title">Revista</div>
-        <a href="#categorias">Categorias</a>
-        <a href="#modelo">Modelo de Publicação</a>
-        <a href="#conselho">Conselho Editorial</a>
-        <a href="#submissao">Submeter Artigo</a>
+      <div>
+        <div class="footer-col-title">Revista</div>
+        <div class="footer-col">
+          <a href="#sobre">Sobre a Journal</a>
+          <a href="#edicao">Edição Inaugural</a>
+          <a href="#categorias">Categorias</a>
+          <a href="#conselho">Conselho Editorial</a>
+          <a href="#submissao">Publicar Artigo</a>
+        </div>
       </div>
     </div>
     <div class="footer-divider"></div>
     <div class="footer-bottom">
       <span>© 2026 Brary Editora Ltda. Todos os direitos reservados.</span>
-      <span>Brary Journal — Publicação Técnico-Científica do Brary Institute</span>
+      <span>Brary Journal — Registro do Conhecimento Aplicado</span>
     </div>
   </div>
 </footer>
@@ -1556,18 +1961,16 @@
 (function () {
   'use strict';
 
-  /* --- NAVBAR: hamburger + shrink --- */
-  const navbar    = document.getElementById('navbar');
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu= document.getElementById('mobile-menu');
+  /* --- NAVBAR --- */
+  var navbar    = document.getElementById('navbar');
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu= document.getElementById('mobile-menu');
 
   hamburger.addEventListener('click', function () {
-    const open = mobileMenu.classList.toggle('open');
+    var open = mobileMenu.classList.toggle('open');
     hamburger.classList.toggle('open', open);
     hamburger.setAttribute('aria-expanded', open);
   });
-
-  // close menu on link click
   mobileMenu.querySelectorAll('a').forEach(function (a) {
     a.addEventListener('click', function () {
       mobileMenu.classList.remove('open');
@@ -1576,18 +1979,16 @@
     });
   });
 
-  // shrink navbar on scroll
   window.addEventListener('scroll', function () {
     navbar.classList.toggle('scrolled', window.scrollY > 60);
     document.getElementById('back-top').classList.toggle('visible', window.scrollY > 400);
   }, { passive: true });
 
-  /* --- BACK TO TOP --- */
   document.getElementById('back-top').addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  /* --- SCROLL REVEAL --- */
+  /* --- REVEAL --- */
   var revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
@@ -1597,13 +1998,13 @@
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.07, rootMargin: '0px 0px -30px 0px' });
     revealEls.forEach(function (el) { io.observe(el); });
   } else {
     revealEls.forEach(function (el) { el.classList.add('visible'); });
   }
 
-  /* --- FORM VALIDATION --- */
+  /* --- FORM --- */
   var form = document.getElementById('form-submissao');
   if (!form) return;
 
@@ -1614,7 +2015,6 @@
     field.classList.toggle('error', show);
     err.classList.toggle('visible', show);
   }
-
   function validateEmail(v) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
   }
@@ -1623,22 +2023,23 @@
     var nome   = document.getElementById('f-nome').value.trim();
     var email  = document.getElementById('f-email').value.trim();
     var tel    = document.getElementById('f-tel').value.trim();
+    var area   = document.getElementById('f-area').value.trim();
     var cat    = document.getElementById('f-cat').value;
     var titulo = document.getElementById('f-titulo').value.trim();
     var msg    = document.getElementById('f-msg').value.trim();
+    var valid  = true;
 
-    var valid = true;
-
-    setError('f-nome',  'err-nome',  !nome);   if (!nome)  valid = false;
+    setError('f-nome',  'err-nome',  !nome);           if (!nome)  valid = false;
     setError('f-email', 'err-email', !validateEmail(email)); if (!validateEmail(email)) valid = false;
-    setError('f-tel',   'err-tel',   !tel);    if (!tel)   valid = false;
-    setError('f-cat',   'err-cat',   !cat);    if (!cat)   valid = false;
-    setError('f-titulo','err-titulo',!titulo); if (!titulo) valid = false;
-    setError('f-msg',   'err-msg',   !msg);    if (!msg)   valid = false;
+    setError('f-tel',   'err-tel',   !tel);             if (!tel)   valid = false;
+    setError('f-area',  'err-area',  !area);            if (!area)  valid = false;
+    setError('f-cat',   'err-cat',   !cat);             if (!cat)   valid = false;
+    setError('f-titulo','err-titulo',!titulo);          if (!titulo) valid = false;
+    setError('f-msg',   'err-msg',   !msg);             if (!msg)   valid = false;
 
     if (!valid) { e.preventDefault(); return; }
-
     e.preventDefault();
+
     var btn = form.querySelector('button[type="submit"]');
     btn.disabled = true;
     btn.textContent = 'Enviando...';
@@ -1654,25 +2055,23 @@
         document.getElementById('form-success').style.display = 'block';
       } else {
         btn.disabled = false;
-        btn.textContent = 'Enviar Submissão';
+        btn.textContent = 'Enviar para análise editorial';
         alert('Erro ao enviar. Tente novamente ou entre em contato por e-mail.');
       }
     })
     .catch(function () {
       btn.disabled = false;
-      btn.textContent = 'Enviar Submissão';
+      btn.textContent = 'Enviar para análise editorial';
       alert('Erro de conexão. Verifique sua internet e tente novamente.');
     });
   });
 
-  // Clear error on input
-  ['f-nome','f-email','f-tel','f-cat','f-titulo','f-msg'].forEach(function (id) {
+  ['f-nome','f-email','f-tel','f-area','f-cat','f-titulo','f-msg'].forEach(function (id) {
     var el = document.getElementById(id);
     if (!el) return;
     el.addEventListener('input', function () {
       el.classList.remove('error');
-      var errId = id.replace('f-', 'err-');
-      var errEl = document.getElementById(errId);
+      var errEl = document.getElementById(id.replace('f-', 'err-'));
       if (errEl) errEl.classList.remove('visible');
     });
   });
