@@ -214,28 +214,36 @@ ul { list-style: none; }
   .mobile-menu { display: none !important; }
 }
 
-/* ===== HERO CAPA 2026 ===== */
-.hero-capa-row {
-  position: relative; z-index: 1;
-  padding: 3rem 0 0;
+/* ===== HERO SPLIT LAYOUT ===== */
+.hero-split {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  flex: 1;
+  padding-bottom: 3rem;
+}
+.hero-content { flex: 1; max-width: 600px; }
+.hero-capa-col {
+  flex-shrink: 0;
+  display: none;
+  align-items: flex-end;
   justify-content: center;
 }
 .hero-capa-img {
-  width: clamp(160px, 22vw, 280px);
+  width: clamp(180px, 18vw, 260px);
   height: auto;
   display: block;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.45), -4px 0 16px rgba(0,0,0,0.2);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5), -4px 0 16px rgba(0,0,0,0.2);
   transform: perspective(700px) rotateY(-5deg);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 .hero-capa-img:hover {
   transform: perspective(700px) rotateY(0deg);
-  box-shadow: 0 28px 70px rgba(0,0,0,0.5);
+  box-shadow: 0 28px 70px rgba(0,0,0,0.55);
 }
 @media (min-width: 900px) {
-  .hero-capa-row { justify-content: flex-start; }
-  .hero-capa-img { width: clamp(180px, 20vw, 280px); }
+  .hero-capa-col { display: flex; }
 }
 
 /* ===== SISTEMA DE CAPAS ===== */
@@ -1270,31 +1278,31 @@ footer {
 <section id="hero" aria-label="Brary Journal">
   <div class="container">
     <div class="hero-inner">
-      <div class="hero-content">
-        <div class="hero-tag reveal">Publicação oficial do ecossistema Brary</div>
-        <h1 class="hero-h1 reveal">
-          Conhecimento aplicado.<br>
-          <em>Legado que permanece.</em>
-        </h1>
-        <p class="hero-sub reveal">
-          A publicação oficial do ecossistema Brary para registrar, preservar e
-          compartilhar o conhecimento produzido por especialistas, profissionais
-          e metodologias com impacto real.
-        </p>
-        <div class="hero-btns reveal">
-          <a href="#submissao" class="btn btn-gold">Publicar Artigo →</a>
-          <a href="#edicao" class="btn btn-outline-white">Conhecer a Edição Inaugural</a>
+      <div class="hero-split">
+        <div class="hero-content">
+          <div class="hero-tag reveal">Publicação oficial do ecossistema Brary</div>
+          <h1 class="hero-h1 reveal">
+            Conhecimento aplicado.<br>
+            <em>Legado que permanece.</em>
+          </h1>
+          <p class="hero-sub reveal">
+            A publicação oficial do ecossistema Brary para registrar, preservar e
+            compartilhar o conhecimento produzido por especialistas, profissionais
+            e metodologias com impacto real.
+          </p>
+          <div class="hero-btns reveal">
+            <a href="#submissao" class="btn btn-gold">Publicar Artigo →</a>
+            <a href="#edicao" class="btn btn-outline-white">Conhecer a Edição Inaugural</a>
+          </div>
         </div>
-      </div>
-
-      <!-- Capa 2026 + pilares -->
-      <div class="hero-capa-row reveal">
-        <img
-          src="revista2026.png"
-          alt="Brary Journal — edição 2026"
-          class="hero-capa-img"
-          loading="eager"
-        >
+        <div class="hero-capa-col reveal">
+          <img
+            src="revista2026.png"
+            alt="Brary Journal — edição 2026"
+            class="hero-capa-img"
+            loading="eager"
+          >
+        </div>
       </div>
 
       <div class="hero-pillars reveal">
@@ -1325,8 +1333,6 @@ footer {
     </div>
   </div>
 </section>
-
-<!-- ===== SOBRE ===== -->
 <section id="sobre" aria-label="Sobre a Brary Journal">
   <div class="container">
     <div class="sobre-layout">
@@ -1375,7 +1381,7 @@ footer {
   </div>
 </section>
 
-<!-- ===== EDIÇÃO INAUGURAL ===== -->
+<!-- ===== SOBRE ===== -->
 <section id="edicao" aria-label="Edição inaugural">
   <div class="container">
     <div class="edicao-layout">
